@@ -69,10 +69,12 @@ footer { color: var(--muted); font-size: 0.95rem; margin-top: 3rem; }
 </header>
 
 <section class="summary" aria-label="Summary">
-<p><strong>Headwire collects no data about you.</strong> There are no accounts, no analytics, no
-advertising, no tracking and no Headwire servers. Your Mac’s screen, its sound, your input and
-anything you copy or send stay on your devices, or travel directly between your own iPad or iPhone
-and your own Mac. Nothing goes over the internet.</p>
+<p><strong>Headwire collects nothing about you unless you turn on Share usage data.</strong>
+There are no accounts, no advertising, no tracking and no Headwire servers. Your Mac’s screen, its
+sound, your input and anything you copy or send stay on your devices, or travel directly between
+your own iPad or iPhone and your own Mac. The only things the app ever sends over the internet are
+anonymous usage data and crash reports, which are off until you turn them on (see <a href="#usage-data">Usage
+data</a>).</p>
 </section>
 
 <h2>What this covers</h2>
@@ -81,10 +83,57 @@ version and the Direct download. Hung Nguyen develops and publishes both apps. �
 here: there is no company and no team behind the apps that could see your data.</p>
 
 <h2>What the developer collects</h2>
-<p>Nothing. Neither app sends anything to the developer or to anyone else. Neither contains an
-analytics, advertising or crash-reporting library, and neither connects to a server of its own.
-The only reports the developer can ever see are the ones Apple passes on, and only if you’ve
-chosen to share them (see <a href="#apple">What Apple handles</a>).</p>
+<p>Nothing, unless you choose to send it:</p>
+<ul>
+<li><strong>Usage data and crash reports,</strong> from Headwire on iPad and iPhone, only if you
+turn on Share usage data (see <a href="#usage-data">Usage data</a>).</li>
+<li><strong>Feedback</strong> you email with Send feedback (see <a href="#feedback">Feedback</a>).</li>
+</ul>
+<p>Headwire Helper sends nothing to the developer or to anyone else. Neither app contains an
+advertising library, and neither connects to a server of the developer’s own. The PostHog library
+in Headwire for iPad and iPhone includes a crash reporter, which Headwire turns on only while Share
+usage data is on, so no crash report is sent unless you’ve turned it on.
+Apart from these, the only reports the developer can see are the ones Apple passes on, and only if
+you’ve chosen to share them (see <a href="#apple">What Apple handles</a>).</p>
+
+<h3 id="usage-data">Usage data</h3>
+<p>Share usage data is off until you turn it on. The first time you open Headwire, it asks once
+whether to turn it on, with Share and Not now; after that it’s in Settings › About › Share usage
+data. While it’s on, Headwire for iPad and iPhone sends anonymous usage data and crash reports to
+PostHog, a product analytics service, so the developer can see which features are used and fix
+what breaks.</p>
+<ul>
+<li><strong>What is sent:</strong> the name of each thing you do in the app, such as opening
+Settings or turning natural scrolling on, and once a minute a count of frequent ones, such as
+touches and key presses. With each one, PostHog’s software adds the app’s version, the iOS or
+iPadOS version, the device model and type (such as iPad), its screen size, its language and region
+setting, its time zone, whether it’s on Wi-Fi or mobile data, and a random ID made on this
+install.</li>
+<li><strong>Crash reports:</strong> when Headwire crashes, the next launch sends what kind of crash it
+was, the addresses in Headwire’s and the system’s code where it happened, the names of those code
+files and their build IDs, with the same app and device details. A crash’s message is taken out
+before it’s sent, since it could quote something on screen, and so are full file paths.</li>
+<li><strong>What is never sent:</strong> your Mac’s screen or sound, anything you type, paste or
+copy, file names, the names of your Macs or devices, pairing codes, your name, Apple Account or
+email address, your location, or an advertising identifier. Headwire doesn’t identify you to PostHog
+or build a profile of you, and the data isn’t used for tracking or advertising, sold, or shared
+with anyone else.</li>
+<li><strong>Where it goes:</strong> PostHog’s cloud in the European Union (Frankfurt, Germany). Like
+any server, PostHog sees the device’s IP address when the data arrives; Headwire asks it not to
+work out a location from it, and the project is set to discard it rather than store it.</li>
+<li><strong>How long it’s kept:</strong> up to one year, after which PostHog deletes it.</li>
+<li><strong>How to turn it off:</strong> turn off Share usage data. Sending stops at once, and the
+random ID and anything not yet sent are deleted from the device; turning it on again starts with a
+new ID. Deleting Headwire does the same. Because what was sent isn’t linked to you, it can’t be
+picked out and deleted afterwards; it is removed when the year is up.</li>
+<li>Headwire never sends usage data over a network you’ve set to Low Data Mode.</li>
+</ul>
+
+<h3 id="feedback">Feedback</h3>
+<p>Settings › About › Send feedback opens your own email app with a message to the developer, with
+the app and system versions filled in. Nothing is sent until you send it yourself. What you write,
+with your email address, reaches the developer’s mailbox (Gmail), and is used only to read and
+answer your feedback.</p>
 
 <h2>What stays on your devices</h2>
 <p>To work, the apps keep a few things on the device they run on. None of it leaves that
@@ -103,6 +152,9 @@ them, so Bluetooth input types the right characters when the helper isn’t runn
 and for each app on the Mac.</li>
 <li><strong>Your Macs:</strong> which paired Mac you chose to show, which one the capture card is
 plugged into, and the connection each was last shown over.</li>
+<li><strong>Your paired Macs’ names,</strong> and whether each is connected: shared with Headwire’s
+widgets and controls, Siri, Shortcuts and Spotlight on this device, so you can open a Mac from
+them. Pairing keys are never shared with them.</li>
 <li><strong>Battery readings:</strong> a reading of the device’s charge each minute, kept for two
 days, to work out what Instant switch costs in battery.</li>
 <li><strong>How many times you’ve opened Headwire,</strong> so it knows when to offer a tip.</li>
@@ -162,7 +214,8 @@ recognise.</li>
 <li>While a device is connected, text you copy on the Mac is sent to it and put on its clipboard.
 Text marked as private, such as a password copied from a password manager, is never sent.</li>
 <li>Headwire reads the iPad’s or iPhone’s clipboard only when you paste into the Mac, with ⌘V
-on the stream or Paste to Mac in Settings. It never reads it on its own.</li>
+on the stream, Paste to Mac in Settings, or the Paste clipboard to Mac action in Shortcuts or
+Siri. It never reads it on its own.</li>
 <li>Clipboard contents are never logged, and Headwire keeps no copy of them.</li>
 </ul>
 
@@ -226,6 +279,8 @@ gets sales reports from Apple that don’t name you.</li>
 in your device’s Analytics &amp; Improvements settings, Apple may pass crash reports and
 diagnostics from Headwire to the developer, without your name. That’s your choice in Apple’s
 settings, and off unless you turn it on.</li>
+<li><strong>Siri.</strong> When you speak a request to Siri, such as opening a Mac by its name,
+Apple processes the request, the Mac’s name included. Headwire itself sends nothing.</li>
 </ul>
 <p>Apple’s handling of this data is covered by
 <a href="https://www.apple.com/legal/privacy/">Apple’s privacy policy</a>.</p>
@@ -238,7 +293,8 @@ keep logs of visits under
 privacy statement</a>; the apps send nothing to it.</p>
 
 <h2>Children</h2>
-<p>Headwire isn’t directed at children and collects no data from anyone, children included.</p>
+<p>Headwire isn’t directed at children. It collects nothing from anyone, children included,
+unless they turn on Share usage data or send feedback.</p>
 
 <h2>Changes to this policy</h2>
 <p>If what the apps keep or send ever changes, this page changes first, with a new date at the
