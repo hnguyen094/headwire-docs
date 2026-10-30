@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <title>Headwire Privacy Policy</title>
-<meta name="description" content="Headwire and Headwire Helper collect no data. What stays on your devices, what travels between them, and what Apple handles.">
+<meta name="description" content="Headwire Helper collects no data, and Headwire collects none unless you turn on Share usage data. What stays on your devices, what travels between them, and what Apple handles.">
 <style>
 :root {
     --bg: #ffffff;
@@ -65,7 +65,7 @@ footer { color: var(--muted); font-size: 0.95rem; margin-top: 3rem; }
 <main>
 <header>
 <h1>Headwire Privacy Policy</h1>
-<p class="updated">Last updated 2026-10-23</p>
+<p class="updated">Last updated 2026-10-28</p>
 </header>
 
 <section class="summary" aria-label="Summary">
@@ -104,7 +104,7 @@ PostHog, a product analytics service, so the developer can see which features ar
 what breaks.</p>
 <ul>
 <li><strong>What is sent:</strong> the name of each thing you do in the app, such as opening
-Settings or turning natural scrolling on, and once a minute a count of frequent ones, such as
+Settings or turning reverse scrolling on, and once a minute a count of frequent ones, such as
 touches and key presses. With each one, PostHog’s software adds the app’s version, the iOS or
 iPadOS version, the device model and type (such as iPad), its screen size, its language and region
 setting, its time zone, whether it’s on Wi-Fi or mobile data, and a random ID made on this
@@ -135,7 +135,7 @@ the app and system versions filled in. Nothing is sent until you send it yoursel
 with your email address, reaches the developer’s mailbox (Gmail), and is used only to read and
 answer your feedback.</p>
 
-<h2>What stays on your devices</h2>
+<h2 id="stays">What stays on your devices</h2>
 <p>To work, the apps keep a few things on the device they run on. None of it leaves that
 device except inside your own device backups.</p>
 <ul>
@@ -146,8 +146,9 @@ it, so the picture is right the next time you plug it in.</li>
 <li><strong>Pairing keys:</strong> each app makes its own key and keeps it, with the keys of the
 devices it’s paired with and their names, in the Keychain, readable only on that device.
 They aren’t synced through iCloud Keychain and don’t move to a new device.</li>
-<li><strong>Your Mac’s keyboard layout and shortcuts,</strong> as Headwire Helper last reported
-them, so Bluetooth input types the right characters when the helper isn’t running.</li>
+<li><strong>Your Mac’s keyboard layout, shortcuts and three-finger drag setting,</strong> as
+Headwire Helper last reported them, so Bluetooth input types the right characters and drags as your
+Mac does when the helper isn’t running.</li>
 <li><strong>Custom keys:</strong> the keys, text snippets and key sequences you make, for each Mac
 and for each app on the Mac.</li>
 <li><strong>Your Macs:</strong> which paired Mac you chose to show, which one the capture card is
@@ -155,8 +156,13 @@ plugged into, and the connection each was last shown over.</li>
 <li><strong>Your paired Macs’ names,</strong> and whether each is connected: shared with Headwire’s
 widgets and controls, Siri, Shortcuts and Spotlight on this device, so you can open a Mac from
 them. Pairing keys are never shared with them.</li>
-<li><strong>Battery readings:</strong> a reading of the device’s charge each minute, kept for two
-days, to work out what Instant switch costs in battery.</li>
+<li><strong>Battery readings:</strong> a reading of the device’s charge each minute while Headwire
+is open, to work out what Instant switch costs in battery. Each reading is deleted once Headwire
+takes one two days after it.</li>
+<li><strong>Pictures of your Macs,</strong> if you turn on Glance at your Mac: the newest small
+picture of each paired Mac, shared with Headwire’s widgets on this device, and its Live Activity on
+iPhone, so they can show it. Turning Glance at your Mac off deletes them all, and removing a Mac
+deletes its picture. They’re kept out of iCloud and computer backups.</li>
 <li><strong>How many times you’ve opened Headwire,</strong> so it knows when to offer a tip.</li>
 <li><strong>Files you receive</strong> from your Mac, in Headwire’s folder in the Files app (On My
 iPad › Headwire), until you delete them. On the Mac, files you send from the iPad go to your
@@ -184,14 +190,16 @@ Wi-Fi) or a direct wireless link between the two devices:
   <li>your touches, pointer movements and key presses, to the Mac;</li>
   <li>plain text you copy, both ways (see <a href="#clipboard">Copy and paste</a>);</li>
   <li>files you choose to send, both ways;</li>
-  <li>the Mac’s keyboard layout and shortcuts, and settings such as the picture size and frame
+  <li>the Mac’s keyboard layout, shortcuts and three-finger drag setting, and settings such as the picture size and frame
   rate the device asks for;</li>
   <li>the name and identifier of the app in front on the Mac, when the device connects and each
   time you switch apps, so the device can show that app’s custom keys;</li>
   <li>whether the Mac’s screen is on, asleep or locked, whether it’s streaming and whether the
   capture card is on it;</li>
-  <li>small pictures of the Mac’s screen, at most one a second, only while the Mac overview is
-  open on a paired device. They’re shown there and not saved.</li>
+  <li>small pictures of the Mac’s screen: at most one a second while the Mac overview is open on
+  a paired device, where they’re shown and not saved; and, if you turn on Glance at your Mac, one
+  every 15 seconds from each other paired Mac while Headwire keeps playing in the background, kept
+  for the widgets (see <a href="#stays">What stays on your devices</a>).</li>
   </ul>
 </li>
 </ul>
@@ -201,8 +209,9 @@ Wi-Fi) or a direct wireless link between the two devices:
 checks the other’s key against the one it saved when you paired them. A device that hasn’t been
 paired gets nothing from the helper.</li>
 <li>Headwire Helper only accepts connections from this Mac, its USB cable, its local networks and
-direct wireless. It refuses connections that arrive through a VPN or from the internet, and it
-never opens a port for the internet.</li>
+direct wireless. It listens only while Streaming or Input is on, and turns away any connection that
+arrives through a VPN or from the internet before reading anything from it. Like any Mac sharing
+service, it relies on your router or firewall to keep the internet from reaching the Mac at all.</li>
 <li>Headwire never uses mobile data for the link.</li>
 <li>Headwire Helper captures the screen only while a paired device is connected.</li>
 <li>On your local network, Headwire Helper announces itself with Bonjour under your Mac’s name,
@@ -214,8 +223,8 @@ recognise.</li>
 <li>While a device is connected, text you copy on the Mac is sent to it and put on its clipboard.
 Text marked as private, such as a password copied from a password manager, is never sent.</li>
 <li>Headwire reads the iPad’s or iPhone’s clipboard only when you paste into the Mac, with ⌘V
-on the stream, Paste to Mac in Settings, or the Paste clipboard to Mac action in Shortcuts or
-Siri. It never reads it on its own.</li>
+on the stream, the Paste button in the row of Mac keys, or the Paste clipboard to Mac action in
+Shortcuts or Siri. It never reads it on its own.</li>
 <li>Clipboard contents are never logged, and Headwire keeps no copy of them.</li>
 </ul>
 
@@ -249,7 +258,8 @@ choose to save. Headwire can add to your library but can’t see what’s in it.
 <thead><tr><th scope="col">Permission</th><th scope="col">Why</th></tr></thead>
 <tbody>
 <tr><td>Screen Recording</td><td>To stream the Mac’s screen and sound to your paired iPad or
-iPhone, and to take the small pictures for the Mac overview, only while one is connected. The helper takes the sound the Mac plays, never the Mac’s
+iPhone, and to take the small pictures for the Mac overview and Glance at your Mac, only while
+one is connected. The helper takes the sound the Mac plays, never the Mac’s
 microphone.</td></tr>
 <tr><td>Accessibility</td><td>To turn your touches, pointer and key presses from the iPad or iPhone
 into mouse and keyboard input on the Mac.</td></tr>
@@ -271,10 +281,10 @@ while it’s in the background, as a video app does; nothing else changes about 
 
 <h2 id="apple">What Apple handles</h2>
 <ul>
-<li><strong>Purchases.</strong> Tips and Headwire Pro are bought through the App Store. Apple
-handles the payment and your Apple Account; Headwire only learns from the App Store which
-products you own, and checks that on the device to unlock Pro and count your tips. The developer
-gets sales reports from Apple that don’t name you.</li>
+<li><strong>Tips.</strong> Tips are given through the App Store. Apple handles the payment and
+your Apple Account; Headwire only learns from the App Store whether you’ve tipped, and checks that
+on the device so it stops offering a tip. The developer gets sales reports from Apple that don’t
+name you.</li>
 <li><strong>Crash reports and diagnostics.</strong> If you’ve turned on sharing with app developers
 in your device’s Analytics &amp; Improvements settings, Apple may pass crash reports and
 diagnostics from Headwire to the developer, without your name. That’s your choice in Apple’s

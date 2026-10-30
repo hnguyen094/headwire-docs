@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Headwire Support</title>
+<meta name="description" content="Help with Headwire and Headwire Helper: the three ways to connect, what to check when something doesn’t work, and how to reach the developer.">
+<style>
+:root {
+    --bg: #ffffff;
+    --text: #1d1d1f;
+    --muted: #5e5e63;
+    --rule: #d2d2d7;
+    --panel: #f5f5f7;
+    --link: #0062cc;
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg: #161618;
+        --text: #f2f2f4;
+        --muted: #a8a8ae;
+        --rule: #3a3a3e;
+        --panel: #222225;
+        --link: #5fa8ff;
+    }
+}
+:root[data-theme="dark"] {
+    --bg: #161618;
+    --text: #f2f2f4;
+    --muted: #a8a8ae;
+    --rule: #3a3a3e;
+    --panel: #222225;
+    --link: #5fa8ff;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 1.0625rem/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+main { max-width: 42rem; margin: 0 auto; padding: 3rem 1rem 4rem; }
+h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 0.25rem; }
+h2 { font-size: 1.3rem; line-height: 1.3; margin: 2.5rem 0 0.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+h3 { font-size: 1.05rem; margin: 1.5rem 0 0.25rem; }
+p, ul, ol { margin: 0 0 1rem; }
+ul, ol { padding-left: 1.25rem; }
+li { margin-bottom: 0.4rem; }
+a { color: var(--link); text-underline-offset: 0.15em; overflow-wrap: anywhere; }
+a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
+.updated { color: var(--muted); margin-bottom: 2rem; }
+.summary { background: var(--panel); border-radius: 12px; padding: 1rem 1.25rem; }
+.summary p:last-child { margin-bottom: 0; }
+.address { font-weight: 600; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
+footer { color: var(--muted); font-size: 0.95rem; margin-top: 3rem; }
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>Headwire Support</h1>
+<p class="updated">Last updated 2026-10-28</p>
+</header>
+
+<section class="summary" aria-label="Summary">
+<p><strong>Need a hand?</strong> In Headwire, open Settings › About › Send feedback to email the
+developer, with the app and system versions filled in, or <a href="#contact">open an issue</a>.
+The steps below cover the questions that come up most.</p>
+</section>
+
+<h2>Three ways to connect</h2>
+<h3>A capture card (iPad with USB-C)</h3>
+<p>Connect an HDMI port on your Mac to a USB video capture card, a standard “HDMI to USB” card,
+and plug the card into your iPad. Open Headwire and allow Camera and Microphone when asked: the
+system treats the card as a camera, and its sound as a microphone. Nothing is installed on the
+Mac, and the card takes the place of a monitor, so this works with a Mac mini that has none.</p>
+<h3>Bluetooth keyboard and mouse</h3>
+<p>Open Headwire and allow Bluetooth. On your Mac, open System Settings › Bluetooth, find
+Headwire under Nearby Devices and click Connect. Check that both screens show the same code, then
+confirm on both. Nothing is installed on the Mac.</p>
+<h3>Headwire Helper on the Mac</h3>
+<p>For the Mac screen and sound over a USB cable or wirelessly, on iPad or iPhone, install
+Headwire Helper on your Mac. <a href="../helper/">Get Headwire Helper</a> has the steps.</p>
+
+<h2>If something doesn’t work</h2>
+<h3>The capture card shows nothing</h3>
+<ul>
+<li>Check that Headwire may use the camera: in the Settings app on your iPad, open Apps ›
+Headwire and turn on Camera.</li>
+<li>Check that the Mac is awake and sending to the card. On your Mac, the card is listed in
+System Settings › Displays.</li>
+<li>Video an app protects, as many streaming services do, shows as black through a capture card.
+That’s the protection working; the rest of the screen still shows.</li>
+</ul>
+<h3>There’s a picture but no sound from the card</h3>
+<p>In the Settings app on your iPad, open Apps › Headwire and turn on Microphone. Headwire only
+takes the card’s HDMI sound, never the built-in microphone.</p>
+<h3>Your Mac doesn’t find Headwire over Bluetooth</h3>
+<p>Once paired, your Mac lists your iPad or iPhone under its own name, not as Headwire. If they
+were paired before, on your Mac open System Settings › Bluetooth, click the info button next to
+your iPad or iPhone, choose Forget This Device, then connect again.</p>
+<h3>Headwire Helper streams nothing</h3>
+<ul>
+<li>In the Headwire Helper menu on your Mac, check that Streaming is on, and that Headwire Helper
+is allowed in System Settings › Privacy &amp; Security › Screen &amp; System Audio Recording.</li>
+<li>Headwire Helper from the Mac App Store needs a display connected to the Mac to stream, such
+as a monitor, the capture card, or an HDMI dummy plug. On a Mac with no display, Headwire says
+so.</li>
+</ul>
+<h3>Headwire can’t find your Mac</h3>
+<ul>
+<li>Connect the two with a USB cable, or put them on the same Wi-Fi or Ethernet network.</li>
+<li>Check that Headwire may find devices on your local network: in the Settings app, open Apps ›
+Headwire and turn on Local Network.</li>
+<li>In the Headwire Helper menu on your Mac, check that Streaming or Input is on; Headwire Helper
+listens only while one is.</li>
+</ul>
+
+<h2 id="contact">Contact</h2>
+<ul>
+<li>In Headwire, Settings › About › Send feedback opens your email app with a message to the
+developer. Nothing is sent until you send it.</li>
+<li>Or write to <span class="address">hungnguyen094+headwire@gmail.com</span> from any email app.</li>
+<li>Or open an issue at
+<a href="https://github.com/hnguyen094/headwire-docs/issues">github.com/hnguyen094/headwire-docs/issues</a>.
+Issues there are public, so leave out anything personal.</li>
+</ul>
+
+<footer>
+<p>Headwire and Headwire Helper are by Hung Nguyen. <a href="../privacy/">Privacy Policy</a> ·
+<a href="../helper/">Get Headwire Helper</a> · <a href="../documentation/">Developer documentation</a></p>
+</footer>
+</main>
+</body>
+</html>
