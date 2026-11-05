@@ -1,0 +1,226 @@
+/* Headwire's website. Colours come from the app icon (design/icon): the slate fill, the Mac window's
+   teal and mint, and the iPadOS pointer in white. Type is the system's own: sans for headings and
+   text, serif for the lede, monospace for labels. No web fonts, no scripts. */
+
+:root {
+    --bg: #f3f5f4;
+    --surface: #ffffff;
+    --text: #12161c;
+    --muted: #4a5260;
+    --rule: #d3d9d7;
+    --accent: #00705d;
+    --teal: #30e6c8;
+    --mint: #9ef3e4;
+    --tint: #d9f7f1;
+    --slab: #30e6c8;
+    --button-bg: #0d0f14;
+    --button-text: #ffffff;
+    --pointer-stroke: #0d0f14;
+    --shadow: 0 1px 2px rgb(13 15 20 / 0.08), 0 12px 32px rgb(13 15 20 / 0.14);
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --serif: ui-serif, "New York", "Iowan Old Style", Georgia, serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg: #0d0f14;
+        --surface: #161a21;
+        --text: #eceff2;
+        --muted: #a3abb7;
+        --rule: #2a2f3a;
+        --accent: #5cebd3;
+        --tint: #10302b;
+        --slab: #1d8f7d;
+        --button-bg: #30e6c8;
+        --button-text: #0d0f14;
+        --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 16px 40px rgb(0 0 0 / 0.5);
+    }
+}
+:root[data-theme="dark"] {
+    --bg: #0d0f14;
+    --surface: #161a21;
+    --text: #eceff2;
+    --muted: #a3abb7;
+    --rule: #2a2f3a;
+    --accent: #5cebd3;
+    --tint: #10302b;
+    --slab: #1d8f7d;
+    --button-bg: #30e6c8;
+    --button-text: #0d0f14;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 16px 40px rgb(0 0 0 / 0.5);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 1rem; }
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 1.0625rem/1.6 var(--sans);
+    overflow-wrap: break-word;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--accent); text-underline-offset: 0.18em; text-decoration-thickness: 0.06em; }
+a:hover { text-decoration-thickness: 0.12em; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+p, ul, ol, dl { margin: 0 0 1rem; }
+ul, ol { padding-left: 1.25rem; }
+li { margin-bottom: 0.4rem; }
+h1, h2, h3 { line-height: 1.15; letter-spacing: -0.015em; }
+h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); margin: 0 0 1rem; letter-spacing: -0.025em; }
+h3 { font-size: 1.2rem; margin: 1.5rem 0 0.4rem; }
+
+.wrap { max-width: 72rem; margin: 0 auto; padding: 0 clamp(1rem, 4vw, 2.5rem); }
+.skip { position: absolute; left: -999px; top: 0; }
+.skip:focus { left: 1rem; top: 1rem; background: var(--surface); padding: 0.5rem 0.75rem; z-index: 2; }
+
+/* Header and footer */
+.site-header { border-bottom: 1px solid var(--rule); }
+.site-header .wrap {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: 0.5rem 1.5rem; padding-top: 0.9rem; padding-bottom: 0.9rem;
+}
+.brand {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    color: var(--text); text-decoration: none; font-weight: 750; font-size: 1.15rem; letter-spacing: -0.01em;
+}
+.brand img { width: 2rem; height: 2rem; }
+.site-nav ul { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; list-style: none; margin: 0; padding: 0; }
+.site-nav li { margin: 0; }
+.site-nav a { color: var(--text); text-decoration: none; font-size: 0.97rem; padding: 0.25rem 0; }
+.site-nav a:hover { color: var(--accent); }
+.site-nav a[aria-current="page"] { color: var(--accent); box-shadow: inset 0 -2px 0 var(--accent); }
+
+.site-footer { border-top: 1px solid var(--rule); margin-top: 5rem; color: var(--muted); font-size: 0.95rem; }
+.site-footer .wrap { padding-top: 2rem; padding-bottom: 3rem; }
+.site-footer ul { display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; list-style: none; padding: 0; }
+.site-footer a { color: var(--text); }
+
+/* Labels */
+.eyebrow {
+    font: 600 0.8rem/1.4 var(--mono); text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--accent); margin: 0 0 0.75rem;
+}
+.lede { font-family: var(--serif); font-size: clamp(1.2rem, 2.4vw, 1.45rem); line-height: 1.5; color: var(--text); }
+
+/* Buttons */
+.actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin: 1.75rem 0 0; }
+.button {
+    display: inline-flex; align-items: center; gap: 0.5rem; min-height: 2.9rem; padding: 0.65rem 1.25rem;
+    border-radius: 999px; background: var(--button-bg); color: var(--button-text);
+    font-weight: 650; text-decoration: none;
+}
+.button:hover { filter: brightness(1.12); }
+.button.quiet { background: transparent; color: var(--text); box-shadow: inset 0 0 0 1.5px var(--rule); }
+.button.quiet:hover { box-shadow: inset 0 0 0 1.5px var(--accent); filter: none; }
+
+/* Home: the hero */
+.hero .wrap { display: grid; gap: 3rem; padding-top: clamp(2.5rem, 7vw, 5.5rem); padding-bottom: 2rem; align-items: center; }
+@media (min-width: 60rem) { .hero .wrap { grid-template-columns: 5fr 7fr; } }
+.hero h1 {
+    font-size: clamp(2.7rem, 7.5vw, 5.4rem); line-height: 0.98; letter-spacing: -0.045em;
+    font-weight: 800; margin: 0 0 1.25rem;
+}
+.hero h1 span { color: var(--accent); }
+
+/* A screenshot on the icon's teal window, with the icon's pointer breaking out past its edge. */
+.shot { position: relative; margin: 0; padding: 0 1.25rem 1.75rem 0; }
+.shot::before {
+    content: ""; position: absolute; inset: 1.5rem 0 0 1.5rem; border-radius: 28px; background: var(--slab);
+}
+.shot img { position: relative; border-radius: 18px; box-shadow: var(--shadow); }
+.shot .pointer {
+    position: absolute; right: 4%; bottom: -0.5rem; width: clamp(2.6rem, 9%, 4.5rem); height: auto;
+    filter: drop-shadow(0 6px 10px rgb(13 15 20 / 0.35));
+}
+.shot .pointer path { fill: #ffffff; stroke: var(--pointer-stroke); stroke-width: 0.5; }
+figcaption { color: var(--muted); font-size: 0.92rem; margin-top: 0.75rem; position: relative; }
+
+/* Home: sections */
+.section { padding-top: clamp(3.5rem, 8vw, 6rem); }
+.section-head { max-width: 44rem; margin-bottom: 2rem; }
+.section-head p { color: var(--muted); font-size: 1.1rem; }
+
+.ways { display: grid; gap: 1.25rem; }
+@media (min-width: 48rem) { .ways { grid-template-columns: 1fr 1fr; } }
+.way { background: var(--surface); border: 1px solid var(--rule); border-radius: 20px; overflow: hidden; }
+/* The icon's title bar, three window buttons and all. */
+.way-bar {
+    height: 2.4rem; background: var(--tint); border-bottom: 1px solid var(--rule);
+    background-image:
+        radial-gradient(circle at 1.25rem 50%, var(--accent) 0 0.3rem, transparent 0.32rem),
+        radial-gradient(circle at 2.25rem 50%, var(--accent) 0 0.3rem, transparent 0.32rem),
+        radial-gradient(circle at 3.25rem 50%, var(--accent) 0 0.3rem, transparent 0.32rem);
+}
+.way-body { padding: 1.5rem clamp(1.25rem, 3vw, 2rem) 1.75rem; }
+.way h3 { font-size: 1.45rem; margin: 0 0 0.25rem; letter-spacing: -0.02em; }
+.way .tagline { font-family: var(--serif); font-size: 1.15rem; color: var(--muted); margin-bottom: 1.25rem; }
+.together { margin-top: 1.5rem; font-family: var(--serif); font-size: 1.2rem; text-align: center; }
+
+/* Lists marked with the icon's pointer. */
+.pointers { list-style: none; padding: 0; }
+.pointers li { position: relative; padding-left: 1.6rem; }
+.pointers li::before {
+    content: ""; position: absolute; left: 0.1rem; top: 0.35em; width: 0.72rem; height: 0.94rem;
+    background: var(--accent);
+    -webkit-mask: url("pointer.svg") center / contain no-repeat;
+    mask: url("pointer.svg") center / contain no-repeat;
+}
+
+.features { display: grid; gap: 2rem 3rem; counter-reset: feature; padding: 0; list-style: none; }
+@media (min-width: 48rem) { .features { grid-template-columns: 1fr 1fr; } }
+.features > li { counter-increment: feature; border-top: 2px solid var(--text); padding-top: 1rem; margin: 0; }
+.features > li::before {
+    content: counter(feature, decimal-leading-zero); display: block;
+    font: 600 0.85rem var(--mono); color: var(--accent); margin-bottom: 0.4rem;
+}
+.features h3 { margin: 0 0 0.5rem; font-size: 1.3rem; }
+.features p { color: var(--muted); }
+
+.wide { margin: 0 auto; max-width: 52rem; }
+.wide img { border-radius: 16px; box-shadow: var(--shadow); }
+
+.needs { display: grid; gap: 0; border-top: 1px solid var(--rule); }
+.needs > div { display: grid; gap: 0.25rem 2rem; padding: 1rem 0; border-bottom: 1px solid var(--rule); }
+@media (min-width: 48rem) { .needs > div { grid-template-columns: 16rem 1fr; } }
+.needs dt { font-weight: 650; }
+.needs dd { margin: 0; color: var(--muted); }
+
+.get { display: grid; gap: 1.25rem; }
+@media (min-width: 48rem) { .get { grid-template-columns: 1fr 1fr; } }
+.get > section { background: var(--surface); border: 1px solid var(--rule); border-radius: 20px; padding: 1.75rem clamp(1.25rem, 3vw, 2rem); }
+.get h3 { margin-top: 0; font-size: 1.35rem; }
+.free { margin-top: 1.5rem; padding: 1.25rem 1.5rem; border-radius: 16px; background: var(--tint); }
+.free p:last-child { margin-bottom: 0; }
+
+/* Pages of text: the policy, support, Headwire Connect and the manual */
+.doc { max-width: 44rem; padding-top: clamp(2.5rem, 6vw, 4rem); }
+.doc h1 {
+    font-size: clamp(2.3rem, 6vw, 3.4rem); line-height: 1.02; letter-spacing: -0.04em;
+    font-weight: 800; margin: 0 0 0.5rem;
+}
+.doc h2 { font-size: 1.5rem; margin: 3rem 0 0.75rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+.doc h3 { font-size: 1.12rem; }
+.updated { font: 0.85rem var(--mono); color: var(--muted); margin-bottom: 2rem; }
+.summary { background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--teal); border-radius: 12px; padding: 1.1rem 1.35rem; }
+.summary p:last-child { margin-bottom: 0; }
+.address { font-weight: 650; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
+.table-wrap { overflow-x: auto; margin: 0 0 1rem; }
+table { border-collapse: collapse; width: 100%; font-size: 0.97rem; }
+th, td { text-align: left; vertical-align: top; padding: 0.55rem 0.75rem 0.55rem 0; border-bottom: 1px solid var(--rule); }
+th { font-weight: 650; }
+caption { text-align: left; font-weight: 650; padding-bottom: 0.25rem; }
+.steps { padding-left: 0; list-style: none; counter-reset: step; }
+.steps > li { counter-increment: step; position: relative; padding-left: 2.6rem; margin-bottom: 1rem; }
+.steps > li::before {
+    content: counter(step); position: absolute; left: 0; top: 0.05rem; width: 1.8rem; height: 1.8rem;
+    border-radius: 50%; background: var(--tint); color: var(--accent);
+    font: 700 0.9rem/1.8rem var(--mono); text-align: center;
+}
+.download { margin: 1.25rem 0 1.5rem; }
+.download .note { display: block; color: var(--muted); font-size: 0.92rem; margin-top: 0.5rem; }
+
+@media (prefers-reduced-motion: no-preference) {
+    .button { transition: filter 0.15s, box-shadow 0.15s; }
+}

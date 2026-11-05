@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Headwire's app icon, flat: the layers and fill of design/icon (icon.json, layers/*.svg) without
+       Icon Composer's glass. -->
+  <defs>
+    <linearGradient id="fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2A2F3A"/>
+      <stop offset="1" stop-color="#0D0F14"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="230" fill="url(#fill)"/>
+  <path d="M 136 336 H 888 V 652 A 64 64 0 0 1 824 716 H 200 A 64 64 0 0 1 136 652 Z" fill="#30E6C8"/>
+  <path fill-rule="evenodd" fill="#9EF3E4"
+        d="M 136 336 V 280 A 64 64 0 0 1 200 216 H 824 A 64 64 0 0 1 888 280 V 336 Z
+           M 186 276 a 30 30 0 1 0 60 0 a 30 30 0 1 0 -60 0 Z
+           M 270 276 a 30 30 0 1 0 60 0 a 30 30 0 1 0 -60 0 Z
+           M 354 276 a 30 30 0 1 0 60 0 a 30 30 0 1 0 -60 0 Z"/>
+  <path transform="translate(462 345) scale(29)" fill="#FFFFFF"
+        d="M 1.5 0 C 1.90664 0 2.29586 0.165097 2.57848 0.457467 L 12.0422 10.2475 C 12.618 10.8432 12.6019 11.7928 12.0063 12.3686 C 11.7266 12.6389 11.3528 12.7901 10.9637 12.7901 L 6.58348 12.7901 C 6.20819 12.7901 5.84653 12.9307 5.56989 13.1843 L 2.51359 15.9859 C 1.90291 16.5457 0.954057 16.5045 0.394269 15.8938 C 0.140678 15.6172 0 15.2555 0 14.8802 L 0 1.5 C 0 0.671573 0.671573 0 1.5 0 Z"/>
+</svg>

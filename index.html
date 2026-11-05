@@ -4,71 +4,235 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>Headwire</title>
-<meta name="description" content="Headwire turns an iPad or iPhone into a screen, keyboard and mouse for a Mac.">
-<style>
-:root {
-    --bg: #ffffff;
-    --text: #1d1d1f;
-    --muted: #5e5e63;
-    --rule: #d2d2d7;
-    --panel: #f5f5f7;
-    --link: #0062cc;
-}
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-        --bg: #161618;
-        --text: #f2f2f4;
-        --muted: #a8a8ae;
-        --rule: #3a3a3e;
-        --panel: #222225;
-        --link: #5fa8ff;
-    }
-}
-:root[data-theme="dark"] {
-    --bg: #161618;
-    --text: #f2f2f4;
-    --muted: #a8a8ae;
-    --rule: #3a3a3e;
-    --panel: #222225;
-    --link: #5fa8ff;
-}
-* { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--text);
-    font: 1.0625rem/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-}
-main { max-width: 42rem; margin: 0 auto; padding: 3rem 1rem 4rem; }
-h1 { font-size: 2rem; line-height: 1.2; margin: 0 0 0.25rem; }
-h2 { font-size: 1.3rem; line-height: 1.3; margin: 2.5rem 0 0.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
-h3 { font-size: 1.05rem; margin: 1.5rem 0 0.25rem; }
-p, ul, ol { margin: 0 0 1rem; }
-ul, ol { padding-left: 1.25rem; }
-li { margin-bottom: 0.4rem; }
-a { color: var(--link); text-underline-offset: 0.15em; overflow-wrap: anywhere; }
-a:focus-visible { outline: 2px solid var(--link); outline-offset: 2px; border-radius: 2px; }
-.updated { color: var(--muted); margin-bottom: 2rem; }
-.summary { background: var(--panel); border-radius: 12px; padding: 1rem 1.25rem; }
-.summary p:last-child { margin-bottom: 0; }
-.address { font-weight: 600; overflow-wrap: anywhere; user-select: all; -webkit-user-select: all; }
-footer { color: var(--muted); font-size: 0.95rem; margin-top: 3rem; }
-</style>
+<title>Headwire: your Mac, on your iPad</title>
+<meta name="description" content="Headwire shows the Mac in the room on your iPad or iPhone, plays its sound, and lets you work it with touch, a trackpad, a mouse or a keyboard. Use a capture card and Bluetooth, with nothing installed on the Mac, or Headwire Connect, by cable or wirelessly.">
+<link rel="icon" href="assets/headwire.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<main>
-<header>
-<h1>Headwire</h1>
-<p class="updated">Use an iPad or iPhone as a screen, keyboard and mouse for your Mac.</p>
-</header>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<div class="wrap">
+<a class="brand" href="./"><img src="assets/headwire.svg" alt="" width="32" height="32">Headwire</a>
+<nav class="site-nav" aria-label="Site">
 <ul>
-<li><a href="helper/">Get Headwire Connect for your Mac</a></li>
+<li><a href="helper/">Headwire Connect</a></li>
+<li><a href="manual/">Manual</a></li>
+<li><a href="support/">Support</a></li>
+<li><a href="privacy/">Privacy</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+<main id="main">
+<section class="hero" aria-labelledby="title">
+<div class="wrap">
+<div>
+<p class="eyebrow">For iPad and iPhone</p>
+<h1 id="title">Your Mac, <span>on your iPad.</span></h1>
+<p class="lede">Headwire shows the Mac in the room full screen on your iPad or iPhone, plays its
+sound, and lets you work it with touch, a trackpad, a mouse or a keyboard. It’s made for a Mac
+in the same room, like a Mac mini without a monitor.</p>
+<div class="actions">
+<a class="button" href="#get">Get Headwire</a>
+<a class="button quiet" href="#two-ways">Two ways to connect</a>
+</div>
+</div>
+<figure class="shot">
+<img src="assets/screens/ipad-stream-1600.jpg"
+     srcset="assets/screens/ipad-stream-800.jpg 800w, assets/screens/ipad-stream-1600.jpg 1600w"
+     sizes="(min-width: 60rem) 42rem, 100vw" width="1600" height="1200"
+     alt="Headwire on iPad, showing a sample Mac desktop edge to edge: a menu bar, a notes window, a chart window and the Dock, with a row of Mac keys along the bottom of the screen.">
+<svg class="pointer" viewBox="-0.5 -0.5 13.5 17.4" aria-hidden="true" focusable="false"><path d="M 1.5 0 C 1.90664 0 2.29586 0.165097 2.57848 0.457467 L 12.0422 10.2475 C 12.618 10.8432 12.6019 11.7928 12.0063 12.3686 C 11.7266 12.6389 11.3528 12.7901 10.9637 12.7901 L 6.58348 12.7901 C 6.20819 12.7901 5.84653 12.9307 5.56989 13.1843 L 2.51359 15.9859 C 1.90291 16.5457 0.954057 16.5045 0.394269 15.8938 C 0.140678 15.6172 0 15.2555 0 14.8802 L 0 1.5 C 0 0.671573 0.671573 0 1.5 0 Z"/></svg>
+</figure>
+</div>
+</section>
+
+<section class="section" id="two-ways" aria-labelledby="two-ways-title">
+<div class="wrap">
+<div class="section-head">
+<p class="eyebrow">Two ways to connect</p>
+<h2 id="two-ways-title">Plug in a capture card, or install Headwire Connect.</h2>
+<p>Both show your Mac screen and play its sound, and both let your iPad or iPhone drive the Mac.
+Pick the one that fits your desk.</p>
+</div>
+<div class="ways">
+<article class="way" aria-labelledby="way-card">
+<div class="way-bar" aria-hidden="true"></div>
+<div class="way-body">
+<h3 id="way-card">A capture card and Bluetooth</h3>
+<p class="tagline">Nothing to install on the Mac.</p>
+<ul class="pointers">
+<li>Plug a USB capture card into your iPad and connect it to the HDMI port on your Mac. Headwire
+shows the picture edge to edge, at the resolutions and frame rates your card offers.</li>
+<li>The picture comes straight from the HDMI port, with no app running on the Mac, so it shows the
+login window too.</li>
+<li>Over Bluetooth, your iPad or iPhone becomes a keyboard and mouse for your Mac. Pair it once in
+System Settings on the Mac.</li>
+</ul>
+<p><a href="support/#capture-card">How to set it up</a></p>
+</div>
+</article>
+<article class="way" aria-labelledby="way-connect">
+<div class="way-bar" aria-hidden="true"></div>
+<div class="way-body">
+<h3 id="way-connect">Headwire Connect</h3>
+<p class="tagline">By cable or wirelessly, with the most features.</p>
+<ul class="pointers">
+<li>Install Headwire Connect on your Mac, and it sends your Mac screen and sound to your iPad or
+iPhone over a USB cable, your network, or peer-to-peer Wi-Fi. No capture card needed.</li>
+<li>Input through it adds trackpad-style scrolling and typing any character, whatever the keyboard
+layout.</li>
+<li>Copy text on one and paste it on the other, and send files both ways.</li>
+</ul>
+<p><a href="helper/">Get Headwire Connect</a></p>
+</div>
+</article>
+</div>
+<p class="together">Use either, or both. Headwire picks the connection, and moves to another when one drops.</p>
+</div>
+</section>
+
+<section class="section" aria-labelledby="features-title">
+<div class="wrap">
+<div class="section-head">
+<p class="eyebrow">Made for your hands</p>
+<h2 id="features-title">Work your Mac the way you hold your iPad.</h2>
+</div>
+<ol class="features">
+<li>
+<h3>Tap, or use it like a trackpad</h3>
+<p>Tap where you want to click, or move the pointer as on a trackpad. Right-click with a
+two-finger tap or a long press. Drag, scroll, and pinch to zoom. Swipe with three or four fingers
+for Mission Control, App Exposé and Spaces.</p>
+</li>
+<li>
+<h3>Bring your keyboard</h3>
+<p>Type on a hardware keyboard or the onscreen keyboard, or dictate. A trackpad or mouse
+connected to your iPad works on the Mac too, and Apple Pencil points and clicks where it
+touches.</p>
+</li>
+<li>
+<h3>Made to fit your screen</h3>
+<p>Fill the screen, see the whole picture, or zoom in on what matters. Turn on a row of media,
+brightness and Mission Control keys when you want them.</p>
+</li>
+<li>
+<h3>Hear your Mac</h3>
+<p>Sound plays from the capture card’s HDMI audio or from Headwire Connect, and you can nudge its
+timing to match the picture.</p>
+</li>
+</ol>
+</div>
+</section>
+
+<section class="section" aria-labelledby="iphone-title">
+<div class="wrap">
+<div class="section-head">
+<p class="eyebrow">On iPhone too</p>
+<h2 id="iphone-title">Your Mac in your pocket.</h2>
+<p>On iPhone, Headwire shows your Mac through Headwire Connect, and controls it through Headwire
+Connect or over Bluetooth.</p>
+</div>
+<figure class="wide">
+<img src="assets/screens/iphone-stream-1600.jpg"
+     srcset="assets/screens/iphone-stream-800.jpg 800w, assets/screens/iphone-stream-1600.jpg 1600w"
+     sizes="(min-width: 56rem) 52rem, 100vw" width="1600" height="736" loading="lazy"
+     alt="Headwire on iPhone, held sideways, showing the same sample Mac desktop across the screen.">
+<figcaption>Headwire on iPhone, with the sample desktop the App Store screenshots use.</figcaption>
+</figure>
+</div>
+</section>
+
+<section class="section" aria-labelledby="privacy-title">
+<div class="wrap">
+<div class="section-head">
+<p class="eyebrow">Private by design</p>
+<h2 id="privacy-title">Your Mac stays between your devices.</h2>
+</div>
+<ul class="pointers">
+<li>Video from a capture card never leaves your iPad.</li>
+<li>Headwire Connect only connects to devices you’ve paired, over a cable, your local network or
+peer-to-peer Wi-Fi, never the internet, and the connection is encrypted.</li>
+<li>No accounts, no advertising and no tracking. Usage data is off until you turn it on.</li>
+</ul>
+<p><a href="privacy/">Read the privacy policy</a></p>
+</div>
+</section>
+
+<section class="section" aria-labelledby="needs-title">
+<div class="wrap">
+<div class="section-head">
+<p class="eyebrow">What you need</p>
+<h2 id="needs-title">A Mac, and an iPad or iPhone.</h2>
+</div>
+<dl class="needs">
+<div><dt>To see your Mac on iPad</dt><dd>A USB capture card and an HDMI cable, or Headwire Connect on
+the Mac. A capture card needs an iPad with USB-C.</dd></div>
+<div><dt>To see your Mac on iPhone</dt><dd>Headwire Connect on the Mac.</dd></div>
+<div><dt>To control your Mac</dt><dd>Bluetooth on the Mac, or Headwire Connect.</dd></div>
+<div><dt>For Headwire Connect</dt><dd>A Mac with Apple silicon and macOS 27 or later. Headwire
+Connect from the App Store also needs a display connected to the Mac to stream, such as a
+monitor, the capture card or an HDMI dummy plug.</dd></div>
+<div><dt>For Headwire</dt><dd>iPadOS 26 or iOS 26 or later.</dd></div>
+</dl>
+<p>Video that its app protects, as many streaming services do, shows as black through a capture
+card. The rest of the screen still works.</p>
+</div>
+</section>
+
+<section class="section" id="get" aria-labelledby="get-title">
+<div class="wrap">
+<div class="section-head">
+<p class="eyebrow">Get Headwire</p>
+<h2 id="get-title">Free, with every feature included.</h2>
+</div>
+<div class="get">
+<section aria-labelledby="get-app">
+<h3 id="get-app">Headwire for iPad and iPhone</h3>
+<p>Headwire is coming to the App Store. This page will link to it there.</p>
+</section>
+<section aria-labelledby="get-connect">
+<h3 id="get-connect">Headwire Connect for Mac</h3>
+<p>Download Headwire Connect from the Headwire website now. Headwire Connect from the App Store
+is on its way.</p>
+<div class="actions"><a class="button" href="helper/">Get Headwire Connect</a></div>
+</section>
+</div>
+<div class="free">
+<p>There’s nothing to buy or unlock. Optional tips in the app support its development; a tip
+unlocks nothing, and the app is the same either way.</p>
+</div>
+</div>
+</section>
+
+<section class="section" aria-labelledby="manual-title">
+<div class="wrap">
+<div class="section-head">
+<p class="eyebrow">Manual</p>
+<h2 id="manual-title">Every feature, step by step.</h2>
+<p>The Headwire manual is being written. Until it’s here, <a href="support/">Support</a> has the
+steps to connect and what to check when something doesn’t work.</p>
+</div>
+<p><a href="manual/">About the manual</a></p>
+</div>
+</section>
+</main>
+
+<footer class="site-footer">
+<div class="wrap">
+<nav aria-label="Footer">
+<ul>
+<li><a href="helper/">Get Headwire Connect</a></li>
+<li><a href="manual/">Manual</a></li>
 <li><a href="support/">Support</a></li>
 <li><a href="privacy/">Privacy Policy</a></li>
 </ul>
-<footer><p>Headwire is by Hung Nguyen.</p></footer>
-</main>
+</nav>
+<p>Headwire and Headwire Connect are by Hung Nguyen. This site has no cookies, trackers or analytics.</p>
+</div>
+</footer>
 </body>
 </html>
