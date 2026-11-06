@@ -1,6 +1,6 @@
 // The camera's walk across the desk. A shot is where the camera looks, from which side, and how
-// much it must fit; the timeline runs 0 to 1 through the shots, holding still at the Mac and at
-// the iPad and iPhone.
+// much it must fit; the timeline runs 0 to 1 through the shots on one smooth curve, without
+// stopping at any of them.
 import * as THREE from 'three';
 import { timeline } from './timeline.js';
 
@@ -31,10 +31,6 @@ export function makeShots(screens) {
     };
 }
 
-function smootherstep(x) {
-    return x * x * x * (x * (x * 6 - 15) + 10);
-}
-
 /**
  * Puts `camera` at timeline position t (0 to 1) for its aspect, and answers the point it looks
  * at. `room` is the share of the view the copy covers: { x, y } moves the subject right or up by
@@ -46,12 +42,10 @@ export function poseCamera(camera, shots, t, room) {
     let i = 0;
     while (i < timeline.length - 2 && at > timeline[i + 1][0]) i++;
     const [t0] = timeline[i], [t1] = timeline[i + 1];
-    const u = smootherstep(t1 > t0 ? (at - t0) / (t1 - t0) : 0);
+    // Evenly paced through each stretch, and the keys evenly spaced, so the curve's speed carries
+    // on smoothly through every shot.
+    const u = t1 > t0 ? (at - t0) / (t1 - t0) : 0;
     const pick = (k) => poses[Math.min(Math.max(k, 0), poses.length - 1)];
-    if (timeline[i][1] === timeline[i + 1][1]) {
-        place(camera, poses[i], room);
-        return poses[i].target;
-    }
     const position = catmull(pick(i - 1).position, pick(i).position, pick(i + 1).position, pick(i + 2).position, u);
     const target = catmull(pick(i - 1).target, pick(i).target, pick(i + 1).target, pick(i + 2).target, u);
     place(camera, { position, target }, room);

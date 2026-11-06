@@ -5,7 +5,7 @@ import { screenPictures } from './screens.js';
 import { buildDesk } from './scene.js';
 import { makeShots, poseCamera } from './path.js';
 import { timeline } from './timeline.js';
-import { scrollMap } from './scroll.js';
+import { scrollMap, showChapter } from './scroll.js';
 import { createPan } from './pan.js';
 
 const params = new URLSearchParams(location.search);
@@ -22,6 +22,10 @@ const orbit = THREE.MathUtils.degToRad(Number(params.get('orbit') ?? 0));
 function room(width, height) {
     return width >= height ? { x: 0.17, y: 0 } : { x: 0, y: 0.16 };
 }
+
+// How quickly the camera catches up with the scroll: about 95% in a third of a second, so a
+// mouse wheel's steps become one continuous move.
+const FOLLOW = 0.11;
 
 let lastScroll = -1;
 
@@ -88,9 +92,11 @@ export async function start() {
     root.classList.add('live');
     resize();
     let map = scrollMap(story);
+    showChapter(story);
     addEventListener('resize', () => {
         resize();
         map = scrollMap(story);
+        showChapter(story);
         wake();
     });
 
@@ -140,7 +146,12 @@ export async function start() {
         wake();
     }).observe(canvas);
     document.addEventListener('visibilitychange', wake);
-    addEventListener('scroll', wake, { passive: true });
+    addEventListener('scroll', () => {
+        showChapter(story);
+        wake();
+    }, { passive: true });
+    // Where the camera is along the path, following the scroll's position a moment behind.
+    let shown = map(scrollY);
     function wake() {
         if (!running && visible && !document.hidden) {
             running = true;
@@ -155,16 +166,20 @@ export async function start() {
         const time = now / 1000;
         const boil = reduced.matches ? 0 : Math.floor(time * 6);
         const settling = pan.settling;
-        pan.step(lastFrame ? Math.min((now - lastFrame) / 1000, 0.1) : 0);
+        const dt = lastFrame ? Math.min((now - lastFrame) / 1000, 0.1) : 0;
+        pan.step(dt);
         lastFrame = now;
-        if (scrollY !== lastScroll || boil !== lastBoil || moved || settling) {
+        const aim = map(scrollY);
+        const following = Math.abs(aim - shown) > 0.00005;
+        shown = following && !reduced.matches ? shown + (aim - shown) * (1 - Math.exp(-dt / FOLLOW)) : aim;
+        if (scrollY !== lastScroll || boil !== lastBoil || moved || settling || following) {
             moved = false;
             const interval = last ? now - last : 0;
             if (interval) stats.intervals.push(interval);
             last = now;
             lastScroll = scrollY;
             lastBoil = boil;
-            draw(map(scrollY), time);
+            draw(shown, time);
             // When frames come slower than about 45 a second while scrolling, draw with fewer pixels.
             slow = !measure && interval > 22 && interval < 100 ? slow + 1 : 0;
             if (slow > 8 && scale > 0.6) {

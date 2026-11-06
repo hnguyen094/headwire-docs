@@ -1,9 +1,10 @@
-// The camera's timeline: the shots, in order, and where the camera holds still.
-/** The timeline: [t, shot]. Two keys with one shot hold the camera still between them. */
+// The camera's timeline: the shots, in order, evenly spaced so the camera never slows to a stop
+// between them.
+/** The timeline: [t, shot]. */
 export const timeline = [
-    [0, 'desk'], [0.1, 'desk'],
-    [0.3, 'mac'], [0.44, 'mac'],
-    [0.56, 'across'],
-    [0.7, 'devices'], [0.86, 'devices'],
+    [0, 'desk'],
+    [0.25, 'mac'],
+    [0.5, 'across'],
+    [0.75, 'devices'],
     [1, 'wide'],
 ];

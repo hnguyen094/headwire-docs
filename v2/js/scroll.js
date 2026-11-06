@@ -1,22 +1,18 @@
 // Scroll position to timeline position, for the live drawing.
 import { timeline } from './timeline.js';
 
-// Scroll to timeline position: each chapter's hold lines up with its card in the middle of the
-// screen, and the travel between holds takes the scroll between cards.
+// Scroll to timeline position: the camera reaches each chapter's shot as the chapter's middle
+// crosses the middle of the screen, and moves on at once; between those points it goes at an even
+// pace, so the walk never stops.
 export function scrollMap(story) {
-    const chapters = [...story.querySelectorAll('[data-shot]')];
     const top = story.getBoundingClientRect().top + scrollY;
     const view = innerHeight;
-    const holds = timeline.filter((key, i) => timeline[i + 1]?.[1] === key[1]);
     const points = [[top, 0]];
-    for (const chapter of chapters) {
-        const hold = holds.find(([, name]) => name === chapter.dataset.shot);
-        if (!hold) continue;
-        const end = timeline[timeline.indexOf(hold) + 1][0];
+    for (const chapter of story.querySelectorAll('[data-shot]')) {
+        const key = timeline.find(([, name]) => name === chapter.dataset.shot);
+        if (!key || key[0] === 0 || key[0] === 1) continue;
         const box = chapter.getBoundingClientRect();
-        const start = box.top + scrollY - view * 0.35;
-        const stop = box.bottom + scrollY - view * 0.65;
-        points.push([start, hold[0]], [Math.max(stop, start + 1), end]);
+        points.push([box.top + scrollY + box.height / 2 - view / 2, key[0]]);
     }
     points.push([top + story.offsetHeight - view, 1]);
     points.sort((a, b) => a[0] - b[0]);
@@ -29,4 +25,13 @@ export function scrollMap(story) {
         }
         return 1;
     };
+}
+
+/** Marks the chapter under the middle of the screen as showing, so only its card is up. */
+export function showChapter(story) {
+    const middle = innerHeight / 2;
+    for (const chapter of story.querySelectorAll('[data-shot]')) {
+        const box = chapter.getBoundingClientRect();
+        chapter.classList.toggle('showing', box.top <= middle && box.bottom > middle);
+    }
 }

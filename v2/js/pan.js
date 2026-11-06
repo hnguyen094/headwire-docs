@@ -17,7 +17,7 @@ export function createPan(surface, wake) {
         pitch = THREE.MathUtils.clamp(pitch, -PITCH, PITCH);
     };
     surface.addEventListener('pointerdown', (event) => {
-        if (event.button !== 0 || event.target.closest('a, button, .card')) return;
+        if (event.button !== 0 || event.target.closest('a, button, .showing .card')) return;
         dragging = { id: event.pointerId, x: event.clientX, y: event.clientY };
         returning = false;
         surface.setPointerCapture(event.pointerId);
