@@ -83,45 +83,44 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
 .button:hover { background: var(--accent); }
 
 /* With the drawing: the stills go, the stage stays put, and the scroll moves the camera freely.
-   Each card stays put too, beside the subject, and snaps over to the next as the chapter under
-   the middle of the screen changes. */
+   Each card scrolls in with the page, pins once it arrives, and stays while the camera holds on
+   its subject; the next chapter starts a screen before this one ends, so the next card scrolls
+   in over it as it fades (scroll.js), and pins in its place. */
 .live .still { display: none; }
-.live .chapter { min-height: 160vh; padding: 0; }
+.live .chapter {
+    --hold: 60vh;
+    min-height: calc(200vh + var(--hold));
+    min-height: calc(200svh + var(--hold));
+    padding: 0;
+}
+.live .chapter + .chapter { margin-top: -100vh; margin-top: -100svh; }
+.live .chapter:last-of-type { min-height: calc(100vh + var(--hold)); min-height: calc(100svh + var(--hold)); }
+.live .pin {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: 0 max(var(--gutter), 4vw);
+    pointer-events: none;
+}
 .live .card {
-    position: fixed;
-    z-index: 1;
-    top: 50%;
-    left: max(var(--gutter), 4vw);
     width: min(26rem, 36vw);
     background: var(--card);
     padding: 1.25rem 1.4rem 0.75rem;
     border: 2px solid var(--ink);
     border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
     box-shadow: 3px 4px 0 rgba(42, 43, 56, 0.12);
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(calc(-50% + 14px));
-    transition: opacity 0.18s ease-in, transform 0.18s ease-in;
-}
-.live .showing .card {
-    opacity: 1;
     pointer-events: auto;
-    transform: translateY(-50%);
-    transition: opacity 0.28s ease-out 0.08s, transform 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.2) 0.08s;
 }
-.live .chapter:first-of-type .card { top: 22vh; transform: translateY(14px); background: transparent; border-color: transparent; box-shadow: none; padding-left: 0; }
-.live .chapter:first-of-type.showing .card { transform: none; }
+.live .card.gone { pointer-events: none; }
+.live .chapter:first-of-type .pin { align-items: flex-start; padding-top: 22vh; }
+.live .chapter:first-of-type .card { background: transparent; border-color: transparent; box-shadow: none; padding-left: 0; }
 
 @media (orientation: portrait) {
-    .live .card, .live .chapter:first-of-type .card {
-        top: auto;
-        bottom: 6vh;
-        left: max(var(--gutter), calc((100% - 34rem) / 2));
-        right: max(var(--gutter), calc((100% - 34rem) / 2));
-        width: auto;
-        transform: translateY(14px);
-    }
-    .live .showing .card, .live .chapter:first-of-type.showing .card { transform: none; }
+    .live .pin, .live .chapter:first-of-type .pin { align-items: flex-end; justify-content: center; padding-top: 0; padding-bottom: 6vh; }
+    .live .card { width: 100%; max-width: 34rem; }
     .live .chapter:first-of-type .card { background: var(--card); border-color: var(--ink); box-shadow: 3px 4px 0 rgba(42, 43, 56, 0.12); padding-left: 1.4rem; }
 }
 

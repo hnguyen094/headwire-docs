@@ -4,6 +4,8 @@
 // meshes: where the halves' planes meet when the model comes part open, between them when it
 // comes open flat, and along the spine when it comes closed, as Apple's iPhone Duo does. A mesh
 // in no group is left out (the Duo's file carries a wide one that AR Quick Look doesn't draw).
+// The meshes tagged "hinge" fold across both halves, as the Duo's inner display does: closed, it
+// lies doubled over on itself about the spine. Each is cut in two, a piece for each half.
 import * as THREE from 'three';
 
 /** The plane through a cloud of points: its centre, and the normal along which it is thinnest. */
@@ -55,6 +57,42 @@ function hinge(lower, upper, spine) {
     return { point: mid.addScaledVector(lower.normal, a).addScaledVector(upper.normal, b), direction };
 }
 
+// Cuts a mesh doubled over across both halves at its own middle, triangle by triangle: the mesh
+// itself keeps the upper half's piece, and a new mesh of the same name, added beside it, carries
+// the lower half's.
+function cut(mesh, lower) {
+    const geometry = mesh.geometry.index ? mesh.geometry.toNonIndexed() : mesh.geometry;
+    const pos = geometry.attributes.position;
+    const points = [];
+    for (let i = 0; i < pos.count; i++) points.push(new THREE.Vector3().fromBufferAttribute(pos, i));
+    const middle = plane(points);
+    if (middle.normal.dot(lower.centre.clone().sub(middle.centre)) < 0) middle.normal.negate();
+    const keep = { lower: [], upper: [] };
+    for (let i = 0; i < pos.count; i += 3) {
+        const centre = points[i].clone().add(points[i + 1]).add(points[i + 2]).divideScalar(3);
+        keep[middle.normal.dot(centre.sub(middle.centre)) > 0 ? 'lower' : 'upper'].push(i, i + 1, i + 2);
+    }
+    if (!keep.lower.length || !keep.upper.length) return null;
+    const piece = (indices) => {
+        const part = new THREE.BufferGeometry();
+        for (const [name, attribute] of Object.entries(geometry.attributes)) {
+            const size = attribute.itemSize, values = new attribute.array.constructor(indices.length * size);
+            indices.forEach((index, k) => {
+                for (let j = 0; j < size; j++) values[k * size + j] = attribute.array[index * size + j];
+            });
+            part.setAttribute(name, new THREE.BufferAttribute(values, size, attribute.normalized));
+        }
+        return part;
+    };
+    mesh.geometry = piece(keep.upper);
+    mesh.userData.half = 'upper';
+    const other = new THREE.Mesh(piece(keep.lower), mesh.material);
+    other.name = mesh.name;
+    other.userData = { ...mesh.userData, half: 'lower' };
+    mesh.parent.add(other);
+    return other;
+}
+
 function away(centre, { point, direction }) {
     const q = centre.clone().sub(point);
     return q.addScaledVector(direction, -q.dot(direction)).normalize();
@@ -62,8 +100,7 @@ function away(centre, { point, direction }) {
 
 /**
  * Opens `model` to `degrees` between its halves, in place, about the mesh named `spine`.
- * `groupOf(mesh)` names a mesh's half. Answers `(mesh, index) => whether that vertex is on the
- * upper half`.
+ * `groupOf(mesh)` names a mesh's half. Answers `(mesh) => whether it is on the upper half`.
  */
 export function foldOpen(model, { degrees, spine }, groupOf) {
     model.updateMatrixWorld(true);
@@ -89,6 +126,11 @@ export function foldOpen(model, { degrees, spine }, groupOf) {
     if (lowerPoints.length < 3 || upperPoints.length < 3) return () => true;
     for (const mesh of meshes) if (!mesh.userData.half) mesh.visible = false;
     const lower = plane(lowerPoints), upper = plane(upperPoints);
+    for (const mesh of meshes.filter((m) => m.userData.half === 'hinge')) {
+        const other = cut(mesh, lower);
+        if (other) meshes.push(other);
+        else mesh.userData.half = 'upper';
+    }
     const line = hinge(lower, upper, spinePoints.length >= 3 ? longest(spinePoints) : null);
     const outL = away(lower.centre, line), outU = away(upper.centre, line);
     // The lower half's inner face is the side the upper half lies or rises on.
@@ -102,17 +144,12 @@ export function foldOpen(model, { degrees, spine }, groupOf) {
     const turn = new THREE.Matrix4().makeBasis(along, inner, depth).transpose();
     const risen = outU.clone().applyMatrix4(turn);
     const open = new THREE.Matrix4().makeRotationX(Math.atan2(risen.y, risen.z) - THREE.MathUtils.degToRad(degrees));
-    const flags = new Map();
     const v = new THREE.Vector3(), n = new THREE.Vector3();
     for (const mesh of meshes) {
         const pos = mesh.geometry.attributes.position, nor = mesh.geometry.attributes.normal;
-        const upperHalf = new Uint8Array(pos.count);
+        const isUpper = mesh.userData.half === 'upper';
         for (let i = 0; i < pos.count; i++) {
             v.fromBufferAttribute(pos, i).sub(line.point);
-            // The inner display's assembly ("hinge" in the Duo's file) opens with the upper half.
-            const isUpper = mesh.userData.half === 'upper' || mesh.userData.half === 'hinge';
-
-            upperHalf[i] = isUpper ? 1 : 0;
             v.applyMatrix4(turn);
             if (isUpper) v.applyMatrix4(open);
             pos.setXYZ(i, v.x, v.y, v.z);
@@ -126,8 +163,7 @@ export function foldOpen(model, { degrees, spine }, groupOf) {
         if (nor) nor.needsUpdate = true;
         mesh.geometry.computeBoundingBox();
         mesh.geometry.computeBoundingSphere();
-        flags.set(mesh, upperHalf);
     }
     model.updateMatrixWorld(true);
-    return (mesh, index) => (flags.get(mesh)?.[index] ?? 1) === 1;
+    return (mesh) => mesh.userData.half === 'upper';
 }

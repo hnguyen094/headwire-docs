@@ -12,15 +12,16 @@ import { foldOpen, plane } from './fold.js';
 // centred on the body; `turn` and `tip` rotate it about y and z; `at` moves it after. `display`
 // names the mesh that lit up in Apple's file (its emissive screen); `screen` is the drawn screen it
 // stands in for, showing `picture` (screens.js); `fold` opens a folding phone about its `spine` to
-// that many degrees, and `keys` names the lower half's inner panel, which shows `keysPicture`.
+// that many degrees, and the display's piece on the lower half (fold.js) shows `keysPicture`.
 // `logo` names logo meshes to draw darker; `seat` rests a phone on its stand.
 const props = [
     { file: 'mac-pro', body: 'macPro', stand: true },
     { file: 'mac-mini', body: 'macMini', stand: true },
+    { file: 'vision-pro', body: 'visionPro', stand: true },
     { file: 'imac', body: 'mac', stand: true, at: [0, 0, 0.11], display: 'KiaSydWNENzyEJp', logo: ['wYdKUadknzQnXQo'], screen: 'mac', picture: 'mac' },
     {
         file: 'iphone-duo', body: 'duo', stand: true, fold: { degrees: 105, spine: 'MvKPXGSdYDVvSpk' },
-        display: 'UXtsBZYlaUvHoEh', screen: 'duo', picture: 'duo', keys: 'svvOILdVxasRAOk', keysPicture: 'duoKeys',
+        display: 'UXtsBZYlaUvHoEh', screen: 'duo', picture: 'duo', keysPicture: 'duoKeys',
     },
     { file: 'ipad-pro', body: 'ipad', stand: true, at: [0, 0, -0.02], display: 'lsDiIbtoSGSmWWZ', screen: 'ipad', picture: 'ipad' },
     { file: 'iphone-18-pro', body: 'iphone', turn: Math.PI, seat: true, display: 'lit', screen: 'iphone', picture: 'iphone' },
@@ -57,9 +58,9 @@ function normalise(model, prop) {
     return holder;
 }
 
-// The mesh called `name`, or with 'lit', the largest that showed a screen-shaped picture in
-// Apple's file (v2-props.py marks them with the picture's aspect).
-function named(model, name) {
+// The mesh called `name` that `where` keeps, or with 'lit', the largest that showed a
+// screen-shaped picture in Apple's file (v2-props.py marks them with the picture's aspect).
+function named(model, name, where = () => true) {
     if (name === 'lit') {
         let best = null, area = 0;
         model.traverse((node) => {
@@ -76,28 +77,26 @@ function named(model, name) {
     }
     let found = null;
     model.traverse((node) => {
-        if (!found && node.isMesh && (node.name === name || node.parent?.name === name)) found = node;
+        if (!found && node.isMesh && (node.name === name || node.parent?.name === name) && where(node)) found = node;
     });
     return found;
 }
 
-// The display's vertices in the world: those `only` keeps.
-function surface(mesh, only) {
+// The display's vertices in the world.
+function surface(mesh) {
     mesh.updateMatrixWorld(true);
     const pos = mesh.geometry.attributes.position;
     const points = [];
-    for (let i = 0; i < pos.count; i++) {
-        if (only(mesh, i)) points.push(new THREE.Vector3().fromBufferAttribute(pos, i).applyMatrix4(mesh.matrixWorld));
-    }
-    return { points };
+    for (let i = 0; i < pos.count; i++) points.push(new THREE.Vector3().fromBufferAttribute(pos, i).applyMatrix4(mesh.matrixWorld));
+    return points;
 }
 
 // Shows `draw(aspect)` on the display, filling it exactly: each vertex gets new UVs from where it
 // sits on the screen's face, left to right and top to bottom, so the picture spans the display's
 // own outline, upright, at its own aspect, whatever UVs Apple's file gave it. `topward` is the way
 // the picture's top faces on a screen lying flat; standing screens use up.
-function showOn(mesh, draw, facing, only, topward = up) {
-    const { points } = surface(mesh, only);
+function showOn(mesh, draw, facing, topward = up) {
+    const points = surface(mesh);
     if (points.length < 3) return null;
     const { centre, normal } = plane(points);
     if (normal.dot(facing) < 0) normal.negate();
@@ -107,16 +106,11 @@ function showOn(mesh, draw, facing, only, topward = up) {
     const ys = points.map((p) => p.clone().sub(centre).dot(upward));
     const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
     const w = x1 - x0, h = y1 - y0;
-    // Vertices left out (the other half of a folded panel) take the picture's black edge.
-    const pos = mesh.geometry.attributes.position;
-    const uv = new Float32Array(pos.count * 2).fill(-1);
-    const p = new THREE.Vector3();
-    for (let i = 0; i < pos.count; i++) {
-        if (!only(mesh, i)) continue;
-        p.fromBufferAttribute(pos, i).applyMatrix4(mesh.matrixWorld).sub(centre);
-        uv[i * 2] = (p.dot(right) - x0) / w;
-        uv[i * 2 + 1] = (y1 - p.dot(upward)) / h;
-    }
+    const uv = new Float32Array(points.length * 2);
+    points.forEach((p, i) => {
+        uv[i * 2] = (xs[i] - x0) / w;
+        uv[i * 2 + 1] = (y1 - ys[i]) / h;
+    });
     mesh.geometry = mesh.geometry.clone();
     mesh.geometry.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
     const texture = new THREE.CanvasTexture(draw(w / h));
@@ -176,7 +170,7 @@ function place(entry, screens, pictures) {
     const body = screens.bodies[prop.body];
     regrey(model);
     if (prop.logo) darken(model, prop.logo);
-    const half = prop.fold ? foldOpen(model, prop.fold, groupOf) : () => true;
+    const upper = prop.fold ? foldOpen(model, prop.fold, groupOf) : () => true;
     const holder = normalise(model, prop);
     hideBody(body);
     body.add(holder);
@@ -184,25 +178,19 @@ function place(entry, screens, pictures) {
     if (prop.seat) seat(holder, body);
     if (!prop.screen) return;
     const shown = screens[prop.screen];
-    const display = named(model, prop.display);
+    const display = named(model, prop.display, upper);
     const facing = new THREE.Vector3(0, 0, 1).transformDirection(shown.matrixWorld);
-    const frame = display && showOn(display, pictures[prop.picture], facing, half);
+    const frame = display && showOn(display, pictures[prop.picture], facing);
     if (!frame) {
         shown.visible = true;
         return;
     }
     clearGlass(model);
     proxy(shown, frame);
-    // A folding phone's lower half: its picture's top towards the hinge, where the display stands.
-    // The panel `keys` names marks where; the picture goes on whatever face is uppermost there.
-    const panel = prop.keys && named(model, prop.keys);
-    if (panel) {
-        panel.geometry.computeBoundingBox();
-        const centre = panel.geometry.boundingBox.getCenter(new THREE.Vector3()).applyMatrix4(panel.matrixWorld);
-        const ray = new THREE.Raycaster(centre.clone().addScaledVector(up, 0.05), up.clone().negate(), 0, 0.1);
-        const keys = ray.intersectObject(model, true).find((hit) => hit.object.visible)?.object ?? panel;
-        showOn(keys, pictures[prop.keysPicture], up, () => true, frame.centre.clone().sub(centre).normalize());
-    }
+    // A folding phone's lower half: the display's piece there, its picture's top towards the
+    // hinge, which foldOpen lays along the model's x with the lower half towards +z.
+    const keys = prop.keysPicture && named(model, prop.display, (mesh) => !upper(mesh));
+    if (keys) showOn(keys, pictures[prop.keysPicture], up, new THREE.Vector3(0, 0, -1).transformDirection(model.matrixWorld));
 }
 
 /**

@@ -27,11 +27,24 @@ export function scrollMap(story) {
     };
 }
 
-/** Marks the chapter under the middle of the screen as showing, so only its card is up. */
-export function showChapter(story) {
-    const middle = innerHeight / 2;
-    for (const chapter of story.querySelectorAll('[data-shot]')) {
-        const box = chapter.getBoundingClientRect();
-        chapter.classList.toggle('showing', box.top <= middle && box.bottom > middle);
-    }
+/**
+ * Fades each pinned card out as the next one scrolls in over it: fully there while the next card
+ * is below the screen, gone once the next card's top reaches its middle, and gone for good once
+ * the next card pins.
+ */
+export function fadeCards(story) {
+    const cards = [...story.querySelectorAll('[data-shot] .card')];
+    cards.forEach((card, i) => {
+        const next = cards[i + 1];
+        let shown = 1;
+        if (next) {
+            const box = card.getBoundingClientRect();
+            const middle = box.top + box.height / 2;
+            const arriving = next.closest('[data-shot]').getBoundingClientRect().top > 0;
+            const share = (next.getBoundingClientRect().top - middle) / Math.max(innerHeight - middle, 1);
+            shown = arriving ? Math.min(Math.max(share, 0), 1) : 0;
+        }
+        card.style.opacity = shown.toFixed(3);
+        card.classList.toggle('gone', shown < 0.5);
+    });
 }

@@ -1,12 +1,10 @@
 // Headwire's own controls, drawn the way the app draws them over the stream: round glass buttons
 // with white symbols. keysRow is the row of Mac keys (as in the App Store captures: back, forward,
 // Mission Control, Launchpad, brightness, media, volume, keyboard); settingsButton is the glass
-// settings button; keyboardAndTrackpad is the lower half of a folding phone opened like a laptop,
-// keys above and a trackpad below, in the same glass.
+// settings button. duo-deck.js draws the lower half of a folding phone opened like a laptop from
+// these.
 
-const font = '-apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif';
-
-function glass(ctx, path) {
+export function glass(ctx, path) {
     ctx.save();
     path();
     ctx.fillStyle = 'rgba(28,28,34,0.58)';
@@ -24,7 +22,7 @@ function circle(ctx, x, y, r) {
     });
 }
 
-function ink(ctx, s) {
+export function ink(ctx, s) {
     ctx.strokeStyle = '#fff';
     ctx.fillStyle = '#fff';
     ctx.lineWidth = Math.max(1.5, s * 0.12);
@@ -114,7 +112,8 @@ const symbols = [
 
 /** The row of Mac keys, centred on (cx, cy), each button of radius r. */
 export function keysRow(ctx, cx, cy, r) {
-    const gap = r * 2.36;
+    // 44-point keys, 4 points apart, as the app's key row lays them out.
+    const gap = r * (48 / 22);
     const x0 = cx - (gap * (symbols.length - 1)) / 2;
     symbols.forEach((draw, i) => {
         const x = x0 + i * gap;
@@ -138,60 +137,4 @@ export function settingsButton(ctx, x, y, r) {
         ctx.fill();
     }
     ctx.restore();
-}
-
-function key(ctx, x, y, w, h, label) {
-    glass(ctx, () => {
-        ctx.beginPath();
-        ctx.roundRect(x, y, w, h, h * 0.22);
-    });
-    ctx.fillStyle = '#fff';
-    ctx.font = `500 ${Math.round(Math.min(h * 0.42, (w / Math.max(label.length, 1)) * 1.5))}px ${font}`;
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-    ctx.fillText(label, x + w / 2, y + h / 2 + 1);
-}
-
-/**
- * The lower half of a folding phone opened like a laptop, `width` by `height` with the hinge at
- * the top: Headwire's Mac keys, a keyboard, and a trackpad below.
- */
-export function keyboardAndTrackpad(ctx, width, height) {
-    ctx.fillStyle = '#0b0b0f';
-    ctx.fillRect(0, 0, width, height);
-    const pad = width * 0.035;
-    const r = Math.min(height * 0.032, width / 34);
-    keysRow(ctx, width / 2, pad + r, r);
-    const rows = [
-        ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
-        ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-        ['⇧', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', '⌫'],
-    ];
-    const top = pad * 2 + r * 2;
-    const gap = width * 0.012;
-    const kw = (width - pad * 2 - gap * 9) / 10;
-    const kh = Math.min(kw * 1.15, height * 0.1);
-    rows.forEach((row, i) => {
-        const span = row.length * kw + (row.length - 1) * gap;
-        let x = (width - span) / 2;
-        for (const label of row) {
-            key(ctx, x, top + i * (kh + gap), kw, kh, label);
-            x += kw + gap;
-        }
-    });
-    const bottom = top + 3 * (kh + gap);
-    const modifiers = [['control', 1.3], ['option', 1.3], ['command', 1.6], ['', 4.8], ['command', 1.6], ['option', 1.3]];
-    const units = modifiers.reduce((sum, [, u]) => sum + u, 0);
-    const unit = (width - pad * 2 - gap * (modifiers.length - 1)) / units;
-    let x = pad;
-    for (const [label, u] of modifiers) {
-        key(ctx, x, bottom, unit * u, kh, label);
-        x += unit * u + gap;
-    }
-    // The trackpad: the rest of the half.
-    const padTop = bottom + kh + pad;
-    glass(ctx, () => {
-        ctx.beginPath();
-        ctx.roundRect(width * 0.18, padTop, width * 0.64, Math.max(height - padTop - pad, kh), kh * 0.35);
-    });
 }

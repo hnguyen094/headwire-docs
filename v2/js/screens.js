@@ -5,7 +5,8 @@
 //
 // The menu's words are Headwire Connect's own (ConnectAppMenuContent, SwitchRows,
 // DevicesMenuSection and DeviceRow in src/HeadwireConnect).
-import { keysRow, settingsButton, keyboardAndTrackpad } from './headwire-ui.js';
+import { keysRow, settingsButton } from './headwire-ui.js';
+import { duoDeck } from './duo-deck.js';
 import { paintWallpaper } from './wallpaper.js';
 
 const font = '-apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif';
@@ -136,7 +137,7 @@ function paintDesktop(ctx, width, height) {
 /**
  * Answers a function per screen, each taking the screen's aspect (width
  * over height) and answering a canvas: `mac`, `ipad`, `iphone`, `duo` (the folding phone's upper
- * half) and `duoKeys` (its lower half, Headwire's keyboard and trackpad).
+ * half) and `duoKeys` (its lower half: Headwire's key row, Mac keys and trackpad).
  */
 export async function screenPictures() {
     const desktop = (aspect, chrome) => {
@@ -147,19 +148,29 @@ export async function screenPictures() {
     };
     // Headwire's controls over the stream: the settings button in the top corner, and the row of
     // Mac keys along the bottom, sized to the screen.
-    const withControls = (keys) => (ctx, width, height) => {
+    const withControls = (ctx, width, height) => {
         const r = Math.min(height * 0.032, width / 34);
         settingsButton(ctx, width - r * 1.6, 36 + r * 1.6, r);
-        if (keys) keysRow(ctx, width / 2, height - r * 1.8, r);
+        keysRow(ctx, width / 2, height - r * 1.8, r);
+    };
+    // Half-folded like a laptop, the upper pane is the stream alone, fitted to the pane: the
+    // controls are on the lower pane (duo-deck.js).
+    const fitted = (aspect) => {
+        const { canvas, ctx, width, height } = canvasFor(aspect);
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, width, height);
+        const w = Math.min(width, (height * 16) / 9), h = (w * 9) / 16;
+        ctx.drawImage(desktop(16 / 9), (width - w) / 2, (height - h) / 2, w, h);
+        return canvas;
     };
     return {
         mac: (aspect) => desktop(aspect),
-        ipad: (aspect) => desktop(aspect, withControls(true)),
-        iphone: (aspect) => desktop(aspect, withControls(true)),
-        duo: (aspect) => desktop(aspect, withControls(false)),
+        ipad: (aspect) => desktop(aspect, withControls),
+        iphone: (aspect) => desktop(aspect, withControls),
+        duo: fitted,
         duoKeys: (aspect) => {
             const { canvas, ctx, width, height } = canvasFor(aspect);
-            keyboardAndTrackpad(ctx, width, height);
+            duoDeck(ctx, width, height);
             return canvas;
         },
     };

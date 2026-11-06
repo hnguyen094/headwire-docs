@@ -5,7 +5,7 @@ import { screenPictures } from './screens.js';
 import { buildDesk } from './scene.js';
 import { makeShots, poseCamera } from './path.js';
 import { timeline } from './timeline.js';
-import { scrollMap, showChapter } from './scroll.js';
+import { scrollMap, fadeCards } from './scroll.js';
 import { createPan } from './pan.js';
 
 const params = new URLSearchParams(location.search);
@@ -92,11 +92,11 @@ export async function start() {
     root.classList.add('live');
     resize();
     let map = scrollMap(story);
-    showChapter(story);
+    fadeCards(story);
     addEventListener('resize', () => {
         resize();
         map = scrollMap(story);
-        showChapter(story);
+        fadeCards(story);
         wake();
     });
 
@@ -147,7 +147,7 @@ export async function start() {
     }).observe(canvas);
     document.addEventListener('visibilitychange', wake);
     addEventListener('scroll', () => {
-        showChapter(story);
+        fadeCards(story);
         wake();
     }, { passive: true });
     // Where the camera is along the path, following the scroll's position a moment behind.
