@@ -1,0 +1,132 @@
+/* Version 2 of the home page. Light only, by design: the page is a sheet of paper with a
+   pencil drawing on it, and the drawing's paper and ink are the page's colours. */
+:root {
+    color-scheme: light;
+    --paper: #f6f1e4;
+    --paper-deep: #ece4d0;
+    --card: rgba(250, 247, 238, 0.93);
+    --ink: #2a2b38;
+    --ink-soft: #55566a;
+    --accent: #23408f;
+    --gutter: 16px;
+    --sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --serif: ui-serif, "New York", Georgia, "Times New Roman", serif;
+}
+
+* { box-sizing: border-box; }
+html { background: var(--paper); }
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font: 1.0625rem/1.55 var(--sans);
+    -webkit-text-size-adjust: 100%;
+}
+a { color: var(--accent); text-underline-offset: 0.15em; }
+a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+img { max-width: 100%; height: auto; display: block; }
+
+.skip { position: absolute; left: -999px; top: 0; }
+.skip:focus { left: var(--gutter); top: var(--gutter); z-index: 10; background: var(--paper); padding: 0.5rem 0.75rem; }
+
+.site-header {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem max(var(--gutter), 4vw);
+}
+.live .site-header { position: absolute; inset: 0 0 auto 0; }
+.brand { display: flex; align-items: center; gap: 0.5rem; color: var(--ink); font-weight: 650; text-decoration: none; font-size: 1.125rem; }
+.site-header ul, .site-footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
+.site-header a:not(.brand) { color: var(--ink); text-decoration: none; }
+.site-header a:not(.brand):hover { text-decoration: underline; }
+
+.story { position: relative; }
+.stage { display: none; }
+.live .stage {
+    display: block;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100svh;
+    margin-bottom: -100vh;
+    margin-bottom: -100svh;
+    z-index: 0;
+}
+.stage canvas { width: 100%; height: 100%; display: block; }
+
+/* Without the drawing: each chapter is its still, then its words. */
+.chapter { position: relative; z-index: 1; padding: 0 max(var(--gutter), 4vw) 3rem; }
+.still { margin: 0 0 1rem; }
+.still img { width: 100%; border-radius: 6px; }
+.card { max-width: 34rem; }
+.eyebrow { margin: 0 0 0.35rem; font-size: 0.8125rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
+h1, h2 { font-family: var(--serif); font-weight: 600; line-height: 1.12; margin: 0 0 0.75rem; text-wrap: balance; }
+h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); }
+h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
+.card p { margin: 0 0 0.75rem; }
+.hint { color: var(--ink-soft); font-size: 0.9375rem; }
+.links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-top: 1rem; }
+.button {
+    display: inline-block;
+    padding: 0.6rem 1.1rem;
+    background: var(--ink);
+    color: var(--paper);
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+}
+.button:hover { background: var(--accent); }
+
+/* With the drawing: the stills go, the stage stays put, and each card scrolls past it. */
+.live .still { display: none; }
+.live .chapter {
+    min-height: 170vh;
+    display: flex;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.live .chapter:first-of-type { min-height: 150vh; align-items: flex-start; padding-top: 22vh; }
+.live .chapter:last-of-type { min-height: 160vh; }
+.live .card {
+    width: min(26rem, 36vw);
+    background: var(--card);
+    padding: 1.25rem 1.4rem 0.75rem;
+    border: 2px solid var(--ink);
+    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    box-shadow: 3px 4px 0 rgba(42, 43, 56, 0.12);
+}
+.live .chapter:first-of-type .card { background: transparent; border-color: transparent; box-shadow: none; padding-left: 0; }
+
+@media (orientation: portrait) {
+    .live .chapter { align-items: flex-end; padding-bottom: 6vh; }
+    .live .chapter:first-of-type { align-items: flex-end; padding-top: 0; }
+    .live .card { width: 100%; max-width: 34rem; margin: 0 auto; }
+    .live .chapter:first-of-type .card { background: var(--card); border-color: var(--ink); padding-left: 1.4rem; }
+}
+
+.capture .site-header, .capture .chapter, .capture .site-footer, .capture .skip { visibility: hidden; }
+
+.site-footer {
+    position: relative;
+    z-index: 1;
+    padding: 2rem max(var(--gutter), 4vw) 3rem;
+    border-top: 2px solid var(--paper-deep);
+    background: var(--paper);
+    font-size: 0.9375rem;
+    color: var(--ink-soft);
+}
+.site-footer p { margin: 1rem 0 0; }
+
+/* Dragging turns the camera; a finger swiping up or down still scrolls the page, and sideways
+   swipes never go back a page. */
+html { overscroll-behavior-x: none; }
+.live .story { touch-action: pan-y; }
+.live .chapter { cursor: grab; }
+.live .card { cursor: auto; }
+.panning, .panning .chapter { cursor: grabbing; user-select: none; -webkit-user-select: none; }
