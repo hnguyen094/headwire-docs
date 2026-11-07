@@ -56,6 +56,9 @@ function place(camera, { position, target }, room) {
     camera.position.copy(position);
     camera.up.copy(up);
     camera.lookAt(target);
+    // A narrow screen backs the wide shots off past any fixed far plane, so it follows the camera:
+    // the subject's distance plus the room (6 m wall, 4 m floor) behind and around it.
+    camera.far = position.distanceTo(target) + 7;
     const width = camera.userData.width ?? 1, height = camera.userData.height ?? 1;
     camera.setViewOffset(width, height, -room.x * width, room.y * height, width, height);
     camera.updateProjectionMatrix();
