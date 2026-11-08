@@ -1,12 +1,13 @@
 // Apple's own device models, in place of the drawn ones: the reduced GLBs in props/, made by
-// tools/docs/v2-props.sh. Each model that loads in time takes its drawn body's place, and each
-// screen shows its picture on the model's own display, through the display's UVs. A model that
-// fails or takes too long leaves its drawn body where it is.
+// tools/docs/v2-props.sh. Each model takes its drawn body's place as it arrives, and each screen
+// shows its picture on the model's own display, through the display's UVs. A model that fails or
+// takes too long leaves its drawn body where it is.
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
-import { screen, solid } from './sketch.js';
-import { foldOpen, plane } from './fold.js';
+import { foldOpen } from './fold.js';
+import { named, showOn, proxy } from './display.js';
+import { groupOf, regrey, darken, normalise, clearGlass, hideBody, seat, mergeByTone } from './model.js';
 
 // Each model in its drawn body's frame. `stand` puts its base on the body's floor, otherwise it is
 // centred on the body; `turn` and `tip` rotate it about y and z; `at` moves it after. `display`
@@ -27,160 +28,41 @@ const props = [
     { file: 'iphone-18-pro', body: 'iphone', turn: Math.PI, seat: true, display: 'lit', screen: 'iphone', picture: 'iphone' },
 ];
 
-const up = new THREE.Vector3(0, 1, 0);
-
-function groupOf(node) {
-    for (let at = node; at; at = at.parent) if (at.userData?.group) return at.userData.group;
-    return null;
-}
-
-function regrey(root) {
-    root.traverse((node) => {
-        if (!node.isMesh) return;
-        const color = node.material?.color;
-        const tone = color ? 0.2126 * color.r + 0.7152 * color.g + 0.0722 * color.b : 0.5;
-        node.material = solid(Math.min(Math.max(Math.pow(tone, 1 / 2.2), 0.12), 0.97));
-    });
-}
-
-// Metres, turned, and stood on the floor or centred.
-function normalise(model, prop) {
-    const holder = new THREE.Group();
-    holder.add(model);
-    const size = new THREE.Box3().setFromObject(model).getSize(new THREE.Vector3());
-    if (Math.max(size.x, size.y, size.z) > 3) model.scale.multiplyScalar(0.01);
-    model.rotation.set(0, prop.turn ?? 0, prop.tip ?? 0);
-    model.updateMatrixWorld(true);
-    const box = new THREE.Box3().setFromObject(model);
-    const centre = box.getCenter(new THREE.Vector3());
-    model.position.sub(new THREE.Vector3(centre.x, prop.stand ? box.min.y : centre.y, centre.z));
-    holder.position.fromArray(prop.at ?? [0, 0, 0]);
-    return holder;
-}
-
-// The mesh called `name` that `where` keeps, or with 'lit', the largest that showed a
-// screen-shaped picture in Apple's file (v2-props.py marks them with the picture's aspect).
-function named(model, name, where = () => true) {
-    if (name === 'lit') {
-        let best = null, area = 0;
-        model.traverse((node) => {
-            const aspect = node.userData?.screen ?? node.parent?.userData?.screen;
-            if (!node.isMesh || !aspect || Math.abs(aspect - 1) < 0.05) return;
-            const size = new THREE.Box3().setFromObject(node).getSize(new THREE.Vector3());
-            const [a, b] = [size.x, size.y, size.z].sort((x, y) => y - x);
-            if (a * b > area) {
-                area = a * b;
-                best = node;
-            }
-        });
-        return best;
-    }
-    let found = null;
-    model.traverse((node) => {
-        if (!found && node.isMesh && (node.name === name || node.parent?.name === name) && where(node)) found = node;
-    });
-    return found;
-}
-
-// The display's vertices in the world.
-function surface(mesh) {
-    mesh.updateMatrixWorld(true);
-    const pos = mesh.geometry.attributes.position;
-    const points = [];
-    for (let i = 0; i < pos.count; i++) points.push(new THREE.Vector3().fromBufferAttribute(pos, i).applyMatrix4(mesh.matrixWorld));
-    return points;
-}
-
-// Shows `draw(aspect)` on the display, filling it exactly: each vertex gets new UVs from where it
-// sits on the screen's face, left to right and top to bottom, so the picture spans the display's
-// own outline, upright, at its own aspect, whatever UVs Apple's file gave it. `topward` is the way
-// the picture's top faces on a screen lying flat; standing screens use up.
-function showOn(mesh, draw, facing, topward = up) {
-    const points = surface(mesh);
-    if (points.length < 3) return null;
-    const { centre, normal } = plane(points);
-    if (normal.dot(facing) < 0) normal.negate();
-    const upward = topward.clone().addScaledVector(normal, -normal.dot(topward)).normalize();
-    const right = upward.clone().cross(normal).normalize();
-    const xs = points.map((p) => p.clone().sub(centre).dot(right));
-    const ys = points.map((p) => p.clone().sub(centre).dot(upward));
-    const [x0, x1, y0, y1] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)];
-    const w = x1 - x0, h = y1 - y0;
-    const uv = new Float32Array(points.length * 2);
-    points.forEach((p, i) => {
-        uv[i * 2] = (xs[i] - x0) / w;
-        uv[i * 2 + 1] = (y1 - ys[i]) / h;
-    });
-    mesh.geometry = mesh.geometry.clone();
-    mesh.geometry.setAttribute('uv', new THREE.BufferAttribute(uv, 2));
-    const texture = new THREE.CanvasTexture(draw(w / h));
-    texture.anisotropy = 8;
-    texture.flipY = false;
-    mesh.material = screen(texture);
-    return { centre, normal, upward, size: Math.max(w, h) };
-}
-
-// Leaves out the clear glass (v2-props.py marks it), which would otherwise be drawn as solid and
-// cover the display. Everything else stays, so the body reads as solid.
-function clearGlass(model) {
-    model.traverse((node) => {
-        if (node.isMesh && (node.userData?.glass || node.parent?.userData?.glass)) node.visible = false;
-    });
-}
-
-// Moves the drawn screen plane, which the camera frames, onto the model's display, and hides it.
-function proxy(shown, { centre, normal, upward }) {
-    const basis = new THREE.Matrix4().makeBasis(upward.clone().cross(normal).normalize(), upward, normal);
-    const world = new THREE.Quaternion().setFromRotationMatrix(basis);
-    const parent = shown.parent.getWorldQuaternion(new THREE.Quaternion()).invert();
-    shown.quaternion.copy(parent.multiply(world));
-    shown.position.copy(shown.parent.worldToLocal(centre.clone()));
-    shown.visible = false;
-}
-
-// Rests a model leaning in a stand on the stand's base: moves its body up or down until the
-// model's lowest point is on the base's top, 6.5 mm above the desk, so it never cuts into it.
-function seat(holder, body) {
-    const box = new THREE.Box3().setFromObject(holder);
-    body.position.y += 0.0065 - box.min.y;
-    body.updateMatrixWorld(true);
-}
-
-function hideBody(body) {
-    body.traverse((node) => {
-        if (node.isMesh) node.visible = false;
-    });
-}
+/** How many models the page asks for. */
+export const propCount = props.length;
 
 function loader() {
     const draco = new DRACOLoader();
-    draco.setDecoderPath('vendor/three-0.186.1/addons/libs/draco/gltf/');
+    // Through the import map, so the vendored version is named in one place.
+    draco.setDecoderPath(import.meta.resolve('three/addons/libs/draco/gltf/'));
     return new GLTFLoader().setDRACOLoader(draco);
 }
 
-// Draws the meshes `logo` names darker, so a logo that is nearly the body's own tone still reads.
-function darken(model, names) {
-    model.traverse((node) => {
-        if (node.isMesh && (names.includes(node.name) || names.includes(node.parent?.name))) node.material = solid(0.35);
-    });
+/**
+ * The picture `name` at `aspect`, as a texture: the drawn screen's own when its shape is near
+ * enough, so the page keeps one copy of it; otherwise a new one, and the drawn screen's, which
+ * nothing shows once the model is in, is let go.
+ */
+function pictureFor(name, aspect, { screens, pictures }) {
+    const drawn = screens.textures[name];
+    if (drawn?.image && Math.abs(drawn.image.width / drawn.image.height / aspect - 1) < 0.03) return drawn;
+    if (drawn) {
+        drawn.dispose();
+        drawn.image = null;
+    }
+    const texture = new THREE.CanvasTexture(pictures[name](aspect));
+    texture.anisotropy = 8;
+    return texture;
 }
 
-function place(entry, screens, pictures) {
+// Shows the prop's picture on the model's display, and moves the drawn screen onto it; and on a
+// folding phone, the keys on the display's piece on the lower half.
+function showScreen(entry, upper, desk) {
     const { prop, model } = entry;
-    const body = screens.bodies[prop.body];
-    regrey(model);
-    if (prop.logo) darken(model, prop.logo);
-    const upper = prop.fold ? foldOpen(model, prop.fold, groupOf) : () => true;
-    const holder = normalise(model, prop);
-    hideBody(body);
-    body.add(holder);
-    holder.updateMatrixWorld(true);
-    if (prop.seat) seat(holder, body);
-    if (!prop.screen) return;
-    const shown = screens[prop.screen];
+    const shown = desk.screens[prop.screen];
     const display = named(model, prop.display, upper);
     const facing = new THREE.Vector3(0, 0, 1).transformDirection(shown.matrixWorld);
-    const frame = display && showOn(display, pictures[prop.picture], facing);
+    const frame = display && showOn(display, (aspect) => pictureFor(prop.picture, aspect, desk), { normal: facing });
     if (!frame) {
         shown.visible = true;
         return;
@@ -190,24 +72,42 @@ function place(entry, screens, pictures) {
     // A folding phone's lower half: the display's piece there, its picture's top towards the
     // hinge, which foldOpen lays along the model's x with the lower half towards +z.
     const keys = prop.keysPicture && named(model, prop.display, (mesh) => !upper(mesh));
-    if (keys) showOn(keys, pictures[prop.keysPicture], up, new THREE.Vector3(0, 0, -1).transformDirection(model.matrixWorld));
+    const top = new THREE.Vector3(0, 0, -1).transformDirection(model.matrixWorld);
+    if (keys) showOn(keys, (aspect) => pictureFor(prop.keysPicture, aspect, desk), { normal: new THREE.Vector3(0, 1, 0), top });
+}
+
+function place(entry, desk) {
+    const { prop, model } = entry;
+    const body = desk.screens.bodies[prop.body];
+    regrey(model);
+    if (prop.logo) darken(model, prop.logo);
+    const upper = prop.fold ? foldOpen(model, prop.fold, groupOf) : () => true;
+    const holder = normalise(model, prop);
+    hideBody(body);
+    body.add(holder);
+    holder.updateMatrixWorld(true);
+    if (prop.seat) seat(holder, body);
+    if (prop.screen) showScreen(entry, upper, desk);
+    mergeByTone(holder);
 }
 
 /**
- * Loads every model and puts each that arrives within `seconds` in place of its drawn body.
- * Answers how many it placed.
+ * Loads every model into `desk` ({ scene, screens, pictures }) and puts each that arrives within
+ * `seconds` in place of its drawn body as it arrives, telling `placed()` after each. Answers how
+ * many it placed.
  */
-export async function swapProps(scene, screens, pictures, seconds = 12) {
+export async function swapProps(desk, placed, seconds = 12) {
     const gltf = loader();
     const late = new Promise((done) => setTimeout(done, seconds * 1000, null));
-    const loaded = await Promise.all(props.map((prop) =>
-        Promise.race([gltf.loadAsync(`props/${prop.file}.glb`).then((result) => ({ prop, model: result.scene })), late]).catch(() => null)));
-    let placed = 0;
-    for (const entry of loaded) {
-        if (!entry) continue;
-        place(entry, screens, pictures);
-        placed++;
-    }
-    scene.updateMatrixWorld(true);
-    return placed;
+    let count = 0;
+    await Promise.all(props.map(async (prop) => {
+        const arriving = gltf.loadAsync(`props/${prop.file}.glb`).then((result) => ({ prop, model: result.scene }));
+        const entry = await Promise.race([arriving, late]).catch(() => null);
+        if (!entry) return;
+        place(entry, desk);
+        desk.scene.updateMatrixWorld(true);
+        count++;
+        placed();
+    }));
+    return count;
 }

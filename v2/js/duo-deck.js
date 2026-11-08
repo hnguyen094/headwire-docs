@@ -9,7 +9,8 @@ import { glass, ink, keysRow, settingsButton } from './headwire-ui.js';
 const font = '-apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif';
 const PANE_WIDTH = 669;
 
-function label(ctx, words, x, y, size, color = '#fff') {
+// `words` centred `at` [x, y], `size` points.
+function label(ctx, words, { at: [x, y], size, color = '#fff' }) {
     ctx.font = `500 ${size}px ${font}`;
     ctx.fillStyle = color;
     ctx.textAlign = 'center';
@@ -22,7 +23,8 @@ function label(ctx, words, x, y, size, color = '#fff') {
 // null is a divider.
 const strip = ['⌃', '⌥', '⌘', '⇧', null, 'esc', '⇥', '←', '↑', '↓', '→', '⌦', 'fn', null, 'switcher', 'spotlight', 'paste'];
 
-function face(ctx, key, x, y) {
+// The key's face centred on [x, y].
+function face(ctx, key, [x, y]) {
     if (key === 'switcher') {
         ctx.strokeRect(x - 7, y - 3, 10, 10);
         ctx.strokeRect(x - 3, y - 7, 10, 10);
@@ -36,7 +38,7 @@ function face(ctx, key, x, y) {
         ctx.strokeRect(x - 6, y - 7, 12, 15);
         ctx.fillRect(x - 3, y - 9, 6, 4);
     } else {
-        label(ctx, key, x, y + 1, key.length > 1 ? 15 : 19);
+        label(ctx, key, { at: [x, y + 1], size: key.length > 1 ? 15 : 19 });
     }
 }
 
@@ -57,7 +59,7 @@ function macKeys(ctx, left, y) {
         ctx.save();
         ink(ctx, 16);
         ctx.lineWidth = 1.8;
-        face(ctx, key, x + 26, y);
+        face(ctx, key, [x + 26, y]);
         ctx.restore();
         x += 52 + 6;
     }
@@ -71,8 +73,8 @@ function trackpad(ctx, top, bottom) {
     ctx.strokeStyle = 'rgba(255,255,255,0.12)';
     ctx.lineWidth = 1;
     ctx.stroke();
-    label(ctx, 'Trackpad', PANE_WIDTH / 2, (top + bottom) / 2, 13, 'rgba(235,235,245,0.6)');
-    settingsButton(ctx, PANE_WIDTH - 12 - 8 - 22, top + 12 + 8 + 22, 22);
+    label(ctx, 'Trackpad', { at: [PANE_WIDTH / 2, (top + bottom) / 2], size: 13, color: 'rgba(235,235,245,0.6)' });
+    settingsButton(ctx, [PANE_WIDTH - 12 - 8 - 22, top + 12 + 8 + 22, 22]);
 }
 
 /** Draws the lower pane, `width` by `height` in the canvas's units, with the hinge at the top. */
@@ -83,7 +85,7 @@ export function duoDeck(ctx, width, height) {
     ctx.save();
     ctx.scale(scale, scale);
     // The key row: 44-point keys inside 6 points of glass, 12 points below the hinge.
-    keysRow(ctx, PANE_WIDTH / 2, 12 + 6 + 22, 22);
+    keysRow(ctx, [PANE_WIDTH / 2, 12 + 6 + 22, 22]);
     ctx.save();
     ctx.beginPath();
     ctx.rect(12, 72, PANE_WIDTH - 24, 52);

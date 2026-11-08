@@ -33,10 +33,11 @@ export function makeShots(screens) {
 
 /**
  * Puts `camera` at timeline position t (0 to 1) for its aspect, and answers the point it looks
- * at. `room` is the share of the view the copy covers: { x, y } moves the subject right or up by
- * that fraction.
+ * at. `camera.userData.room` is the share of the view the copy covers: { x, y } moves the subject
+ * right or up by that fraction.
  */
-export function poseCamera(camera, shots, t, room) {
+export function poseCamera(camera, shots, t) {
+    const room = camera.userData.room ?? { x: 0, y: 0 };
     const poses = timeline.map(([, name]) => pose(shots[name], camera, room));
     const at = Math.min(Math.max(t, 0), 1);
     let i = 0;
@@ -46,8 +47,9 @@ export function poseCamera(camera, shots, t, room) {
     // on smoothly through every shot.
     const u = t1 > t0 ? (at - t0) / (t1 - t0) : 0;
     const pick = (k) => poses[Math.min(Math.max(k, 0), poses.length - 1)];
-    const position = catmull(pick(i - 1).position, pick(i).position, pick(i + 1).position, pick(i + 2).position, u);
-    const target = catmull(pick(i - 1).target, pick(i).target, pick(i + 1).target, pick(i + 2).target, u);
+    const keys = [pick(i - 1), pick(i), pick(i + 1), pick(i + 2)];
+    const position = catmull(keys.map((key) => key.position), u);
+    const target = catmull(keys.map((key) => key.target), u);
     place(camera, { position, target }, room);
     return target;
 }
@@ -74,10 +76,11 @@ function pose(shot, camera, room) {
     return { target: shot.target, position: shot.target.clone().addScaledVector(direction, distance) };
 }
 
-function catmull(p0, p1, p2, p3, u) {
+// The Catmull-Rom curve through four points, at u (0 to 1) between the middle two.
+function catmull(points, u) {
     const out = new THREE.Vector3();
     for (const axis of ['x', 'y', 'z']) {
-        const a = p0[axis], b = p1[axis], c = p2[axis], d = p3[axis];
+        const [a, b, c, d] = points.map((p) => p[axis]);
         out[axis] = 0.5 * (2 * b + (-a + c) * u + (2 * a - 5 * b + 4 * c - d) * u * u + (-a + 3 * b - 3 * c + d) * u * u * u);
     }
     return out;

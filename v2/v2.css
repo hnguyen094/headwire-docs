@@ -9,6 +9,7 @@
     --ink-soft: #55566a;
     --accent: #23408f;
     --gutter: 16px;
+    --card-corners: 255px 15px 225px 15px / 15px 225px 15px 255px;
     --sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
     --serif: ui-serif, "New York", Georgia, "Times New Roman", serif;
 }
@@ -58,6 +59,9 @@ img { max-width: 100%; height: auto; display: block; }
     z-index: 0;
 }
 .stage canvas { width: 100%; height: 100%; display: block; }
+/* The live layout starts with the page, before three.js arrives; until the drawing's first frame
+   the stage is plain paper. */
+.stage canvas:not(.drawn) { visibility: hidden; }
 
 /* Without the drawing: each chapter is its still, then its words. */
 .chapter { position: relative; z-index: 1; padding: 0 max(var(--gutter), 4vw) 3rem; }
@@ -110,18 +114,22 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
     background: var(--card);
     padding: 1.25rem 1.4rem 0.75rem;
     border: 2px solid var(--ink);
-    border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    border-radius: var(--card-corners);
     box-shadow: 3px 4px 0 rgba(42, 43, 56, 0.12);
     pointer-events: auto;
+    /* A card taller than its screen (a phone held across, larger text) scrolls within itself. */
+    max-height: calc(100% - 2 * var(--gutter));
+    overflow-y: auto;
 }
 .live .card.gone { pointer-events: none; }
 .live .chapter:first-of-type .pin { align-items: flex-start; padding-top: 22vh; }
-.live .chapter:first-of-type .card { background: transparent; border-color: transparent; box-shadow: none; padding-left: 0; }
+/* The first card is bare copy on the drawing: square corners, since a card clips its copy to them. */
+.live .chapter:first-of-type .card { background: transparent; border-color: transparent; border-radius: 0; box-shadow: none; padding-left: 0; }
 
 @media (orientation: portrait) {
     .live .pin, .live .chapter:first-of-type .pin { align-items: flex-end; justify-content: center; padding-top: 0; padding-bottom: 6vh; }
     .live .card { width: 100%; max-width: 34rem; }
-    .live .chapter:first-of-type .card { background: var(--card); border-color: var(--ink); box-shadow: 3px 4px 0 rgba(42, 43, 56, 0.12); padding-left: 1.4rem; }
+    .live .chapter:first-of-type .card { background: var(--card); border-color: var(--ink); border-radius: var(--card-corners); box-shadow: 3px 4px 0 rgba(42, 43, 56, 0.12); padding-left: 1.4rem; }
 }
 
 .capture .site-header, .capture .chapter, .capture .site-footer, .capture .skip { visibility: hidden; }
@@ -137,10 +145,10 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
 }
 .site-footer p { margin: 1rem 0 0; }
 
-/* Dragging turns the camera; a finger swiping up or down still scrolls the page, and sideways
-   swipes never go back a page. */
+/* Dragging turns the camera; a finger swiping up or down still scrolls the page, pinching still
+   zooms it, and sideways swipes never go back a page. */
 html { overscroll-behavior-x: none; }
-.live .story { touch-action: pan-y; }
+.live .story { touch-action: pan-y pinch-zoom; }
 .live .chapter { cursor: grab; }
 .live .card { cursor: auto; }
 .panning, .panning .chapter { cursor: grabbing; user-select: none; -webkit-user-select: none; }

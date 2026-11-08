@@ -1,20 +1,11 @@
 // Version 2 of the home page: the desk drawn as a pencil sketch, with scrolling walking the camera
-// across it, drawn live with three.js (live.js). Without WebGL 2, without scripts, or with Reduce
-// Motion on, the page keeps its stills.
+// across it, drawn live with three.js (live.js). The page's head picks the live layout before the
+// first paint (index.html); without WebGL 2, without scripts, or with Reduce Motion on, the page
+// keeps its stills, and it goes back to them if the drawing can't start.
 const root = document.documentElement;
-const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const capture = new URLSearchParams(location.search).has('capture');
-
-function webgl2() {
-    try {
-        return !!document.createElement('canvas').getContext('webgl2');
-    } catch {
-        return false;
-    }
-}
 
 async function run() {
-    if ((reduced && !capture) || !webgl2()) return;
+    if (!root.classList.contains('live')) return;
     const { start } = await import('./live.js');
     await start();
 }

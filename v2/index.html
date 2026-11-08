@@ -6,9 +6,24 @@
 <meta name="color-scheme" content="light">
 <meta name="robots" content="noindex">
 <title>Headwire: your Mac, on your iPad</title>
-<meta name="description" content="Headwire shows the Mac in the room on your iPad or iPhone, plays its sound, and lets you work it with touch, a trackpad, a mouse or a keyboard.">
+<meta name="description" content="Take your Mac to the couch: its screen and sound on your iPad or iPhone, with touch, a trackpad, a mouse or a keyboard.">
 <link rel="icon" href="../assets/headwire.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<script>
+// The layout is picked here, before the first paint, so the page never changes under the reader:
+// the live drawing (js/main.js) needs WebGL 2, and Reduce Motion keeps the stills unless ?capture
+// asks for the drawing.
+(() => {
+    const capture = new URLSearchParams(location.search).has('capture');
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches && !capture) return;
+    try {
+        const gl = document.createElement('canvas').getContext('webgl2');
+        if (!gl) return;
+        gl.getExtension('WEBGL_lose_context')?.loseContext();
+        document.documentElement.classList.add('live');
+    } catch {}
+})();
+</script>
 <link rel="stylesheet" href="v2.css">
 <script type="importmap">
 {
@@ -40,16 +55,15 @@
 <article class="chapter" data-shot="desk" aria-labelledby="title">
 <figure class="still">
 <picture>
-<source media="(orientation: portrait)" srcset="stills/desk-tall.webp">
+<source media="(orientation: portrait)" srcset="stills/desk-tall.webp" width="900" height="1400">
 <img src="stills/desk-wide.webp" width="1600" height="900" alt="A pencil drawing of a desk: a Mac Pro on the floor beside it, and on it an Apple Vision Pro, an iMac showing a Mac desktop with a Mac mini under it, an iPhone Duo open like a small laptop, an iPad Pro on its Magic Keyboard and an iPhone, with a mug and a notebook.">
 </picture>
 </figure>
 <div class="pin">
 <div class="card">
 <p class="eyebrow">For iPad and iPhone</p>
-<h1 id="title">Your Mac, on your iPad.</h1>
-<p>Headwire shows the Mac in the room on your iPad or iPhone, plays its sound, and lets you work
-it with touch, a trackpad, a mouse or a keyboard.</p>
+<h1 id="title">Take your Mac to the couch.</h1>
+<p>Its screen and its sound, right on your iPad or iPhone. Poke it, swipe it, or bring a keyboard along.</p>
 <p class="hint">Scroll to walk across the desk.</p>
 </div>
 </div>
@@ -58,17 +72,15 @@ it with touch, a trackpad, a mouse or a keyboard.</p>
 <article class="chapter" data-shot="mac" aria-labelledby="mac-title">
 <figure class="still">
 <picture>
-<source media="(orientation: portrait)" srcset="stills/mac-tall.webp">
+<source media="(orientation: portrait)" srcset="stills/mac-tall.webp" width="900" height="1400">
 <img src="stills/mac-wide.webp" width="1600" height="900" loading="lazy" alt="Close up on the iMac, drawn in pencil: the Mac desktop with Headwire Connect’s menu open in the menu bar, showing Streaming and Input switched on and an iPad and an iPhone under Devices.">
 </picture>
 </figure>
 <div class="pin">
 <div class="card">
-<p class="eyebrow">On your Mac</p>
-<h2 id="mac-title">Headwire Connect sends your screen and sound.</h2>
-<p>On your Mac, install Headwire Connect. It sends what’s on the screen, and the sound, to your
-iPad or iPhone over a USB cable, your network or peer-to-peer Wi-Fi. Its menu is in the menu bar
-when you need it.</p>
+<p class="eyebrow">Headwire Connect</p>
+<h2 id="mac-title">Cable? Wi-Fi? No Wi-Fi? Sure.</h2>
+<p>Buttery 120 frames a second, 10-bit color, sound and all. Encrypted, and it never touches the internet.</p>
 </div>
 </div>
 </article>
@@ -76,16 +88,15 @@ when you need it.</p>
 <article class="chapter" data-shot="devices" aria-labelledby="devices-title">
 <figure class="still">
 <picture>
-<source media="(orientation: portrait)" srcset="stills/devices-tall.webp">
+<source media="(orientation: portrait)" srcset="stills/devices-tall.webp" width="900" height="1400">
 <img src="stills/devices-wide.webp" width="1600" height="900" loading="lazy" alt="Close up on the iPad Pro on its Magic Keyboard and the iPhone beside it, drawn in pencil, both showing the same Mac desktop in Headwire, with Headwire’s row of Mac keys along the bottom.">
 </picture>
 </figure>
 <div class="pin">
 <div class="card">
-<p class="eyebrow">On your iPad and iPhone</p>
-<h2 id="devices-title">The same Mac, on both.</h2>
-<p>Your iPad and iPhone show the Mac edge to edge. Tap where you want to click or move the
-pointer as on a trackpad, type on any keyboard, and swipe for Mission Control.</p>
+<p class="eyebrow">iPad and iPhone</p>
+<h2 id="devices-title">Tap, swipe, done.</h2>
+<p>Tap to click, glide like a trackpad, swipe for Mission Control. The Mac keys you’d miss? Right there.</p>
 </div>
 </div>
 </article>
@@ -93,16 +104,15 @@ pointer as on a trackpad, type on any keyboard, and swipe for Mission Control.</
 <article class="chapter" data-shot="wide" aria-labelledby="ways-title">
 <figure class="still">
 <picture>
-<source media="(orientation: portrait)" srcset="stills/wide-tall.webp">
+<source media="(orientation: portrait)" srcset="stills/wide-tall.webp" width="900" height="1400">
 <img src="stills/wide-wide.webp" width="1600" height="900" loading="lazy" alt="The whole desk again, drawn in pencil from the right, with the Mac Pro on the floor and every screen showing the same Mac.">
 </picture>
 </figure>
 <div class="pin">
 <div class="card">
-<p class="eyebrow">Two ways to connect</p>
-<h2 id="ways-title">Plug in a capture card, or install Headwire Connect.</h2>
-<p>A capture card and Bluetooth need nothing installed on the Mac. Headwire Connect works by cable
-or wirelessly, with the most features. Use either, or both.</p>
+<p class="eyebrow">Two ways in</p>
+<h2 id="ways-title">Card or app? Your call.</h2>
+<p>A capture card and Bluetooth: nothing to install on your Mac. Headwire Connect: wireless, with every bell and whistle. Both free.</p>
 <p class="links"><a class="button" href="../helper/">Get Headwire Connect</a>
 <a href="../support/#capture-card">Set up a capture card</a></p>
 </div>

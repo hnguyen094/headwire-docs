@@ -7,36 +7,7 @@
 // The meshes tagged "hinge" fold across both halves, as the Duo's inner display does: closed, it
 // lies doubled over on itself about the spine. Each is cut in two, a piece for each half.
 import * as THREE from 'three';
-
-/** The plane through a cloud of points: its centre, and the normal along which it is thinnest. */
-export function plane(points) {
-    const c = points.reduce((sum, p) => sum.add(p), new THREE.Vector3()).divideScalar(points.length);
-    const m = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
-    for (const p of points) {
-        const d = [p.x - c.x, p.y - c.y, p.z - c.z];
-        for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) m[i][j] += d[i] * d[j];
-    }
-    // The smallest eigenvector, by power iteration on (trace - M), whose largest it is.
-    const trace = m[0][0] + m[1][1] + m[2][2];
-    let v = new THREE.Vector3(0.3, 0.5, 0.8);
-    for (let k = 0; k < 64; k++) {
-        const w = new THREE.Vector3(
-            trace * v.x - (m[0][0] * v.x + m[0][1] * v.y + m[0][2] * v.z),
-            trace * v.y - (m[1][0] * v.x + m[1][1] * v.y + m[1][2] * v.z),
-            trace * v.z - (m[2][0] * v.x + m[2][1] * v.y + m[2][2] * v.z),
-        );
-        v = w.normalize();
-    }
-    return { centre: c, normal: v };
-}
-
-// The direction a cloud of points is longest in.
-function longest(points) {
-    const box = new THREE.Box3().setFromPoints(points);
-    const size = box.getSize(new THREE.Vector3());
-    const axis = size.x >= size.y && size.x >= size.z ? 'x' : size.y >= size.z ? 'y' : 'z';
-    return { centre: box.getCenter(new THREE.Vector3()), direction: new THREE.Vector3()[`set${axis.toUpperCase()}`](1) };
-}
+import { plane, longest } from './points.js';
 
 function hinge(lower, upper, spine) {
     const g = lower.normal.dot(upper.normal);
@@ -98,11 +69,9 @@ function away(centre, { point, direction }) {
     return q.addScaledVector(direction, -q.dot(direction)).normalize();
 }
 
-/**
- * Opens `model` to `degrees` between its halves, in place, about the mesh named `spine`.
- * `groupOf(mesh)` names a mesh's half. Answers `(mesh) => whether it is on the upper half`.
- */
-export function foldOpen(model, { degrees, spine }, groupOf) {
+// Bakes every mesh's place into its geometry, in the model's own frame, and tags its half:
+// 'spine', or the group v2-props.sh gave it.
+function flatten(model, spine, groupOf) {
     model.updateMatrixWorld(true);
     const meshes = [];
     model.traverse((node) => node.isMesh && meshes.push(node));
@@ -116,13 +85,65 @@ export function foldOpen(model, { degrees, spine }, groupOf) {
         mesh.quaternion.identity();
         mesh.scale.set(1, 1, 1);
     }
-    const cloud = (half) => meshes.filter((m) => m.userData.half === half).flatMap((m) => {
+    return meshes;
+}
+
+// The first corner of each triangle of the meshes on `half`.
+function cloud(meshes, half) {
+    return meshes.filter((m) => m.userData.half === half).flatMap((m) => {
         const pos = m.geometry.attributes.position;
         const points = [];
         for (let i = 0; i < pos.count; i += 3) points.push(new THREE.Vector3().fromBufferAttribute(pos, i));
         return points;
     });
-    const lowerPoints = cloud('lower'), upperPoints = cloud('upper'), spinePoints = cloud('spine');
+}
+
+// The turn that lays the hinge along x, the lower half's inner face up y and the lower half
+// towards the viewer (+z), and the turn about x that then opens the upper half to `degrees`.
+function pose({ lower, upper, line }, degrees) {
+    const outL = away(lower.centre, line), outU = away(upper.centre, line);
+    // The lower half's inner face is the side the upper half lies or rises on.
+    const toUpper = upper.centre.clone().sub(lower.centre).dot(lower.normal);
+    const side = Math.abs(toUpper) > 0.001 ? toUpper : lower.normal.dot(outU);
+    const inner = lower.normal.clone().multiplyScalar(side < 0 ? -1 : 1);
+    const along = line.direction.clone();
+    if (along.clone().cross(inner).dot(outL) < 0) along.negate();
+    const depth = along.clone().cross(inner).normalize();
+    const turn = new THREE.Matrix4().makeBasis(along, inner, depth).transpose();
+    const risen = outU.clone().applyMatrix4(turn);
+    const open = new THREE.Matrix4().makeRotationX(Math.atan2(risen.y, risen.z) - THREE.MathUtils.degToRad(degrees));
+    return { turn, open };
+}
+
+// Moves every vertex about the hinge `line` by `turn`, and the upper half's on by `open`.
+function bend(meshes, line, { turn, open }) {
+    const v = new THREE.Vector3(), n = new THREE.Vector3();
+    for (const mesh of meshes) {
+        const pos = mesh.geometry.attributes.position, nor = mesh.geometry.attributes.normal;
+        const isUpper = mesh.userData.half === 'upper';
+        for (let i = 0; i < pos.count; i++) {
+            v.fromBufferAttribute(pos, i).sub(line.point).applyMatrix4(turn);
+            if (isUpper) v.applyMatrix4(open);
+            pos.setXYZ(i, v.x, v.y, v.z);
+            if (!nor) continue;
+            n.fromBufferAttribute(nor, i).transformDirection(turn);
+            if (isUpper) n.transformDirection(open);
+            nor.setXYZ(i, n.x, n.y, n.z);
+        }
+        pos.needsUpdate = true;
+        if (nor) nor.needsUpdate = true;
+        mesh.geometry.computeBoundingBox();
+        mesh.geometry.computeBoundingSphere();
+    }
+}
+
+/**
+ * Opens `model` to `degrees` between its halves, in place, about the mesh named `spine`.
+ * `groupOf(mesh)` names a mesh's half. Answers `(mesh) => whether it is on the upper half`.
+ */
+export function foldOpen(model, { degrees, spine }, groupOf) {
+    const meshes = flatten(model, spine, groupOf);
+    const lowerPoints = cloud(meshes, 'lower'), upperPoints = cloud(meshes, 'upper'), spinePoints = cloud(meshes, 'spine');
     if (lowerPoints.length < 3 || upperPoints.length < 3) return () => true;
     for (const mesh of meshes) if (!mesh.userData.half) mesh.visible = false;
     const lower = plane(lowerPoints), upper = plane(upperPoints);
@@ -132,38 +153,7 @@ export function foldOpen(model, { degrees, spine }, groupOf) {
         else mesh.userData.half = 'upper';
     }
     const line = hinge(lower, upper, spinePoints.length >= 3 ? longest(spinePoints) : null);
-    const outL = away(lower.centre, line), outU = away(upper.centre, line);
-    // The lower half's inner face is the side the upper half lies or rises on.
-    const toUpper = upper.centre.clone().sub(lower.centre).dot(lower.normal);
-    const side = Math.abs(toUpper) > 0.001 ? toUpper : lower.normal.dot(outU);
-    const inner = lower.normal.clone().multiplyScalar(side < 0 ? -1 : 1);
-    const along = line.direction.clone();
-    if (along.clone().cross(inner).dot(outL) < 0) along.negate();
-    const depth = along.clone().cross(inner).normalize();
-    // Hinge to x, inner face to y, the lower half towards the viewer (+z).
-    const turn = new THREE.Matrix4().makeBasis(along, inner, depth).transpose();
-    const risen = outU.clone().applyMatrix4(turn);
-    const open = new THREE.Matrix4().makeRotationX(Math.atan2(risen.y, risen.z) - THREE.MathUtils.degToRad(degrees));
-    const v = new THREE.Vector3(), n = new THREE.Vector3();
-    for (const mesh of meshes) {
-        const pos = mesh.geometry.attributes.position, nor = mesh.geometry.attributes.normal;
-        const isUpper = mesh.userData.half === 'upper';
-        for (let i = 0; i < pos.count; i++) {
-            v.fromBufferAttribute(pos, i).sub(line.point);
-            v.applyMatrix4(turn);
-            if (isUpper) v.applyMatrix4(open);
-            pos.setXYZ(i, v.x, v.y, v.z);
-            if (nor) {
-                n.fromBufferAttribute(nor, i).transformDirection(turn);
-                if (isUpper) n.transformDirection(open);
-                nor.setXYZ(i, n.x, n.y, n.z);
-            }
-        }
-        pos.needsUpdate = true;
-        if (nor) nor.needsUpdate = true;
-        mesh.geometry.computeBoundingBox();
-        mesh.geometry.computeBoundingSphere();
-    }
+    bend(meshes, line, pose({ lower, upper, line }, degrees));
     model.updateMatrixWorld(true);
     return (mesh) => mesh.userData.half === 'upper';
 }
