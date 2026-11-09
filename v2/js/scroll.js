@@ -1,21 +1,29 @@
 // Scroll position to timeline position, for the live drawing.
 import { timeline } from './timeline.js';
 
-// Scroll to timeline position: the camera reaches each chapter's shot as the chapter's middle
-// crosses the middle of the screen, and moves on at once; between those points it goes at an even
-// pace, so the walk never stops.
-export function scrollMap(story) {
+/**
+ * Where the scroll meets the camera's timeline: [{ shot, y, t }] in scroll order, the story's top
+ * at its first shot, each chapter's middle crossing the middle of the screen at its shot, and the
+ * story's end at its last.
+ */
+export function chapterStops(story) {
     const top = story.getBoundingClientRect().top + scrollY;
     const view = innerHeight;
-    const points = [[top, 0]];
+    const stops = [];
     for (const chapter of story.querySelectorAll('[data-shot]')) {
         const key = timeline.find(([, name]) => name === chapter.dataset.shot);
-        if (!key || key[0] === 0 || key[0] === 1) continue;
+        if (!key) continue;
         const box = chapter.getBoundingClientRect();
-        points.push([box.top + scrollY + box.height / 2 - view / 2, key[0]]);
+        const y = key[0] === 0 ? top : key[0] === 1 ? top + story.offsetHeight - view : box.top + scrollY + box.height / 2 - view / 2;
+        stops.push({ shot: key[1], y, t: key[0] });
     }
-    points.push([top + story.offsetHeight - view, 1]);
-    points.sort((a, b) => a[0] - b[0]);
+    return stops.sort((a, b) => a.y - b.y);
+}
+
+// Scroll to timeline position: the camera reaches each chapter's shot at its stop and moves on at
+// once; between stops it goes at an even pace, so the walk never stops.
+export function scrollMap(story) {
+    const points = chapterStops(story).map(({ y, t }) => [y, t]);
     return (y) => {
         if (y <= points[0][0]) return points[0][1];
         for (let i = 1; i < points.length; i++) {

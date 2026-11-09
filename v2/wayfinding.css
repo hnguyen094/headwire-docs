@@ -1,0 +1,142 @@
+/* Wayfinding on the home page (js/wayfinding.js): a pencil cue at the bottom that there's more
+   below, a pencil rail in the left gutter that fills as the reader walks across the desk, with a
+   mark per chapter, and a button back to the top above the rail. Hidden without scripts. */
+.chapters[hidden], .to-top[hidden], .cue[hidden] { display: none; }
+
+:root {
+    /* The rail's middle, in the gutter beside the copy. */
+    --rail-x: max(22px, 2vw);
+    --rail-top: 26vh;
+    --rail-height: 48vh;
+}
+@media (orientation: portrait) {
+    :root { --rail-top: 22vh; --rail-height: 40vh; }
+}
+/* With scripts, the copy and stills leave the rail its gutter; the page's head marks scripts before
+   the first paint, so nothing moves. */
+.js:not(.live) .chapter, .js.live .pin { padding-left: max(44px, 4vw); }
+
+.chapters {
+    position: fixed;
+    z-index: 4;
+    left: calc(var(--rail-x) - 5px);
+    top: var(--rail-top);
+    width: 10px;
+    height: var(--rail-height);
+    pointer-events: none;
+}
+.chapters .track, .chapters .fill, .chapters .line { position: absolute; inset: 0; width: 100%; height: 100%; }
+.chapters .line { overflow: visible; }
+.chapters .line path { fill: none; stroke: var(--ink-soft); stroke-width: 1.4; stroke-linecap: round; vector-effect: non-scaling-stroke; opacity: 0.45; }
+.chapters .line path + path { stroke-width: 0.9; opacity: 0.3; }
+/* The drawn-over part: the same strokes in full ink, cut off where the reader is. */
+.chapters .fill { clip-path: inset(0 0 calc((1 - var(--progress, 0)) * 100%) 0); }
+.chapters .fill .line path { stroke: var(--ink); stroke-width: 2.4; opacity: 0.9; }
+.chapters .fill .line path + path { stroke-width: 1.2; opacity: 0.5; }
+
+.chapters ol { list-style: none; margin: 0; padding: 0; position: absolute; inset: 0; }
+.chapters li { position: absolute; left: 50%; top: calc(var(--at, 0) * 100%); }
+.chapters a {
+    position: absolute;
+    left: -16px;
+    top: -16px;
+    width: 32px;
+    height: 32px;
+    display: grid;
+    place-items: center;
+    pointer-events: auto;
+    color: var(--ink);
+    text-decoration: none;
+}
+.chapters a::before {
+    content: '';
+    width: 11px;
+    height: 11px;
+    border: 1.6px solid var(--ink);
+    border-radius: 60% 40% 55% 45% / 45% 60% 40% 55%;
+    background: var(--paper);
+    transition: background-color 0.2s, transform 0.2s;
+}
+.chapters a.passed::before { background: var(--ink); }
+.chapters a[aria-current]::before { background: var(--accent); border-color: var(--accent); transform: scale(1.3); }
+.chapters a:focus-visible { outline: 3px solid var(--accent); outline-offset: -4px; border-radius: 50%; }
+/* Each mark's name, as a pencil tag beside it on hover or keyboard focus. */
+.chapters a span {
+    position: absolute;
+    left: calc(100% + 2px);
+    top: 50%;
+    transform: translateY(-50%);
+    white-space: nowrap;
+    padding: 0.15rem 0.6rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    background: var(--card);
+    border: 1.5px solid var(--ink);
+    border-radius: var(--card-corners);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s, visibility 0.2s;
+}
+.chapters a:hover span, .chapters a:focus-visible span { opacity: 1; visibility: visible; }
+
+.to-top {
+    position: fixed;
+    z-index: 4;
+    left: calc(var(--rail-x) - 20px);
+    top: calc(var(--rail-top) - 58px);
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    color: var(--ink);
+    background: var(--card);
+    border: 2px solid var(--ink);
+    border-radius: 52% 46% 55% 47% / 47% 55% 46% 52%;
+    box-shadow: 2px 3px 0 rgba(42, 43, 56, 0.12);
+    cursor: pointer;
+    transition: opacity 0.25s, visibility 0.25s, transform 0.25s;
+}
+.to-top svg { width: 22px; height: 22px; }
+.to-top path { fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.to-top:hover { color: var(--accent); border-color: var(--accent); }
+.to-top:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.to-top.gone { opacity: 0; visibility: hidden; transform: translateY(8px); }
+
+.cue {
+    position: fixed;
+    z-index: 4;
+    left: 50%;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    color: var(--ink-soft);
+    font-size: 0.75rem;
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    pointer-events: none;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+.cue svg { width: 26px; height: 15px; overflow: visible; animation: nudge 1.6s ease-in-out infinite alternate; }
+.cue path { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.cue path + path { stroke-width: 1.1; opacity: 0.5; }
+.cue.gone { opacity: 0; visibility: hidden; }
+/* Over the stills' copy, the cue sits on its own scrap of paper. */
+.js:not(.live) .cue { padding: 0.2rem 0.75rem 0.3rem; background: var(--card); border-radius: var(--card-corners); }
+/* On a phone held upright the first card sits low; the chevron alone fits under it. */
+@media (orientation: portrait) { .live .cue span { display: none; } }
+@keyframes nudge {
+    from { transform: translateY(-2px); }
+    to { transform: translateY(4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cue svg { animation: none; }
+    .cue, .to-top, .chapters a::before, .chapters a span { transition: none; }
+}
+
+.capture .chapters, .capture .to-top, .capture .cue { visibility: hidden; }

@@ -12,8 +12,10 @@
 <script>
 // The layout is picked here, before the first paint, so the page never changes under the reader:
 // the live drawing (js/main.js) needs WebGL 2, and Reduce Motion keeps the stills unless ?capture
-// asks for the drawing.
+// asks for the drawing. Scripts are marked here too, so the wayfinding's gutter (wayfinding.css)
+// is there from the first paint.
 (() => {
+    document.documentElement.classList.add('js');
     const capture = new URLSearchParams(location.search).has('capture');
     if (matchMedia('(prefers-reduced-motion: reduce)').matches && !capture) return;
     try {
@@ -25,6 +27,7 @@
 })();
 </script>
 <link rel="stylesheet" href="v2.css">
+<link rel="stylesheet" href="wayfinding.css">
 <script type="importmap">
 {
   "imports": {
@@ -47,6 +50,16 @@
 </ul>
 </nav>
 </header>
+
+<nav class="chapters" aria-label="Chapters" hidden>
+<div class="track" aria-hidden="true"><svg class="line" viewBox="0 0 10 100" preserveAspectRatio="none" aria-hidden="true"><path d="M5 0C4.2 18 5.8 33 5 50S4.3 82 5 100"/><path d="M5.6 1C5 22 6.2 40 5.4 58S5 86 5.5 99"/></svg><div class="fill"><svg class="line" viewBox="0 0 10 100" preserveAspectRatio="none" aria-hidden="true"><path d="M5 0C4.2 18 5.8 33 5 50S4.3 82 5 100"/><path d="M5.6 1C5 22 6.2 40 5.4 58S5 86 5.5 99"/></svg></div></div>
+<ol>
+<li><a href="#title" data-shot="desk"><span>Start</span></a></li>
+<li><a href="#mac-title" data-shot="mac"><span>Headwire Connect</span></a></li>
+<li><a href="#devices-title" data-shot="devices"><span>iPad and iPhone</span></a></li>
+<li><a href="#ways-title" data-shot="wide"><span>Two ways in</span></a></li>
+</ol>
+</nav>
 
 <main id="main">
 <section class="story" aria-label="Headwire, shown on a desk">
@@ -120,6 +133,9 @@
 </article>
 </section>
 </main>
+
+<button class="to-top gone" type="button" aria-label="Back to top" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19.5C12.2 15 11.8 10 12 5.5"/><path d="M6.5 11C8.6 9.2 10.3 7.4 12 5.2C13.6 7.3 15.4 9.1 17.5 11"/></svg></button>
+<div class="cue" aria-hidden="true" hidden><span>Scroll</span><svg viewBox="0 0 24 14"><path d="M3 3.5C6.2 6.4 9.2 9.4 12 11.5C14.9 9.2 17.8 6.3 21 3.2"/><path d="M3.6 2.6C6.8 5.8 9.6 8.6 12.3 10.6C15 8.4 17.6 5.6 20.4 2.8"/></svg></div>
 
 <footer class="site-footer">
 <nav aria-label="Footer">
