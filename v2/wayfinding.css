@@ -93,7 +93,7 @@
     background: var(--card);
     border: 2px solid var(--ink);
     border-radius: 52% 46% 55% 47% / 47% 55% 46% 52%;
-    box-shadow: 2px 3px 0 rgba(42, 43, 56, 0.12);
+    box-shadow: 2px 3px 0 var(--shadow);
     cursor: pointer;
     transition: opacity 0.25s, visibility 0.25s, transform 0.25s;
 }
@@ -139,4 +139,4 @@
     .cue, .to-top, .chapters a::before, .chapters a span { transition: none; }
 }
 
-.capture .chapters, .capture .to-top, .capture .cue { visibility: hidden; }
+.capture .chapters, .capture .to-top, .capture .cue { visibility: hidden; transition: none; }

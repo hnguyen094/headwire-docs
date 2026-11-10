@@ -79,6 +79,8 @@ uniform float pixel;
 uniform float boil;
 uniform vec3 ink;
 uniform vec3 paper;
+uniform vec3 screenInk;
+uniform float night;
 uniform float grain;
 uniform float far;
 out vec4 outColor;
@@ -150,11 +152,14 @@ void main() {
     vec2 css = frag / pixel;
     float tick = boil;
 
-    // The paper: warm, with a fine tooth and a few soft fibres.
+    // The paper: warm, with a fine tooth and a few soft fibres. By day the grain darkens the paper
+    // a little; at night it lifts graphite paper in pale specks and streaks, as light catches its
+    // tooth, which a darkening can't show on paper so dark (the page's graphite.svg, alike).
     float tooth = fbm(css * 0.9);
     float fibre = smoothstep(0.62, 0.9, noise(vec2(css.x * 0.02, css.y * 0.4))) * 0.5;
     float blotch = fbm(css * 0.004);
     vec3 base = paper * mix(1.0, 0.955 + 0.06 * tooth - 0.02 * fibre + 0.03 * (blotch - 0.5), grain);
+    base += night * grain * (0.26 * max(tooth - 0.42, 0.0) + 0.08 * fibre + 0.05 * (blotch - 0.5)) * vec3(0.9, 0.89, 0.86);
 
     vec4 shade = texture(tShade, vUv);
     float kind = shade.a;
@@ -170,14 +175,17 @@ void main() {
         h = max(h, hatch(css, -0.785, 6.5, 2.0) * (1.0 - smoothstep(0.46, 0.54, l)) * 0.9);
         h = max(h, hatch(css, 0.2, 4.5, 3.0) * (1.0 - smoothstep(0.26, 0.34, l)) * 0.85);
         color = mix(color, color * mix(0.86, 1.0, smoothstep(0.2, 0.9, l)), 0.6);
-        color = mix(color, ink, h * 0.55 * mix(1.0, 0.8 + 0.2 * tooth, grain));
+        // Chalk at night goes over the shadows more lightly than pencil does by day.
+        color = mix(color, ink, h * mix(0.55, 0.38, night) * mix(1.0, 0.8 + 0.2 * tooth, grain));
     } else if (kind > 0.25) {
-        // A screen: the real picture, a little muted, printed onto the paper.
+        // A screen: the real picture, a little muted, printed onto the paper by day and glowing a
+        // little dimmed off the dark paper at night.
         vec3 c = shade.rgb;
         float g = dot(c, vec3(0.299, 0.587, 0.114));
         c = mix(vec3(g), c, 0.82);
-        c = mix(ink, vec3(1.0), smoothstep(0.0, 1.0, c));
-        color = mix(base, vec3(1.0), 0.55) * mix(vec3(1.0), c, 0.96);
+        c = mix(screenInk, vec3(1.0), smoothstep(0.0, 1.0, c));
+        vec3 sheet = mix(base, vec3(1.0), mix(0.55, 1.0, night)) * mix(1.0, 0.8, night);
+        color = sheet * mix(vec3(1.0), c, 0.96);
     }
 
     // Outlines: two passes, each pushed about by its own boiling noise, so a line wobbles and

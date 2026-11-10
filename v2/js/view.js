@@ -35,6 +35,8 @@ function resize(view) {
     return true;
 }
 
+const scheme = (options) => (options.dark.matches ? 'dark' : 'light');
+
 function draw(view, t, time) {
     const { camera, options, renderer, stats } = view;
     const began = performance.now();
@@ -55,10 +57,11 @@ function draw(view, t, time) {
 /**
  * Builds the renderer and the desk on `canvas`. `options`: `capture` keeps each frame for
  * screenshots, `measure` waits for the GPU at the end of each frame, `orbit` turns the camera
- * that many radians round the subject, and `reduced` is the Reduce Motion query. The view's
- * `draw(t, time)` draws timeline position t at boil time `time` in seconds; `resize()` follows
- * the canvas's size and `scale`, the share of pixels drawn, and answers whether that cleared the
- * canvas, which must then be drawn again before the frame ends.
+ * that many radians round the subject, `reduced` is the Reduce Motion query and `dark` the dark
+ * colour scheme's. The view's `draw(t, time)` draws timeline position t at boil time `time` in
+ * seconds; `follow()` takes the colour scheme the page has now, for the next draw; `resize()`
+ * follows the canvas's size and `scale`, the share of pixels drawn, and answers whether that
+ * cleared the canvas, which must then be drawn again before the frame ends.
  */
 export async function createView(canvas, options) {
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance', preserveDrawingBuffer: options.capture });
@@ -69,13 +72,14 @@ export async function createView(canvas, options) {
     const screens = buildDesk(scene, pictures);
     const view = {
         renderer, scene, pictures, screens, options,
-        sketch: createSketch(renderer),
+        sketch: createSketch(renderer, { scheme: scheme(options) }),
         camera: new THREE.PerspectiveCamera(34, 1, 0.02, 8),
         shots: makeShots(screens),
         pan: null,
         scale: 1, width: 0, height: 0, pixel: 0,
         stats: { frames: 0, cpu: [], intervals: [] },
     };
+    view.follow = () => view.sketch.setScheme(scheme(options));
     view.resize = () => resize(view);
     view.draw = (t, time) => draw(view, t, time);
     view.resize();

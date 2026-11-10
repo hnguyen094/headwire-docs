@@ -41,6 +41,18 @@ const sharedLight = { value: new THREE.Vector3(-0.45, 1.0, 0.65) };
 // The camera's far plane, which every mesh packs its depth against and the outlines unpack it by.
 const sharedFar = { value: 8 };
 
+/**
+ * The drawing's colours by colour scheme, as they reach the canvas (the pass writes them
+ * unconverted): pencil on warm paper by day, and by night warm chalk on graphite paper, the app's
+ * Sketch theme and the page's (v2.css). `screenInk` is the darkest a screen's picture prints;
+ * `night` turns screens to glow and the hatching to lighter chalk. The day colours are the ones
+ * the drawing has always shown, the page's paper (f6f1e4) and ink (2a2b38) taken as linear.
+ */
+export const palettes = {
+    light: { ink: 0x06060a, paper: 0xebe0c6, screenInk: 0x06060a, night: 0 },
+    dark: { ink: 0xe6dfcc, paper: 0x1c1c21, screenInk: 0x16161a, night: 1 },
+};
+
 // The full-screen pass that draws the two targets onto the canvas as pencil on paper.
 function postPass(target, grain) {
     const material = new THREE.RawShaderMaterial({
@@ -53,8 +65,10 @@ function postPass(target, grain) {
             resolution: { value: new THREE.Vector2(1, 1) },
             pixel: { value: 1 },
             boil: { value: 0 },
-            ink: { value: new THREE.Color(0x2a2b38) },
-            paper: { value: new THREE.Color(0xf6f1e4) },
+            ink: { value: new THREE.Color() },
+            paper: { value: new THREE.Color() },
+            screenInk: { value: new THREE.Color() },
+            night: { value: 0 },
             grain: { value: grain ? 1 : 0 },
             far: sharedFar,
         },
@@ -87,10 +101,11 @@ function saturatedDepth(renderer, target) {
 
 /**
  * The renderer's passes. `render(scene, camera, boil)` draws a frame; `resize(width, height,
- * pixel)` takes the canvas size in device pixels and how many device pixels make a CSS pixel.
- * With `grain: false` the paper is plain.
+ * pixel)` takes the canvas size in device pixels and how many device pixels make a CSS pixel;
+ * `setScheme(scheme)` draws the next frame in palettes[scheme]. With `grain: false` the paper is
+ * plain.
  */
-export function createSketch(renderer, { grain = true } = {}) {
+export function createSketch(renderer, { grain = true, scheme = 'light' } = {}) {
     const target = new THREE.WebGLRenderTarget(1, 1, {
         count: 2,
         type: THREE.UnsignedByteType,
@@ -101,8 +116,18 @@ export function createSketch(renderer, { grain = true } = {}) {
     target.textures[0].name = 'shade';
     target.textures[1].name = 'data';
     const post = postPass(target, grain);
+    const setScheme = (name) => {
+        const { ink, paper, screenInk, night } = palettes[name];
+        const uniforms = post.material.uniforms;
+        uniforms.ink.value.setHex(ink, THREE.NoColorSpace);
+        uniforms.paper.value.setHex(paper, THREE.NoColorSpace);
+        uniforms.screenInk.value.setHex(screenInk, THREE.NoColorSpace);
+        uniforms.night.value = night;
+    };
+    setScheme(scheme);
 
     return {
+        setScheme,
         resize(width, height, pixel) {
             target.setSize(width, height);
             post.material.uniforms.resolution.value.set(width, height);

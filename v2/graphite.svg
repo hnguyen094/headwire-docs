@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+<!-- Graphite paper's grain for the dark page (the sheet token in v2.css): a fine tooth and long fibres in pale
+     specks over the paper colour, tiling without seams. The live drawing grains its own paper alike
+     (js/sketch-shaders.js). -->
+<filter id="grain" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB">
+<feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" seed="7" stitchTiles="stitch" result="tooth"/>
+<feColorMatrix in="tooth" result="specks" values="0 0 0 0 0.9  0 0 0 0 0.89  0 0 0 0 0.86  0.75 0 0 0 -0.33"/>
+<feTurbulence type="fractalNoise" baseFrequency="0.012 0.32" numOctaves="2" seed="11" stitchTiles="stitch" result="fibre"/>
+<feColorMatrix in="fibre" result="streaks" values="0 0 0 0 0.9  0 0 0 0 0.89  0 0 0 0 0.86  0.55 0 0 0 -0.31"/>
+<feMerge><feMergeNode in="streaks"/><feMergeNode in="specks"/></feMerge>
+</filter>
+<rect width="240" height="240" filter="url(#grain)"/>
+</svg>

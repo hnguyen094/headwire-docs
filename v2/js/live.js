@@ -13,6 +13,7 @@ const options = {
     // With ?measure, each frame waits for the GPU to finish, so its time is the whole frame's.
     measure: params.has('measure'),
     reduced: matchMedia('(prefers-reduced-motion: reduce)'),
+    dark: matchMedia('(prefers-color-scheme: dark)'),
     // With ?capture&orbit=degrees, review stills look from that far round the subject (180:
     // behind, with the wall left out so the camera can stand there).
     orbit: THREE.MathUtils.degToRad(Number(params.get('orbit') ?? 0)),
@@ -92,6 +93,7 @@ export async function start() {
         // The renders draw each still themselves, after any resize; the live page draws in the
         // same task as its resize (motion.js).
         addEventListener('resize', view.resize);
+        options.dark.addEventListener('change', view.follow);
         document.documentElement.classList.add('capture');
         return;
     }

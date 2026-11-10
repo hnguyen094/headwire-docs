@@ -76,6 +76,13 @@ function listen(view, story, state) {
         if (view.resize()) view.draw(state.shown, performance.now() / 1000);
         wake();
     });
+    // A change of colour scheme repaints the page's own colours at once, so the drawing takes its
+    // new palette in the same task rather than a frame behind them.
+    view.options.dark.addEventListener('change', () => {
+        view.follow();
+        view.draw(state.shown, performance.now() / 1000);
+        wake();
+    });
 }
 
 /** Draws `view` as `story` scrolls. Answers `redraw()`, for when the desk itself changes. */

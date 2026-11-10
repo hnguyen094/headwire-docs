@@ -1,5 +1,6 @@
-/* Version 2 of the home page. Light only, by design: the page is a sheet of paper with a
-   pencil drawing on it, and the drawing's paper and ink are the page's colours. */
+/* Version 2 of the home page: a sheet of paper with a pencil drawing on it, whose paper and ink
+   are the page's colours. In dark it is the same drawing at night, in the app's Sketch theme:
+   graphite paper and warm chalk ink (js/sketch.js draws the desk in the same colours). */
 
 /* Shantell Sans (SIL Open Font License 1.1, fonts/OFL.txt), the app's Sketch typeface, for the
    drawing's hand: Regular and SemiBold cut at Informality 0 and Bounce 0, subset to Latin and to
@@ -37,24 +38,40 @@
     unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
 }
 :root {
-    color-scheme: light;
+    color-scheme: light dark;
     --paper: #f6f1e4;
     --paper-deep: #ece4d0;
     --card: rgba(250, 247, 238, 0.93);
     --ink: #2a2b38;
     --ink-soft: #55566a;
     --accent: #23408f;
+    --shadow: rgba(42, 43, 56, 0.12);
+    /* The paper as a background: plain by day, and by night graphite with its grain, a static tile
+       the browser draws once (graphite.svg). */
+    --sheet: var(--paper);
     --gutter: 16px;
     --card-corners: 255px 15px 225px 15px / 15px 225px 15px 255px;
     --sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
     --hand: "Shantell Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+@media (prefers-color-scheme: dark) {
+    :root {
+        --paper: #1c1c21;
+        --paper-deep: #2b2b33;
+        --card: rgba(37, 37, 44, 0.94);
+        --ink: #e6dfcc;
+        --ink-soft: #b4ae9f;
+        --accent: #7a92d8;
+        --shadow: rgba(0, 0, 0, 0.4);
+        --sheet: url("graphite.svg") var(--paper);
+    }
+}
 
 * { box-sizing: border-box; }
-html { background: var(--paper); }
+html { background: var(--sheet); }
 body {
     margin: 0;
-    background: var(--paper);
+    background: var(--sheet);
     color: var(--ink);
     font: 1.0625rem/1.55 var(--sans);
     -webkit-text-size-adjust: 100%;
@@ -151,7 +168,7 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
     padding: 1.25rem 1.4rem 0.75rem;
     border: 2px solid var(--ink);
     border-radius: var(--card-corners);
-    box-shadow: 3px 4px 0 rgba(42, 43, 56, 0.12);
+    box-shadow: 3px 4px 0 var(--shadow);
     pointer-events: auto;
     /* A card taller than its screen (a phone held across, larger text) scrolls within itself. */
     max-height: calc(100% - 2 * var(--gutter));
@@ -165,7 +182,7 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
 @media (orientation: portrait) {
     .live .pin, .live .chapter:first-of-type .pin { align-items: flex-end; justify-content: center; padding-top: 0; padding-bottom: 6vh; }
     .live .card { width: 100%; max-width: 34rem; }
-    .live .chapter:first-of-type .card { background: var(--card); border-color: var(--ink); border-radius: var(--card-corners); box-shadow: 3px 4px 0 rgba(42, 43, 56, 0.12); padding-left: 1.4rem; }
+    .live .chapter:first-of-type .card { background: var(--card); border-color: var(--ink); border-radius: var(--card-corners); box-shadow: 3px 4px 0 var(--shadow); padding-left: 1.4rem; }
 }
 
 .capture .site-header, .capture .chapter, .capture .site-footer, .capture .skip { visibility: hidden; }
@@ -175,7 +192,7 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
     z-index: 2;
     padding: 2rem max(var(--gutter), 4vw) 3rem;
     border-top: 2px solid var(--paper-deep);
-    background: var(--paper);
+    background: var(--sheet);
     font-size: 0.9375rem;
     color: var(--ink-soft);
 }
