@@ -42,20 +42,22 @@ function step(view, state, now) {
     return moving;
 }
 
+// Draws a frame. A slow run of frames may change the share of pixels drawn first, so the frame that
+// resizes the canvas, which clears it, is also the one drawn on it.
 function draw(view, state, now) {
     const interval = state.last ? now - state.last : 0;
     if (interval) view.stats.intervals.push(interval);
     state.last = now;
     state.lastScroll = scrollY;
     state.moved = state.dirty = false;
-    view.draw(state.shown, now / 1000);
     if (!view.options.measure && state.governor.sample(interval)) {
         view.scale = state.governor.scale;
         view.resize();
     }
+    view.draw(state.shown, now / 1000);
 }
 
-function listen(story, state) {
+function listen(view, story, state) {
     const { wake } = state;
     new IntersectionObserver(([entry]) => {
         state.visible = entry.isIntersecting;
@@ -66,9 +68,12 @@ function listen(story, state) {
         fadeCards(story);
         wake();
     }, { passive: true });
+    // A resize that changes the canvas clears it, so it's drawn again in the same task, before the
+    // browser can show it empty.
     addEventListener('resize', () => {
         state.map = scrollMap(story);
         fadeCards(story);
+        if (view.resize()) view.draw(state.shown, performance.now() / 1000);
         wake();
     });
 }
@@ -91,7 +96,7 @@ export function animate(view, story) {
         state.moved = true;
         state.wake();
     });
-    listen(story, state);
+    listen(view, story, state);
     view.options.reduced.addEventListener('change', state.wake);
     state.wake();
     return () => {

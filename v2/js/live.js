@@ -88,8 +88,10 @@ export async function start() {
     if (capture) await loading;
     if (capture && Math.abs(options.orbit) > Math.PI / 2) view.screens.wall.visible = false;
     fadeCards(story);
-    addEventListener('resize', view.resize);
     if (capture) {
+        // The renders draw each still themselves, after any resize; the live page draws in the
+        // same task as its resize (motion.js).
+        addEventListener('resize', view.resize);
         document.documentElement.classList.add('capture');
         return;
     }

@@ -47,16 +47,43 @@ function measure(story, parts, state) {
     update(parts, state);
 }
 
+// How far, in CSS pixels, a touch may move and still be a tap.
+const TAP_SLOP = 10;
+
+/**
+ * Runs `action(event)` on a click, and on a touch that starts and ends on `element` without moving
+ * further than TAP_SLOP. A browser makes no click of a touch that stops a scroll's momentum
+ * (Chrome's tap suppression after a fling), though it still sends the touch; ending the touch here
+ * cancels the click that would otherwise follow, so the action runs once. iOS sends neither
+ * (WebKit r219340), and there the first touch only stops the scroll.
+ */
+function onTap(element, action) {
+    let start = null;
+    element.addEventListener('touchstart', (event) => {
+        const touch = event.changedTouches[0];
+        start = event.touches.length === 1 ? { x: touch.clientX, y: touch.clientY } : null;
+    }, { passive: true });
+    element.addEventListener('touchend', (event) => {
+        const touch = event.changedTouches[0];
+        const tapped = start && Math.hypot(touch.clientX - start.x, touch.clientY - start.y) <= TAP_SLOP;
+        start = null;
+        if (!tapped || !event.cancelable) return;
+        event.preventDefault();
+        action(event);
+    });
+    element.addEventListener('click', action);
+}
+
 function listen(story, parts, state) {
     for (const link of parts.links) {
-        link.addEventListener('click', (event) => {
+        onTap(link, (event) => {
             const stop = state.stops.find(({ shot }) => shot === link.dataset.shot);
             if (!stop) return;
             event.preventDefault();
             jump(stop.y);
         });
     }
-    parts.top.addEventListener('click', () => {
+    onTap(parts.top, () => {
         jump(0);
         parts.title.setAttribute('tabindex', '-1');
         parts.title.focus({ preventScroll: true });
