@@ -5,6 +5,7 @@ import { makeShots } from './path.js';
 import { timeline } from './timeline.js';
 import { fadeCards } from './scroll.js';
 import { animate } from './motion.js';
+import { PAPER_RATE, paperShift } from './paper.js';
 
 const params = new URLSearchParams(location.search);
 const capture = params.has('capture');
@@ -62,13 +63,21 @@ function expose(view, models) {
         get modelsReady() { return models.ready; },
         get modelsPlaced() { return models.placed; },
         get modelsWanted() { return models.wanted; },
-        /** Draws timeline position t at boil time `time`, for the stills. */
-        renderAt(t, time = 0) {
-            view.draw(t, time);
+        /** Draws timeline position t at boil time `time`, the paper moved up `shift`, for the stills. */
+        renderAt(t, time = 0, shift = 0) {
+            view.draw(t, time, shift);
             view.renderer.getContext().finish();
         },
+        /** The paper's share of the scroll, and its offset at a scroll (paper.js). */
+        paperRate: PAPER_RATE,
+        paperShift: (scroll) => paperShift(scroll, options.reduced.matches),
         /** Of the last frame's drawn pixels, the share at the farthest depth the sketch packs. */
         saturatedDepth: () => view.sketch.saturatedDepth(),
+        /**
+         * How far the last frame moved each theme's background for the scroll (paper.js), and
+         * where Standard's glows were drawn, [x, y] in screen shares from the bottom left (glass.js).
+         */
+        backgroundOffsets: () => view.sketch.backgroundOffsets(),
         stats: () => ({ ...summary(view.stats), size: [view.width, view.height], scale: view.scale, calls: view.renderer.info.render.calls }),
         resetStats() {
             Object.assign(view.stats, { frames: 0, cpu: [], intervals: [] });
@@ -94,6 +103,7 @@ export async function start() {
         // same task as its resize (motion.js).
         addEventListener('resize', view.resize);
         options.dark.addEventListener('change', view.follow);
+        addEventListener('themechange', view.follow);
         document.documentElement.classList.add('capture');
         return;
     }

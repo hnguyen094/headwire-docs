@@ -5,7 +5,7 @@
 
 :root {
     /* The rail's middle, in the gutter beside the copy. */
-    --rail-x: max(22px, 2vw);
+    --rail-x: calc(env(safe-area-inset-left, 0px) + max(22px, 2vw));
     --rail-top: 26vh;
     --rail-height: 48vh;
 }
@@ -14,7 +14,7 @@
 }
 /* With scripts, the copy and stills leave the rail its gutter; the page's head marks scripts before
    the first paint, so nothing moves. */
-.js:not(.live) .chapter, .js.live .pin { padding-left: max(44px, 4vw); }
+.js:not(.live) .chapter, .js.live .pin { padding-left: calc(env(safe-area-inset-left, 0px) + max(44px, 4vw)); }
 
 .chapters {
     position: fixed;
@@ -53,7 +53,7 @@
     width: 11px;
     height: 11px;
     border: 1.6px solid var(--ink);
-    border-radius: 60% 40% 55% 45% / 45% 60% 40% 55%;
+    border-radius: var(--mark-radius);
     background: var(--paper);
     transition: background-color 0.2s, transform 0.2s;
 }
@@ -68,11 +68,13 @@
     transform: translateY(-50%);
     white-space: nowrap;
     padding: 0.15rem 0.6rem;
-    font-size: 0.8125rem;
+    font-size: 0.75rem;
     font-weight: 600;
     background: var(--card);
-    border: 1.5px solid var(--ink);
-    border-radius: var(--card-corners);
+    border: var(--tag-border);
+    border-radius: var(--card-radius);
+    -webkit-backdrop-filter: var(--glass);
+    backdrop-filter: var(--glass);
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.2s, visibility 0.2s;
@@ -91,9 +93,11 @@
     place-items: center;
     color: var(--ink);
     background: var(--card);
-    border: 2px solid var(--ink);
-    border-radius: 52% 46% 55% 47% / 47% 55% 46% 52%;
-    box-shadow: 2px 3px 0 var(--shadow);
+    border: var(--card-border);
+    border-radius: var(--mark-radius);
+    box-shadow: var(--card-shadow);
+    -webkit-backdrop-filter: var(--glass);
+    backdrop-filter: var(--glass);
     cursor: pointer;
     transition: opacity 0.25s, visibility 0.25s, transform 0.25s;
 }
@@ -126,7 +130,7 @@
 .cue path + path { stroke-width: 1.1; opacity: 0.5; }
 .cue.gone { opacity: 0; visibility: hidden; }
 /* Over the stills' copy, the cue sits on its own scrap of paper. */
-.js:not(.live) .cue { padding: 0.2rem 0.75rem 0.3rem; background: var(--card); border-radius: var(--card-corners); }
+.js:not(.live) .cue { padding: 0.2rem 0.75rem 0.3rem; background: var(--card); border-radius: var(--card-radius); -webkit-backdrop-filter: var(--glass); backdrop-filter: var(--glass); }
 /* On a phone held upright the first card sits low; the chevron alone fits under it. */
 @media (orientation: portrait) { .live .cue span { display: none; } }
 @keyframes nudge {

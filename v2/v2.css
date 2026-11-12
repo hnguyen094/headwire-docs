@@ -1,79 +1,28 @@
-/* Version 2 of the home page: a sheet of paper with a pencil drawing on it, whose paper and ink
-   are the page's colours. In dark it is the same drawing at night, in the app's Sketch theme:
-   graphite paper and warm chalk ink (js/sketch.js draws the desk in the same colours). */
+/* Version 2 of the home page: the desk, drawn live or as stills, with the story's copy on cards
+   over it. Every colour, face and corner comes from the theme (themes.css), so this sheet lays the
+   page out once for Standard and Sketch alike. Type runs a little under the system's sizes, as in
+   the app. */
 
-/* Shantell Sans (SIL Open Font License 1.1, fonts/OFL.txt), the app's Sketch typeface, for the
-   drawing's hand: Regular and SemiBold cut at Informality 0 and Bounce 0, subset to Latin and to
-   Cyrillic, served from this site. A page in English fetches only the two Latin files. */
-@font-face {
-    font-family: "Shantell Sans";
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url("fonts/shantell-sans-regular-latin.woff2") format("woff2");
-    unicode-range: U+0000-00FF, U+0100-024F, U+0131, U+0152-0153, U+0259, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+1E00-1EFF, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-    font-family: "Shantell Sans";
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url("fonts/shantell-sans-regular-cyrillic.woff2") format("woff2");
-    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
-@font-face {
-    font-family: "Shantell Sans";
-    font-style: normal;
-    font-weight: 600;
-    font-display: swap;
-    src: url("fonts/shantell-sans-semibold-latin.woff2") format("woff2");
-    unicode-range: U+0000-00FF, U+0100-024F, U+0131, U+0152-0153, U+0259, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+1E00-1EFF, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-    font-family: "Shantell Sans";
-    font-style: normal;
-    font-weight: 600;
-    font-display: swap;
-    src: url("fonts/shantell-sans-semibold-cyrillic.woff2") format("woff2");
-    unicode-range: U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
-}
+/* The page's side margin at its narrowest, in every theme. The page reaches under the screen's
+   rounded corners, notch and toolbars (viewport-fit=cover) so the drawing is all a reader sees
+   there; the copy keeps out of those insets. */
 :root {
-    color-scheme: light dark;
-    --paper: #f6f1e4;
-    --paper-deep: #ece4d0;
-    --card: rgba(250, 247, 238, 0.93);
-    --ink: #2a2b38;
-    --ink-soft: #55566a;
-    --accent: #23408f;
-    --shadow: rgba(42, 43, 56, 0.12);
-    /* The paper as a background: plain by day, and by night graphite with its grain, a static tile
-       the browser draws once (graphite.svg). */
-    --sheet: var(--paper);
     --gutter: 16px;
-    --card-corners: 255px 15px 225px 15px / 15px 225px 15px 255px;
-    --sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --hand: "Shantell Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-@media (prefers-color-scheme: dark) {
-    :root {
-        --paper: #1c1c21;
-        --paper-deep: #2b2b33;
-        --card: rgba(37, 37, 44, 0.94);
-        --ink: #e6dfcc;
-        --ink-soft: #b4ae9f;
-        --accent: #7a92d8;
-        --shadow: rgba(0, 0, 0, 0.4);
-        --sheet: url("graphite.svg") var(--paper);
-    }
+    --edge-left: calc(env(safe-area-inset-left, 0px) + max(var(--gutter), 4vw));
+    --edge-right: calc(env(safe-area-inset-right, 0px) + max(var(--gutter), 4vw));
 }
 
 * { box-sizing: border-box; }
 html { background: var(--sheet); }
+/* The page scrolls as one document, by touch, wheel, keyboard and the chapter rail, with no scroll
+   bar of its own where the browser lets a page hide it; the rail shows where the reader is. */
+html { scrollbar-width: none; }
+html::-webkit-scrollbar { display: none; }
 body {
     margin: 0;
     background: var(--sheet);
     color: var(--ink);
-    font: 1.0625rem/1.55 var(--sans);
+    font: 1rem/1.5 var(--sans);
     -webkit-text-size-adjust: 100%;
 }
 a { color: var(--accent); text-underline-offset: 0.15em; }
@@ -91,24 +40,62 @@ img { max-width: 100%; height: auto; display: block; }
     gap: 0.5rem 1.5rem;
     align-items: center;
     justify-content: space-between;
-    padding: 0.75rem max(var(--gutter), 4vw);
+    padding: calc(0.75rem + env(safe-area-inset-top, 0px)) var(--edge-right) 0.75rem var(--edge-left);
 }
 .live .site-header { position: absolute; inset: 0 0 auto 0; }
-.brand { display: flex; align-items: center; gap: 0.5rem; color: var(--ink); font-weight: 650; text-decoration: none; font-size: 1.125rem; }
+.brand { display: flex; align-items: center; gap: 0.5rem; color: var(--ink); font-family: var(--display); font-weight: var(--heading-weight); text-decoration: none; font-size: 1.0625rem; }
 .site-header ul, .site-footer ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.25rem 1.25rem; }
 .site-header a:not(.brand) { color: var(--ink); text-decoration: none; }
 .site-header a:not(.brand):hover { text-decoration: underline; }
 
+/* The theme switch: a segmented control of two radio buttons, shown once scripts can keep the
+   choice (js/theme.js). Its name is for screen readers; the two labels say the rest. */
+.theme-switch[hidden] { display: none; }
+.theme-switch {
+    display: flex;
+    margin: 0;
+    padding: 2px;
+    border: var(--tag-border);
+    border-radius: var(--button-radius);
+    background: var(--card);
+    -webkit-backdrop-filter: var(--glass);
+    backdrop-filter: var(--glass);
+    font-size: 0.8125rem;
+}
+.theme-switch legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.theme-switch label { position: relative; display: block; cursor: pointer; }
+.theme-switch input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.theme-switch span { display: block; padding: 0.3rem 0.8rem; border-radius: var(--button-radius); color: var(--ink-soft); }
+.theme-switch input:checked + span { background: var(--button-face); color: var(--button-ink); font-weight: var(--heading-weight); }
+.theme-switch input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+@media (hover: hover) { .theme-switch input:not(:checked):hover + span { color: var(--ink); } }
+/* On a phone the switch shares the brand's row, and the links take the row under them. */
+@media (max-width: 600px) {
+    .theme-switch { order: 1; }
+    .site-header nav { order: 2; flex-basis: 100%; }
+}
+
 .story { position: relative; }
-.stage { display: none; }
+/* On a touch screen Safari shows the page under its status bar, where the part scrolled off the
+   top shows through; the drawing reaches that far above the screen (the overhang), so the reader
+   sees its paper there too, sliding with the rest (js/paper.js). The story is its own block so
+   the drawing's margin can't pull the page up with it. */
+.live .story { display: flow-root; }
+.stage { display: none; --overhang: 0px; }
+@media (hover: none) {
+    .stage { --overhang: 80px; }
+}
 .live .stage {
     display: block;
     position: sticky;
-    top: 0;
-    height: 100vh;
-    height: 100svh;
+    top: calc(-1 * var(--overhang));
+    /* The large viewport, so the drawing still fills the screen with Safari's toolbars tucked away
+       and never resizes as they come and go. */
+    height: calc(100vh + var(--overhang));
+    height: calc(100lvh + var(--overhang));
+    margin-top: calc(-1 * var(--overhang));
     margin-bottom: -100vh;
-    margin-bottom: -100svh;
+    margin-bottom: -100lvh;
     z-index: 0;
 }
 .stage canvas { width: 100%; height: 100%; display: block; }
@@ -117,27 +104,26 @@ img { max-width: 100%; height: auto; display: block; }
 .stage canvas:not(.drawn) { visibility: hidden; }
 
 /* Without the drawing: each chapter is its still, then its words. */
-.chapter { position: relative; z-index: 1; padding: 0 max(var(--gutter), 4vw) 3rem; }
+.chapter { position: relative; z-index: 1; padding: 0 var(--edge-right) 3rem var(--edge-left); }
 .still { margin: 0 0 1rem; }
 .still img { width: 100%; border-radius: 6px; }
-.card { max-width: 34rem; font-family: var(--hand); }
-.eyebrow { margin: 0 0 0.35rem; font-size: 0.8125rem; font-weight: 650; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
-h1, h2 { font-family: var(--hand); font-weight: 600; line-height: 1.12; margin: 0 0 0.75rem; text-wrap: balance; }
-h1 { font-size: clamp(2.1rem, 5vw, 3.4rem); }
-h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
+.card { max-width: 34rem; font-family: var(--display); }
+h1, h2 { font-family: var(--display); font-weight: var(--heading-weight); letter-spacing: var(--heading-tracking); line-height: 1.12; margin: 0 0 0.65rem; text-wrap: balance; }
+h1 { font-size: clamp(1.95rem, 4.6vw, 3.1rem); }
+h2 { font-size: clamp(1.5rem, 3.1vw, 2.2rem); }
 .card p { margin: 0 0 0.75rem; }
-.hint { color: var(--ink-soft); font-size: 0.9375rem; }
+.hint { color: var(--ink-soft); font-size: 0.875rem; }
 .links { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-top: 1rem; }
 .button {
     display: inline-block;
     padding: 0.6rem 1.1rem;
-    background: var(--ink);
-    color: var(--paper);
+    background: var(--button-face);
+    color: var(--button-ink);
     text-decoration: none;
-    font-weight: 600;
-    border-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+    font-weight: var(--heading-weight);
+    border-radius: var(--button-radius);
 }
-.button:hover { background: var(--accent); }
+.button:hover { background: var(--button-hover); }
 
 /* With the drawing: the stills go, the stage stays put, and the scroll moves the camera freely.
    Each card scrolls in with the page, pins once it arrives, and stays while the camera holds on
@@ -159,16 +145,18 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
     height: 100svh;
     display: flex;
     align-items: center;
-    padding: 0 max(var(--gutter), 4vw);
+    padding: 0 var(--edge-right) 0 var(--edge-left);
     pointer-events: none;
 }
 .live .card {
     width: min(26rem, 36vw);
     background: var(--card);
-    padding: 1.25rem 1.4rem 0.75rem;
-    border: 2px solid var(--ink);
-    border-radius: var(--card-corners);
-    box-shadow: 3px 4px 0 var(--shadow);
+    padding: 1.3rem 1.4rem 0.75rem;
+    border: var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    -webkit-backdrop-filter: var(--glass);
+    backdrop-filter: var(--glass);
     pointer-events: auto;
     /* A card taller than its screen (a phone held across, larger text) scrolls within itself. */
     max-height: calc(100% - 2 * var(--gutter));
@@ -177,12 +165,12 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
 .live .card.gone { pointer-events: none; }
 .live .chapter:first-of-type .pin { align-items: flex-start; padding-top: 22vh; }
 /* The first card is bare copy on the drawing: square corners, since a card clips its copy to them. */
-.live .chapter:first-of-type .card { background: transparent; border-color: transparent; border-radius: 0; box-shadow: none; padding-left: 0; }
+.live .chapter:first-of-type .card { background: transparent; border-color: transparent; border-radius: 0; box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; padding-left: 0; }
 
 @media (orientation: portrait) {
     .live .pin, .live .chapter:first-of-type .pin { align-items: flex-end; justify-content: center; padding-top: 0; padding-bottom: 6vh; }
     .live .card { width: 100%; max-width: 34rem; }
-    .live .chapter:first-of-type .card { background: var(--card); border-color: var(--ink); border-radius: var(--card-corners); box-shadow: 3px 4px 0 var(--shadow); padding-left: 1.4rem; }
+    .live .chapter:first-of-type .card { background: var(--card); border: var(--card-border); border-radius: var(--card-radius); box-shadow: var(--card-shadow); -webkit-backdrop-filter: var(--glass); backdrop-filter: var(--glass); padding-left: 1.4rem; }
 }
 
 .capture .site-header, .capture .chapter, .capture .site-footer, .capture .skip { visibility: hidden; }
@@ -190,13 +178,14 @@ h2 { font-size: clamp(1.6rem, 3.4vw, 2.4rem); }
 .site-footer {
     position: relative;
     z-index: 2;
-    padding: 2rem max(var(--gutter), 4vw) 3rem;
-    border-top: 2px solid var(--paper-deep);
+    padding: 2rem var(--edge-right) calc(3rem + env(safe-area-inset-bottom, 0px)) var(--edge-left);
+    border-top: var(--rule);
     background: var(--sheet);
-    font-size: 0.9375rem;
+    font-size: 0.875rem;
     color: var(--ink-soft);
 }
 .site-footer p { margin: 1rem 0 0; }
+.site-footer .credit { margin-top: 0.4rem; font-size: 0.8125rem; }
 
 /* Dragging turns the camera; a finger swiping up or down still scrolls the page, pinching still
    zooms it, and sideways swipes never go back a page. */

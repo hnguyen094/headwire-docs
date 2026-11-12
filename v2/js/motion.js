@@ -6,6 +6,7 @@ import { createLoop } from './loop.js';
 import { createGovernor } from './governor.js';
 import { scrollMap, fadeCards } from './scroll.js';
 import { createPan } from './pan.js';
+import { paperShift } from './paper.js';
 
 // How quickly the camera catches up with the scroll: about 95% in a third of a second, so a
 // mouse wheel's steps become one continuous move.
@@ -16,10 +17,10 @@ const BOIL = 6;
 // the next.
 const BOIL_FOR = 8000;
 
-// Whether the lines boil at `now`: not with Reduce Motion, nor once BOIL_FOR has passed since the
-// drawing was last woken.
+// Whether the lines boil at `now`: not with Reduce Motion, nor in a theme whose lines hold still,
+// nor once BOIL_FOR has passed since the drawing was last woken.
 function boiling(view, state, now) {
-    return !view.options.reduced.matches && now - state.wokenAt < BOIL_FOR;
+    return !view.options.reduced.matches && view.sketch.boils && now - state.wokenAt < BOIL_FOR;
 }
 
 // One animation frame: answers whether something still moves, so the next frame should run.
@@ -42,6 +43,11 @@ function step(view, state, now) {
     return moving;
 }
 
+// The paper's offset at the scroll the drawing last drew at, its one reading of the scroll.
+function shiftOf(view, state) {
+    return paperShift(Math.max(state.lastScroll, 0), view.options.reduced.matches);
+}
+
 // Draws a frame. A slow run of frames may change the share of pixels drawn first, so the frame that
 // resizes the canvas, which clears it, is also the one drawn on it.
 function draw(view, state, now) {
@@ -54,7 +60,7 @@ function draw(view, state, now) {
         view.scale = state.governor.scale;
         view.resize();
     }
-    view.draw(state.shown, now / 1000);
+    view.draw(state.shown, now / 1000, shiftOf(view, state));
 }
 
 function listen(view, story, state) {
@@ -73,16 +79,18 @@ function listen(view, story, state) {
     addEventListener('resize', () => {
         state.map = scrollMap(story);
         fadeCards(story);
-        if (view.resize()) view.draw(state.shown, performance.now() / 1000);
+        if (view.resize()) view.draw(state.shown, performance.now() / 1000, shiftOf(view, state));
         wake();
     });
-    // A change of colour scheme repaints the page's own colours at once, so the drawing takes its
-    // new palette in the same task rather than a frame behind them.
-    view.options.dark.addEventListener('change', () => {
+    // A change of colour scheme or theme repaints the page's own colours at once, so the drawing
+    // takes its new look in the same task rather than a frame behind them.
+    const follow = () => {
         view.follow();
-        view.draw(state.shown, performance.now() / 1000);
+        view.draw(state.shown, performance.now() / 1000, shiftOf(view, state));
         wake();
-    });
+    };
+    view.options.dark.addEventListener('change', follow);
+    addEventListener('themechange', follow);
 }
 
 /** Draws `view` as `story` scrolls. Answers `redraw()`, for when the desk itself changes. */

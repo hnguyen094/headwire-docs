@@ -2,7 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
 <meta name="robots" content="noindex">
 <title>Headwire: your Mac, on your iPad</title>
@@ -10,6 +10,31 @@
 <link rel="icon" href="../assets/headwire.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <script>
+// The theme is picked here, before the first paint, so the page never changes under the reader:
+// ?theme= for the renders and tests, else the reader's last choice (js/theme.js keeps it under the
+// same key), else Standard, which themes.css draws with no attribute at all.
+(() => {
+    let theme = new URLSearchParams(location.search).get('theme');
+    try { theme ??= localStorage.getItem('headwire-theme'); } catch {}
+    document.documentElement.dataset.theme = theme === 'sketch' ? 'sketch' : 'standard';
+})();
+// Each theme's stills sit in a folder named for it, stills/standard/ and stills/sketch/, and the
+// page names Standard's, which a page without scripts shows. Every still waits to load until it
+// shows, so the theme's own folder goes in as each still arrives, before it can load, and again
+// whenever the theme changes.
+(() => {
+    const root = document.documentElement;
+    const point = (element) => {
+        const name = element.localName === 'img' ? 'src' : 'srcset';
+        const was = element.getAttribute(name), now = was?.replace(/stills\/\w+\//, `stills/${root.dataset.theme}/`);
+        if (now !== was) element.setAttribute(name, now);
+    };
+    const still = (node) => (node.localName === 'img' || node.localName === 'source') && node.closest('.still');
+    const arriving = new MutationObserver((changes) => changes.forEach((change) => change.addedNodes.forEach((node) => still(node) && point(node))));
+    arriving.observe(root, { childList: true, subtree: true });
+    addEventListener('DOMContentLoaded', () => arriving.disconnect());
+    new MutationObserver(() => document.querySelectorAll('.still source, .still img').forEach(point)).observe(root, { attributeFilter: ['data-theme'] });
+})();
 // The layout is picked here, before the first paint, so the page never changes under the reader:
 // the live drawing (js/main.js) needs WebGL 2, and Reduce Motion keeps the stills unless ?capture
 // asks for the drawing. Scripts are marked here too, so the wayfinding's gutter (wayfinding.css)
@@ -26,6 +51,7 @@
     } catch {}
 })();
 </script>
+<link rel="stylesheet" href="themes.css">
 <link rel="stylesheet" href="v2.css">
 <link rel="stylesheet" href="wayfinding.css">
 <script type="importmap">
@@ -49,6 +75,11 @@
 <li><a href="../support/">Support</a></li>
 </ul>
 </nav>
+<fieldset class="theme-switch" hidden>
+<legend>Theme</legend>
+<label><input type="radio" name="theme" value="standard"><span>Standard</span></label>
+<label><input type="radio" name="theme" value="sketch"><span>Sketch</span></label>
+</fieldset>
 </header>
 
 <nav class="chapters" aria-label="Chapters" hidden>
@@ -68,15 +99,14 @@
 <article class="chapter" data-shot="desk" aria-labelledby="title">
 <figure class="still">
 <picture>
-<source media="(prefers-color-scheme: dark) and (orientation: portrait)" srcset="stills/desk-tall-dark.webp" width="900" height="1400">
-<source media="(prefers-color-scheme: dark)" srcset="stills/desk-wide-dark.webp" width="1600" height="900">
-<source media="(orientation: portrait)" srcset="stills/desk-tall.webp" width="900" height="1400">
-<img src="stills/desk-wide.webp" width="1600" height="900" alt="A pencil drawing of a desk: a Mac Pro on the floor beside it, and on it an Apple Vision Pro, an iMac showing a Mac desktop with a Mac mini under it, an iPhone Duo open like a small laptop, an iPad Pro on its Magic Keyboard and an iPhone, with a mug and a notebook.">
+<source media="(prefers-color-scheme: dark) and (orientation: portrait)" srcset="stills/standard/desk-tall-dark.webp" width="900" height="1400">
+<source media="(prefers-color-scheme: dark)" srcset="stills/standard/desk-wide-dark.webp" width="1600" height="900">
+<source media="(orientation: portrait)" srcset="stills/standard/desk-tall.webp" width="900" height="1400">
+<img src="stills/standard/desk-wide.webp" width="1600" height="900" loading="lazy" alt="A drawing of a desk: a Mac Pro on the floor beside it, and on it an Apple Vision Pro, an iMac showing a Mac desktop with a Mac mini under it, an iPhone Duo open like a small laptop, an iPad Pro on its Magic Keyboard and an iPhone, with a mug and a notebook.">
 </picture>
 </figure>
 <div class="pin">
 <div class="card">
-<p class="eyebrow">For iPad and iPhone</p>
 <h1 id="title">Take your Mac to the couch.</h1>
 <p>Its screen and its sound, right on your iPad or iPhone. Poke it, swipe it, or bring a keyboard along.</p>
 <p class="hint">Scroll to walk across the desk.</p>
@@ -87,15 +117,14 @@
 <article class="chapter" data-shot="mac" aria-labelledby="mac-title">
 <figure class="still">
 <picture>
-<source media="(prefers-color-scheme: dark) and (orientation: portrait)" srcset="stills/mac-tall-dark.webp" width="900" height="1400">
-<source media="(prefers-color-scheme: dark)" srcset="stills/mac-wide-dark.webp" width="1600" height="900">
-<source media="(orientation: portrait)" srcset="stills/mac-tall.webp" width="900" height="1400">
-<img src="stills/mac-wide.webp" width="1600" height="900" loading="lazy" alt="Close up on the iMac, drawn in pencil: the Mac desktop with Headwire Connect’s menu open in the menu bar, showing Streaming and Input switched on and an iPad and an iPhone under Devices.">
+<source media="(prefers-color-scheme: dark) and (orientation: portrait)" srcset="stills/standard/mac-tall-dark.webp" width="900" height="1400">
+<source media="(prefers-color-scheme: dark)" srcset="stills/standard/mac-wide-dark.webp" width="1600" height="900">
+<source media="(orientation: portrait)" srcset="stills/standard/mac-tall.webp" width="900" height="1400">
+<img src="stills/standard/mac-wide.webp" width="1600" height="900" loading="lazy" alt="Close up on the iMac: the Mac desktop with Headwire Connect’s menu open in the menu bar, showing Streaming and Input switched on and an iPad and an iPhone under Devices.">
 </picture>
 </figure>
 <div class="pin">
 <div class="card">
-<p class="eyebrow">Headwire Connect</p>
 <h2 id="mac-title">Cable? Wi-Fi? No Wi-Fi? Sure.</h2>
 <p>Buttery 120 frames a second, 10-bit color, sound and all. Encrypted, and it never touches the internet.</p>
 </div>
@@ -105,15 +134,14 @@
 <article class="chapter" data-shot="devices" aria-labelledby="devices-title">
 <figure class="still">
 <picture>
-<source media="(prefers-color-scheme: dark) and (orientation: portrait)" srcset="stills/devices-tall-dark.webp" width="900" height="1400">
-<source media="(prefers-color-scheme: dark)" srcset="stills/devices-wide-dark.webp" width="1600" height="900">
-<source media="(orientation: portrait)" srcset="stills/devices-tall.webp" width="900" height="1400">
-<img src="stills/devices-wide.webp" width="1600" height="900" loading="lazy" alt="Close up on the iPad Pro on its Magic Keyboard and the iPhone beside it, drawn in pencil, both showing the same Mac desktop in Headwire, with Headwire’s row of Mac keys along the bottom.">
+<source media="(prefers-color-scheme: dark) and (orientation: portrait)" srcset="stills/standard/devices-tall-dark.webp" width="900" height="1400">
+<source media="(prefers-color-scheme: dark)" srcset="stills/standard/devices-wide-dark.webp" width="1600" height="900">
+<source media="(orientation: portrait)" srcset="stills/standard/devices-tall.webp" width="900" height="1400">
+<img src="stills/standard/devices-wide.webp" width="1600" height="900" loading="lazy" alt="Close up on the iPad Pro on its Magic Keyboard and the iPhone beside it, both showing the same Mac desktop in Headwire, with Headwire’s row of Mac keys along the bottom.">
 </picture>
 </figure>
 <div class="pin">
 <div class="card">
-<p class="eyebrow">iPad and iPhone</p>
 <h2 id="devices-title">Tap, swipe, done.</h2>
 <p>Tap to click, glide like a trackpad, swipe for Mission Control. The Mac keys you’d miss? Right there.</p>
 </div>
@@ -123,15 +151,14 @@
 <article class="chapter" data-shot="wide" aria-labelledby="ways-title">
 <figure class="still">
 <picture>
-<source media="(prefers-color-scheme: dark) and (orientation: portrait)" srcset="stills/wide-tall-dark.webp" width="900" height="1400">
-<source media="(prefers-color-scheme: dark)" srcset="stills/wide-wide-dark.webp" width="1600" height="900">
-<source media="(orientation: portrait)" srcset="stills/wide-tall.webp" width="900" height="1400">
-<img src="stills/wide-wide.webp" width="1600" height="900" loading="lazy" alt="The whole desk again, drawn in pencil from the right, with the Mac Pro on the floor and every screen showing the same Mac.">
+<source media="(prefers-color-scheme: dark) and (orientation: portrait)" srcset="stills/standard/wide-tall-dark.webp" width="900" height="1400">
+<source media="(prefers-color-scheme: dark)" srcset="stills/standard/wide-wide-dark.webp" width="1600" height="900">
+<source media="(orientation: portrait)" srcset="stills/standard/wide-tall.webp" width="900" height="1400">
+<img src="stills/standard/wide-wide.webp" width="1600" height="900" loading="lazy" alt="The whole desk again, from the right, with the Mac Pro on the floor and every screen showing the same Mac.">
 </picture>
 </figure>
 <div class="pin">
 <div class="card">
-<p class="eyebrow">Two ways in</p>
 <h2 id="ways-title">Capture card or app? Your call.</h2>
 <p>A capture card and Bluetooth: nothing to install on your Mac. Headwire Connect: wireless, with every bell and whistle. Both free.</p>
 <p class="links"><a class="button" href="../helper/">Get Headwire Connect</a>
@@ -155,6 +182,7 @@
 </ul>
 </nav>
 <p>Headwire and Headwire Connect are by Hung Nguyen. This site has no cookies, trackers or analytics.</p>
+<p class="credit">The Sketch theme is set in Quicksand, by the Quicksand Project Authors, under the <a href="fonts/OFL.txt">SIL Open Font License</a>.</p>
 </footer>
 </body>
 </html>

@@ -48,7 +48,7 @@ void main() {
     vec3 n = normalize(vViewNormal);
     if (!gl_FrontFacing) n = -n;
     vec3 shade;
-    if (kind > 0.5) {
+    if (kind > 0.5 && kind < 1.5) {
         shade = texture(map, vUv).rgb;
     } else {
         vec3 w = normalize(vWorldNormal);
@@ -57,7 +57,8 @@ void main() {
         float sky = 0.5 + 0.5 * w.y;
         shade = vec3(tone * (0.44 + 0.42 * lambert + 0.2 * sky));
     }
-    gShade = vec4(shade, kind > 0.5 ? 0.5 : 1.0);
+    // Kind 2 is the room behind the desk: a solid to the sketch, and a backdrop to Standard (glass.js).
+    gShade = vec4(shade, kind > 1.5 ? 0.85 : kind > 0.5 ? 0.5 : 1.0);
     gData = vec4(n.xy * 0.5 + 0.5, packDepth(vDepth));
 }`;
 
@@ -81,6 +82,7 @@ uniform vec3 ink;
 uniform vec3 paper;
 uniform vec3 screenInk;
 uniform float night;
+uniform float paperShift;
 uniform float grain;
 uniform float far;
 out vec4 outColor;
@@ -155,9 +157,11 @@ void main() {
     // The paper: warm, with a fine tooth and a few soft fibres. By day the grain darkens the paper
     // a little; at night it lifts graphite paper in pale specks and streaks, as light catches its
     // tooth, which a darkening can't show on paper so dark (the page's graphite.svg, alike).
-    float tooth = fbm(css * 0.9);
-    float fibre = smoothstep(0.62, 0.9, noise(vec2(css.x * 0.02, css.y * 0.4))) * 0.5;
-    float blotch = fbm(css * 0.004);
+    // The paper's grain slides with the scroll at its share of the copy's pace (paper.js).
+    vec2 paperAt = css - vec2(0.0, paperShift);
+    float tooth = fbm(paperAt * 0.9);
+    float fibre = smoothstep(0.62, 0.9, noise(vec2(paperAt.x * 0.02, paperAt.y * 0.4))) * 0.5;
+    float blotch = fbm(paperAt * 0.004);
     vec3 base = paper * mix(1.0, 0.955 + 0.06 * tooth - 0.02 * fibre + 0.03 * (blotch - 0.5), grain);
     base += night * grain * (0.26 * max(tooth - 0.42, 0.0) + 0.08 * fibre + 0.05 * (blotch - 0.5)) * vec3(0.9, 0.89, 0.86);
 

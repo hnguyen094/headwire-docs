@@ -1,0 +1,131 @@
+/* The page's two themes, as the app has them: Standard, the system's look, with glass over a soft
+   light, and Sketch, pencil on paper. Each is a set of the custom properties below, light and dark,
+   and nothing else; v2.css and wayfinding.css draw every theme from them, and the drawing takes
+   its own colours per theme (js/sketch.js, js/glass.js). The page's head picks the theme before
+   the first paint (index.html); without scripts the page is Standard. */
+
+/* Quicksand (SIL Open Font License 1.1, fonts/OFL.txt), the app's Sketch typeface, unmodified in
+   Regular and Bold, served from this site as WOFF2. Only Sketch fetches it. */
+@font-face {
+    font-family: "Quicksand";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url("fonts/quicksand-regular.woff2") format("woff2");
+}
+@font-face {
+    font-family: "Quicksand";
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("fonts/quicksand-bold.woff2") format("woff2");
+}
+
+/* Standard: system type, translucent glass with a bright top edge, over a soft wash of light. */
+:root {
+    color-scheme: light dark;
+    --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --heading-weight: 650;
+    --heading-tracking: -0.015em;
+    --paper: #f5f5f7;
+    --paper-deep: #e3e3e8;
+    --card: rgba(255, 255, 255, 0.62);
+    --ink: #1d1d1f;
+    --ink-soft: #55555c;
+    --accent: #0066cc;
+    --accent-ink: #ffffff;
+    --shadow: rgba(20, 20, 40, 0.1);
+    --sheet:
+        radial-gradient(60% 45% at 12% 8%, rgba(160, 196, 255, 0.45), transparent 70%),
+        radial-gradient(55% 40% at 92% 30%, rgba(255, 200, 220, 0.35), transparent 70%),
+        linear-gradient(#fbfbfd, var(--paper)) var(--paper);
+    --card-border: 1px solid rgba(255, 255, 255, 0.7);
+    --card-radius: 22px;
+    --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), inset 0 -1px 0 rgba(0, 0, 0, 0.04), 0 10px 30px var(--shadow);
+    --glass: blur(22px) saturate(1.8);
+    --button-face: var(--accent);
+    --button-ink: var(--accent-ink);
+    --button-hover: #0057b0;
+    --button-radius: 999px;
+    --mark-radius: 50%;
+    --tag-border: 1px solid rgba(0, 0, 0, 0.08);
+    --rule: 1px solid var(--paper-deep);
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --paper: #0b0b10;
+        --paper-deep: #24242c;
+        --card: rgba(34, 34, 42, 0.58);
+        --ink: #f5f5f7;
+        --ink-soft: #a8a8b3;
+        --accent: #5aa9ff;
+        --accent-ink: #00152b;
+        --shadow: rgba(0, 0, 0, 0.45);
+        --sheet:
+            radial-gradient(60% 45% at 12% 8%, rgba(60, 90, 200, 0.28), transparent 70%),
+            radial-gradient(55% 40% at 92% 30%, rgba(150, 70, 160, 0.2), transparent 70%),
+            linear-gradient(#111118, var(--paper)) var(--paper);
+        --card-border: 1px solid rgba(255, 255, 255, 0.14);
+        --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 12px 34px var(--shadow);
+        --button-hover: #85c0ff;
+        --tag-border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+}
+
+/* Sketch: a sheet of paper with a pencil drawing on it, whose paper and ink are the page's colours.
+   In dark it is the same drawing at night: graphite paper and warm chalk ink. */
+:root[data-theme="sketch"] {
+    --display: "Quicksand", var(--sans);
+    --heading-weight: 700;
+    --heading-tracking: 0;
+    --paper: #f6f1e4;
+    --paper-deep: #ece4d0;
+    --card: rgba(250, 247, 238, 0.93);
+    --ink: #2a2b38;
+    --ink-soft: #55566a;
+    --accent: #23408f;
+    --accent-ink: var(--paper);
+    --shadow: rgba(42, 43, 56, 0.12);
+    /* The paper as a background: plain by day, and by night graphite with its grain, a static tile
+       the browser draws once (graphite.svg). */
+    --sheet: var(--paper);
+    --card-border: 2px solid var(--ink);
+    --card-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+    --card-shadow: 3px 4px 0 var(--shadow);
+    --glass: none;
+    --button-face: var(--ink);
+    --button-ink: var(--paper);
+    --button-hover: var(--accent);
+    --button-radius: 255px 18px 225px 18px / 18px 225px 18px 255px;
+    --mark-radius: 60% 40% 55% 45% / 45% 60% 40% 55%;
+    --tag-border: 1.5px solid var(--ink);
+    --rule: 2px solid var(--paper-deep);
+}
+@media (prefers-color-scheme: dark) {
+    :root[data-theme="sketch"] {
+        --paper: #1c1c21;
+        --paper-deep: #2b2b33;
+        --card: rgba(37, 37, 44, 0.94);
+        --ink: #e6dfcc;
+        --ink-soft: #b4ae9f;
+        --accent: #7a92d8;
+        --shadow: rgba(0, 0, 0, 0.4);
+        --sheet: url("graphite.svg") var(--paper);
+    }
+}
+
+/* Asked for more contrast, or less transparency: solid surfaces and plain outlines in either theme. */
+@media (prefers-contrast: more), (prefers-reduced-transparency: reduce) {
+    :root, :root[data-theme="sketch"] {
+        --card: var(--paper);
+        --glass: none;
+    }
+}
+@media (prefers-contrast: more) {
+    :root, :root[data-theme="sketch"] {
+        --ink-soft: var(--ink);
+        --card-border: 2px solid var(--ink);
+        --tag-border: 2px solid var(--ink);
+    }
+}

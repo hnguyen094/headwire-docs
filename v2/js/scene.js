@@ -4,15 +4,15 @@
 // (props.js): plain shapes with no maker's details, sized like the real ones. Each screen is a plane of its own that
 // shows its picture; `screens` names where each one is so the camera can frame it.
 import * as THREE from 'three';
-import { solid } from './sketch.js';
+import { solid, backdrop } from './sketch.js';
 import { tones, box, place } from './shapes.js';
 import { allInOne, stand, foldingPhone, tabletOnKeyboard } from './devices.js';
 
 function room(group) {
     group.add(place(box([1.9, 0.04, 0.82, 0.006], tones.desk), [0, -0.02, 0]));
-    const wall = new THREE.Mesh(new THREE.PlaneGeometry(6, 3), solid(tones.wall));
+    const wall = new THREE.Mesh(new THREE.PlaneGeometry(6, 3), backdrop(tones.wall));
     group.add(place(wall, [0, 0.7, -0.42]));
-    const floor = new THREE.Mesh(new THREE.PlaneGeometry(6, 4), solid(0.9));
+    const floor = new THREE.Mesh(new THREE.PlaneGeometry(6, 4), backdrop(0.9));
     group.add(place(floor, [0, -0.74, 0.8], [-Math.PI / 2, 0, 0]));
     for (const x of [-0.9, 0.9]) group.add(place(box([0.04, 0.72, 0.7], tones.metal), [x * 0.96, -0.4, 0]));
     return wall;

@@ -2,14 +2,16 @@
 // point on the timeline.
 import * as THREE from 'three';
 import { createSketch } from './sketch.js';
+import { currentTheme } from './theme.js';
 import { screenPictures } from './screens.js';
 import { buildDesk } from './scene.js';
 import { makeShots, poseCamera } from './path.js';
 
 // The copy's share of the view, so the subject sits beside it on a wide screen and above it on
-// a tall one.
-function room(width, height) {
-    return width >= height ? { x: 0.17, y: 0 } : { x: 0, y: 0.16 };
+// a tall one. `overhang` is the share of the canvas above the screen (v2.css), so the subject
+// sits where the reader sees the middle, not the canvas's.
+function room(width, height, overhang) {
+    return width >= height ? { x: 0.17, y: -overhang / 2 } : { x: 0, y: 0.16 - overhang / 2 };
 }
 
 // Follows the canvas's size and the view's scale, answering whether the drawing buffer changed.
@@ -31,13 +33,14 @@ function resize(view) {
     camera.aspect = view.width / view.height;
     camera.userData.width = view.width;
     camera.userData.height = view.height;
-    camera.userData.room = room(view.width, view.height);
+    const overhang = parseFloat(getComputedStyle(canvas.parentElement).getPropertyValue('--overhang')) || 0;
+    camera.userData.room = room(view.width, view.height, overhang / Math.max(cssH, 1));
     return true;
 }
 
 const scheme = (options) => (options.dark.matches ? 'dark' : 'light');
 
-function draw(view, t, time) {
+function draw(view, t, time, shift = 0) {
     const { camera, options, renderer, stats } = view;
     const began = performance.now();
     const target = poseCamera(camera, view.shots, t);
@@ -47,7 +50,7 @@ function draw(view, t, time) {
         camera.lookAt(target);
     }
     renderer.info.reset();
-    view.sketch.render(view.scene, camera, options.reduced.matches ? 0 : Math.floor(time * 6) % 97);
+    view.sketch.render(view.scene, camera, options.reduced.matches ? 0 : Math.floor(time * 6) % 97, shift);
     renderer.domElement.classList.add('drawn');
     if (options.measure) renderer.getContext().finish();
     stats.cpu.push(performance.now() - began);
@@ -58,10 +61,11 @@ function draw(view, t, time) {
  * Builds the renderer and the desk on `canvas`. `options`: `capture` keeps each frame for
  * screenshots, `measure` waits for the GPU at the end of each frame, `orbit` turns the camera
  * that many radians round the subject, `reduced` is the Reduce Motion query and `dark` the dark
- * colour scheme's. The view's `draw(t, time)` draws timeline position t at boil time `time` in
- * seconds; `follow()` takes the colour scheme the page has now, for the next draw; `resize()`
- * follows the canvas's size and `scale`, the share of pixels drawn, and answers whether that
- * cleared the canvas, which must then be drawn again before the frame ends.
+ * colour scheme's. The view's `draw(t, time, shift)` draws timeline position t at boil time `time`
+ * in seconds, its background moved up `shift` CSS pixels; `follow()` takes the colour scheme and
+ * theme the page has now, for the next draw; `resize()` follows the canvas's size and `scale`, the
+ * share of pixels drawn, and answers whether that cleared the canvas, which must then be drawn
+ * again before the frame ends.
  */
 export async function createView(canvas, options) {
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: false, powerPreference: 'high-performance', preserveDrawingBuffer: options.capture });
@@ -72,16 +76,19 @@ export async function createView(canvas, options) {
     const screens = buildDesk(scene, pictures);
     const view = {
         renderer, scene, pictures, screens, options,
-        sketch: createSketch(renderer, { scheme: scheme(options) }),
+        sketch: createSketch(renderer, { scheme: scheme(options), theme: currentTheme() }),
         camera: new THREE.PerspectiveCamera(34, 1, 0.02, 8),
         shots: makeShots(screens),
         pan: null,
         scale: 1, width: 0, height: 0, pixel: 0,
         stats: { frames: 0, cpu: [], intervals: [] },
     };
-    view.follow = () => view.sketch.setScheme(scheme(options));
+    view.follow = () => {
+        view.sketch.setScheme(scheme(options));
+        view.sketch.setTheme(currentTheme());
+    };
     view.resize = () => resize(view);
-    view.draw = (t, time) => draw(view, t, time);
+    view.draw = (t, time, shift) => draw(view, t, time, shift);
     view.resize();
     return view;
 }
