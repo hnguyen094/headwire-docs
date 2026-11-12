@@ -3,7 +3,8 @@
 // tone and a paper grain. Screens keep their real picture, printed onto the paper.
 import * as THREE from 'three';
 import { geometryVertex, geometryFragment, postVertex, postFragment } from './sketch-shaders.js';
-import { glassMaterial, setGlassScheme, setGlassDrift, glassDrift } from './glass.js';
+import { linesMaterial, setLinesScheme, createSmoothing } from './lines.js';
+import { createLayers } from './layers.js';
 
 /** A mesh material for the sketch: `tone` is how light its surface is, 0 to 1. */
 export function solid(tone) {
@@ -62,7 +63,7 @@ export const palettes = {
 };
 
 // The full-screen pass that draws the two targets onto the canvas as pencil on paper.
-function sketchMaterial(target, grain) {
+function sketchMaterial(target, grain, layers) {
     return new THREE.RawShaderMaterial({
         glslVersion: THREE.GLSL3,
         vertexShader: postVertex,
@@ -80,16 +81,17 @@ function sketchMaterial(target, grain) {
             paperShift: { value: 0 },
             grain: { value: grain ? 1 : 0 },
             far: sharedFar,
+            ...layers.uniforms,
         },
         depthTest: false,
         depthWrite: false,
     });
 }
 
-// The full-screen pass for each theme: Sketch's pencil, or Standard's clean drawing (glass.js).
+// The full-screen pass for each theme: Sketch's pencil, or Standard's line work (lines.js).
 // The theme picks which `material` the one full-screen triangle draws with.
-function postPass(target, grain) {
-    const materials = { sketch: sketchMaterial(target, grain), standard: glassMaterial(target, sharedFar) };
+function postPass(target, grain, layers) {
+    const materials = { sketch: sketchMaterial(target, grain, layers), standard: linesMaterial(target, sharedFar) };
     const triangle = new THREE.BufferGeometry();
     triangle.setAttribute('position', new THREE.Float32BufferAttribute([-1, -1, 0, 3, -1, 0, -1, 3, 0], 3));
     const quad = new THREE.Mesh(triangle, materials.sketch);
@@ -119,11 +121,12 @@ function saturatedDepth(renderer, target) {
 }
 
 /**
- * The renderer's passes. `render(scene, camera, boil, shift)` draws a frame, its background moved
+ * The renderer's passes. `render(scene, camera, boil, shift)` draws a frame, Sketch's paper moved
  * up with the scroll by `shift` CSS pixels (paper.js); `resize(width, height, pixel)` takes the
  * canvas size in device pixels and how many device pixels make a CSS pixel; `setScheme(scheme)`
  * draws the next frame in palettes[scheme], and `setTheme(theme)` in the theme's look, 'sketch' or
- * 'standard'; `boils` is whether its lines move with the boil. With `grain: false` the paper is
+ * 'standard'; `idleRate` is how many times a second its lines move while nothing else does: the
+ * pencil's boil, or none in Standard, whose drawing holds still. With `grain: false` the paper is
  * plain.
  */
 export function createSketch(renderer, { grain = true, scheme = 'light', theme = 'sketch' } = {}) {
@@ -136,15 +139,18 @@ export function createSketch(renderer, { grain = true, scheme = 'light', theme =
     });
     target.textures[0].name = 'shade';
     target.textures[1].name = 'data';
-    const post = postPass(target, grain);
+    const layers = createLayers(renderer, target);
+    const smoothing = createSmoothing(renderer);
+    const post = postPass(target, grain, layers);
     const setScheme = (name) => {
         const { ink, paper, screenInk, night } = palettes[name];
         const uniforms = post.materials.sketch.uniforms;
-        setGlassScheme(post.materials.standard, name);
+        setLinesScheme(post.materials.standard, name);
         uniforms.ink.value.setHex(ink, THREE.NoColorSpace);
         uniforms.paper.value.setHex(paper, THREE.NoColorSpace);
         uniforms.screenInk.value.setHex(screenInk, THREE.NoColorSpace);
         uniforms.night.value = night;
+        layers.setPaper(uniforms.paper.value, night, uniforms.grain.value);
     };
     setScheme(scheme);
     post.use(theme);
@@ -152,36 +158,38 @@ export function createSketch(renderer, { grain = true, scheme = 'light', theme =
     return {
         setScheme,
         setTheme: (name) => post.use(name),
-        get boils() { return post.material === post.materials.sketch; },
+        get idleRate() { return post.material === post.materials.sketch ? 6 : 0; },
         resize(width, height, pixel) {
             target.setSize(width, height);
+            layers.resize(width, height, pixel);
+            smoothing.resize(width, height);
             for (const { uniforms } of Object.values(post.materials)) {
                 uniforms.resolution.value.set(width, height);
                 uniforms.pixel.value = pixel;
             }
         },
         render(scene, camera, boil, shift = 0) {
-            const { sketch, standard } = post.materials;
+            const { sketch } = post.materials;
             sketch.uniforms.boil.value = boil;
-            // One offset moves both themes' backgrounds: Sketch's paper by the CSS pixel, and
-            // Standard's wash by the screen height.
+            // The scroll moves Sketch's paper; Standard's ground is plain and has nothing to move.
             sketch.uniforms.paperShift.value = shift;
-            setGlassDrift(standard, (shift * standard.uniforms.pixel.value) / standard.uniforms.resolution.value.y);
             sharedFar.value = camera.far;
+            const sketching = post.material === sketch;
+            if (sketching) layers.update(shift, boil);
             renderer.setRenderTarget(target);
             renderer.setClearColor(0x000000, 0);
             renderer.clear(true, true, false);
             // The background clears to depth 0, so every silhouette reads as a jump in depth.
             renderer.render(scene, camera);
-            renderer.setRenderTarget(null);
+            if (sketching) layers.drawEdges(camera.far);
+            // Standard's line work goes into a target of its own, and onto the canvas smoothed.
+            renderer.setRenderTarget(sketching ? null : smoothing.target);
             renderer.render(post.scene, post.camera);
+            if (!sketching) smoothing.draw();
         },
         /** Of the last frame's drawn pixels, the share at the farthest depth the sketch packs. */
         saturatedDepth: () => saturatedDepth(renderer, target),
-        /**
-         * The last frame's background offsets: Sketch's paper in CSS pixels, Standard's drift in
-         * screen heights, and the centres of Standard's glows that drift put them at.
-         */
-        backgroundOffsets: () => ({ paper: post.materials.sketch.uniforms.paperShift.value, ...glassDrift(post.materials.standard) }),
+        /** The last frame's background offset: Sketch's paper, in CSS pixels. */
+        backgroundOffsets: () => ({ paper: post.materials.sketch.uniforms.paperShift.value }),
     };
 }

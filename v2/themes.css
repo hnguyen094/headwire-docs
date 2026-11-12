@@ -1,7 +1,7 @@
-/* The page's two themes, as the app has them: Standard, the system's look, with glass over a soft
-   light, and Sketch, pencil on paper. Each is a set of the custom properties below, light and dark,
+/* The page's two themes, as the app has them: Standard, in the system's type, clean line work on a plain
+   ground, and Sketch, pencil on paper. Each is a set of the custom properties below, light and dark,
    and nothing else; v2.css and wayfinding.css draw every theme from them, and the drawing takes
-   its own colours per theme (js/sketch.js, js/glass.js). The page's head picks the theme before
+   its own colours per theme (js/sketch.js, js/lines.js). The page's head picks the theme before
    the first paint (index.html); without scripts the page is Standard. */
 
 /* Quicksand (SIL Open Font License 1.1, fonts/OFL.txt), the app's Sketch typeface, unmodified in
@@ -21,55 +21,50 @@
     src: url("fonts/quicksand-bold.woff2") format("woff2");
 }
 
-/* Standard: system type, translucent glass with a bright top edge, over a soft wash of light. */
+/* Standard: clean and high in contrast. System type, and the drawing as line work (js/lines.js) on
+   one plain ground, near-black by night and white by day, with one electric accent for the
+   controls; sharp glass cards with thin bright edges over it. */
 :root {
     color-scheme: light dark;
     --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
     --display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    --heading-weight: 650;
-    --heading-tracking: -0.015em;
-    --paper: #f5f5f7;
-    --paper-deep: #e3e3e8;
-    --card: rgba(255, 255, 255, 0.62);
-    --ink: #1d1d1f;
-    --ink-soft: #55555c;
-    --accent: #0066cc;
+    --heading-weight: 700;
+    --heading-tracking: -0.025em;
+    --paper: #fbfbfc;
+    --paper-deep: #d9dce4;
+    --card: rgba(255, 255, 255, 0.8);
+    --ink: #0a0c14;
+    --ink-soft: #3c4150;
+    --accent: #0038ff;
     --accent-ink: #ffffff;
-    --shadow: rgba(20, 20, 40, 0.1);
-    --sheet:
-        radial-gradient(60% 45% at 12% 8%, rgba(160, 196, 255, 0.45), transparent 70%),
-        radial-gradient(55% 40% at 92% 30%, rgba(255, 200, 220, 0.35), transparent 70%),
-        linear-gradient(#fbfbfd, var(--paper)) var(--paper);
-    --card-border: 1px solid rgba(255, 255, 255, 0.7);
-    --card-radius: 22px;
-    --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85), inset 0 -1px 0 rgba(0, 0, 0, 0.04), 0 10px 30px var(--shadow);
-    --glass: blur(22px) saturate(1.8);
+    --shadow: rgba(10, 12, 20, 0.12);
+    --sheet: var(--paper);
+    --card-border: 1px solid rgba(10, 12, 20, 0.9);
+    --card-radius: 12px;
+    --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 0 0 3px rgba(0, 56, 255, 0.06), 0 12px 32px var(--shadow);
+    --glass: blur(16px) saturate(1.4);
     --button-face: var(--accent);
     --button-ink: var(--accent-ink);
-    --button-hover: #0057b0;
-    --button-radius: 999px;
-    --mark-radius: 50%;
-    --tag-border: 1px solid rgba(0, 0, 0, 0.08);
+    --button-hover: #002bc4;
+    --button-radius: 8px;
+    --mark-radius: 2px;
+    --tag-border: 1px solid rgba(10, 12, 20, 0.85);
     --rule: 1px solid var(--paper-deep);
 }
 @media (prefers-color-scheme: dark) {
     :root {
-        --paper: #0b0b10;
-        --paper-deep: #24242c;
-        --card: rgba(34, 34, 42, 0.58);
-        --ink: #f5f5f7;
-        --ink-soft: #a8a8b3;
-        --accent: #5aa9ff;
-        --accent-ink: #00152b;
-        --shadow: rgba(0, 0, 0, 0.45);
-        --sheet:
-            radial-gradient(60% 45% at 12% 8%, rgba(60, 90, 200, 0.28), transparent 70%),
-            radial-gradient(55% 40% at 92% 30%, rgba(150, 70, 160, 0.2), transparent 70%),
-            linear-gradient(#111118, var(--paper)) var(--paper);
-        --card-border: 1px solid rgba(255, 255, 255, 0.14);
-        --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 12px 34px var(--shadow);
-        --button-hover: #85c0ff;
-        --tag-border: 1px solid rgba(255, 255, 255, 0.12);
+        --paper: #04050a;
+        --paper-deep: #1c2230;
+        --card: rgba(6, 8, 14, 0.78);
+        --ink: #f2f5fa;
+        --ink-soft: #aab3c4;
+        --accent: #2ee6ff;
+        --accent-ink: #001418;
+        --shadow: rgba(0, 0, 0, 0.6);
+        --card-border: 1px solid rgba(160, 240, 255, 0.6);
+        --card-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), 0 0 22px rgba(46, 230, 255, 0.12), 0 12px 34px var(--shadow);
+        --button-hover: #8ef2ff;
+        --tag-border: 1px solid rgba(160, 240, 255, 0.6);
     }
 }
 

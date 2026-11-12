@@ -50,7 +50,8 @@ function draw(view, t, time, shift = 0) {
         camera.lookAt(target);
     }
     renderer.info.reset();
-    view.sketch.render(view.scene, camera, options.reduced.matches ? 0 : Math.floor(time * 6) % 97, shift);
+    const reduced = options.reduced.matches;
+    view.sketch.render(view.scene, camera, reduced ? 0 : Math.floor(time * 6) % 97, shift);
     renderer.domElement.classList.add('drawn');
     if (options.measure) renderer.getContext().finish();
     stats.cpu.push(performance.now() - began);
@@ -61,8 +62,8 @@ function draw(view, t, time, shift = 0) {
  * Builds the renderer and the desk on `canvas`. `options`: `capture` keeps each frame for
  * screenshots, `measure` waits for the GPU at the end of each frame, `orbit` turns the camera
  * that many radians round the subject, `reduced` is the Reduce Motion query and `dark` the dark
- * colour scheme's. The view's `draw(t, time, shift)` draws timeline position t at boil time `time`
- * in seconds, its background moved up `shift` CSS pixels; `follow()` takes the colour scheme and
+ * colour scheme's. The view's `draw(t, time, shift)` draws timeline position t at `time` seconds of
+ * the pencil's boil, its background moved up `shift` CSS pixels; `follow()` takes the colour scheme and
  * theme the page has now, for the next draw; `resize()` follows the canvas's size and `scale`, the
  * share of pixels drawn, and answers whether that cleared the canvas, which must then be drawn
  * again before the frame ends.

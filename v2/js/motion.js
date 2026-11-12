@@ -1,7 +1,8 @@
 // Drawing as the page scrolls: the camera follows the scroll a moment behind, a drag turns it,
-// and the pencil lines boil six times a second for BOIL_FOR after the last thing that woke the
-// drawing. Frames run only while something moves or the lines boil (loop.js), and fewer pixels are
-// drawn while that makes slow frames quicker (governor.js).
+// and for BOIL_FOR after the last thing that woke the drawing Sketch's pencil lines boil six times
+// a second; Standard's lines hold still. Frames run only while something moves or the lines do
+// (loop.js), and fewer pixels are drawn while that
+// makes slow frames quicker (governor.js).
 import { createLoop } from './loop.js';
 import { createGovernor } from './governor.js';
 import { scrollMap, fadeCards } from './scroll.js';
@@ -11,22 +12,30 @@ import { paperShift } from './paper.js';
 // How quickly the camera catches up with the scroll: about 95% in a third of a second, so a
 // mouse wheel's steps become one continuous move.
 const FOLLOW = 0.11;
-const BOIL = 6;
-// How long the lines keep boiling after the last scroll, pan, resize, return to the page or change
+// How long the lines keep moving after the last scroll, pan, resize, return to the page or change
 // to the desk, in milliseconds. Then the drawing rests on its last frame and asks for none until
 // the next.
 const BOIL_FOR = 8000;
 
-// Whether the lines boil at `now`: not with Reduce Motion, nor in a theme whose lines hold still,
-// nor once BOIL_FOR has passed since the drawing was last woken.
+// Whether the lines move on their own at `now`: not with Reduce Motion, nor in a theme whose lines
+// hold still, nor once BOIL_FOR has passed since the drawing was last woken.
 function boiling(view, state, now) {
-    return !view.options.reduced.matches && view.sketch.boils && now - state.wokenAt < BOIL_FOR;
+    return !view.options.reduced.matches && view.sketch.idleRate > 0 && now - state.wokenAt < BOIL_FOR;
+}
+
+// Moves the lines' own clock on while they move, and holds it while they rest, so they take up
+// where they stopped rather than jumping to where the time between would have taken them.
+function tick(state, now, moving) {
+    if (moving && state.lastTick) state.clock += Math.min(now - state.lastTick, 100) / 1000;
+    state.lastTick = moving ? now : 0;
 }
 
 // One animation frame: answers whether something still moves, so the next frame should run.
 function step(view, state, now) {
     const reduced = view.options.reduced.matches;
-    const boil = boiling(view, state, now) ? Math.floor((now / 1000) * BOIL) : state.lastBoil;
+    const idle = boiling(view, state, now);
+    tick(state, now, idle);
+    const boil = idle ? Math.floor(state.clock * view.sketch.idleRate) : state.lastBoil;
     const settling = state.pan.settling;
     const dt = state.lastFrame ? Math.min((now - state.lastFrame) / 1000, 0.1) : 0;
     state.pan.step(dt);
@@ -60,7 +69,7 @@ function draw(view, state, now) {
         view.scale = state.governor.scale;
         view.resize();
     }
-    view.draw(state.shown, now / 1000, shiftOf(view, state));
+    view.draw(state.shown, state.clock, shiftOf(view, state));
 }
 
 function listen(view, story, state) {
@@ -79,14 +88,14 @@ function listen(view, story, state) {
     addEventListener('resize', () => {
         state.map = scrollMap(story);
         fadeCards(story);
-        if (view.resize()) view.draw(state.shown, performance.now() / 1000, shiftOf(view, state));
+        if (view.resize()) view.draw(state.shown, state.clock, shiftOf(view, state));
         wake();
     });
     // A change of colour scheme or theme repaints the page's own colours at once, so the drawing
     // takes its new look in the same task rather than a frame behind them.
     const follow = () => {
         view.follow();
-        view.draw(state.shown, performance.now() / 1000, shiftOf(view, state));
+        view.draw(state.shown, state.clock, shiftOf(view, state));
         wake();
     };
     view.options.dark.addEventListener('change', follow);
@@ -96,9 +105,9 @@ function listen(view, story, state) {
 /** Draws `view` as `story` scrolls. Answers `redraw()`, for when the desk itself changes. */
 export function animate(view, story) {
     const map = scrollMap(story);
-    const state = { visible: true, map, shown: map(scrollY), lastScroll: -1, lastBoil: -1, last: 0, lastFrame: 0, wokenAt: 0, moved: false, dirty: false, governor: createGovernor() };
+    const state = { visible: true, map, shown: map(scrollY), lastScroll: -1, lastBoil: -1, clock: 0, lastTick: 0, last: 0, lastFrame: 0, wokenAt: 0, moved: false, dirty: false, governor: createGovernor() };
     const loop = createLoop((now) => step(view, state, now), {
-        rate: () => (boiling(view, state, performance.now()) ? BOIL : 0),
+        rate: () => (boiling(view, state, performance.now()) ? view.sketch.idleRate : 0),
         live: () => state.visible && !document.hidden,
     });
     // Each wake from outside starts the boil's time again; the loop's own boil ticks don't.

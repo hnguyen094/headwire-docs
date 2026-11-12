@@ -74,8 +74,8 @@ function expose(view, models) {
         /** Of the last frame's drawn pixels, the share at the farthest depth the sketch packs. */
         saturatedDepth: () => view.sketch.saturatedDepth(),
         /**
-         * How far the last frame moved each theme's background for the scroll (paper.js), and
-         * where Standard's glows were drawn, [x, y] in screen shares from the bottom left (glass.js).
+         * How far the last frame moved the background for the scroll (paper.js): Sketch's paper,
+         * since Standard's ground is plain.
          */
         backgroundOffsets: () => view.sketch.backgroundOffsets(),
         stats: () => ({ ...summary(view.stats), size: [view.width, view.height], scale: view.scale, calls: view.renderer.info.render.calls }),
