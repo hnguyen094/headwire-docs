@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Picture in Picture, Glance and What works now – Headwire Manual</title>
+<meta name="description" content="Your Mac in a small window, in widgets and the Dynamic Island, and what works on the connection you're using.">
+<link rel="icon" href="../assets/headwire.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<script>
+// The theme is picked before the first paint, as on the home page: ?theme=, else the reader's
+// last choice, else Standard.
+(() => {
+    let theme = new URLSearchParams(location.search).get('theme');
+    try { theme ??= localStorage.getItem('headwire-theme'); } catch {}
+    document.documentElement.dataset.theme = theme === 'sketch' ? 'sketch' : 'standard';
+})();
+</script>
+<link rel="stylesheet" href="../v2/themes.css">
+<link rel="stylesheet" href="manual.css">
+<script type="module" src="theme.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<a class="brand" href="../"><img src="../assets/headwire.svg" alt="" width="28" height="28">Headwire</a>
+<nav aria-label="Site">
+<ul>
+<li><a href="../helper/">Headwire Connect</a></li>
+<li><a href="./" aria-current="page">Manual</a></li>
+<li><a href="../support/">Support</a></li>
+<li><a href="../privacy/">Privacy</a></li>
+</ul>
+</nav>
+<fieldset class="theme-switch" hidden>
+<legend>Theme</legend>
+<label><input type="radio" name="theme" value="standard"><span>Standard</span></label>
+<label><input type="radio" name="theme" value="sketch"><span>Sketch</span></label>
+</fieldset>
+</header>
+
+<div class="manual">
+<nav class="contents" aria-label="Manual">
+<h2>Manual</h2>
+<ol>
+<li><a href="./">Start here</a></li>
+<li><a href="capture-card.html">Capture card and Bluetooth</a></li>
+<li><a href="headwire-connect.html">Headwire Connect</a></li>
+<li><a href="macs.html">Pairing and more than one Mac</a></li>
+<li><a href="stream.html">The stream and its controls</a></li>
+<li><a href="input.html">Touch, pointer and keyboard</a></li>
+<li><a href="extras.html" aria-current="page">Picture in Picture, Glance and What works now</a></li>
+<li><a href="settings.html">Settings</a></li>
+<li><a href="profiles.html">Capture card profiles</a></li>
+<li><a href="connect-menu.html">The Headwire Connect menu</a></li>
+<li><a href="troubleshooting.html">Troubleshooting</a></li>
+</ol>
+</nav>
+
+<main id="main" class="doc">
+<h1>Picture in Picture, Glance and What works now</h1>
+<p class="lede">Keep your Mac in sight while you use other apps, see it in widgets and the Dynamic Island, and check what works on the connection you're using.</p>
+
+<h2 id="picture-in-picture">Picture in Picture</h2>
+<p>Picture in Picture keeps your Mac in a small window over other apps, so you can watch it while you do something else.</p>
+<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<ol class="steps">
+<li>While your Mac's picture shows, tap <b class="ui">Picture in Picture</b> over the stream.</li>
+<li>Your Mac moves into a small window. Move it, resize it, or put it aside as you would any video.</li>
+<li>To come back, tap <b class="ui">Show here</b> in Headwire, or use the window's own button.</li>
+</ol>
+<ul>
+<li>Input to your Mac is off while it's in the small window. Headwire says <b class="ui">Your Mac is in Picture in Picture</b> in the meantime.</li>
+<li>To open the window whenever you leave Headwire, turn on <b class="ui">Start Picture in Picture automatically</b> in <b class="ui">Settings</b> › <b class="ui">General</b>.</li>
+<li>The window shows whichever picture is on screen, from the capture card or Headwire Connect, and follows a switch from one to the other.</li>
+<li>When the system stops the capture card in the background, the window moves to Headwire Connect's stream if there is one. Otherwise it says the capture card paused, and what to do.</li>
+</ul>
+
+<h2 id="glance">Glance</h2>
+<p>With <b class="ui">Glance at your Mac</b> on, Headwire shows a picture of your Mac in its widgets, and on iPhone in the Dynamic Island, while you're in another app.</p>
+<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<ul>
+<li>Turn it on in <b class="ui">Settings</b> › <b class="ui">General</b>. It's off to start with.</li>
+<li>It only runs while something you started keeps Headwire going: your Mac's sound playing, or Picture in Picture open. Nothing else keeps Headwire awake for it.</li>
+<li>The picture updates when it starts, when you change Macs, and every 15 seconds.</li>
+<li>Turn on <b class="ui">Only while charging</b> to glance only while this iPad or iPhone is charging.</li>
+<li>The Lock Screen never shows your Mac's picture, and locking this iPad or iPhone takes it away.</li>
+</ul>
+<h3 id="widgets">Widgets, the Live Activity and Control Center</h3>
+<p>These come with Headwire whether Glance is on or not:</p>
+<ul>
+<li>The <b class="ui">Your Macs</b> widget, for the Home Screen and the Lock Screen, lists your paired Macs. Tap one to open Headwire on that Mac. With Glance on, its Home Screen sizes show each Mac's newest picture.</li>
+<li>The <b class="ui">Open Mac</b> control, for Control Center, the Lock Screen and the Action button, opens Headwire on the Mac you choose when you add it.</li>
+<li>While a Mac is on screen, a Live Activity shows its name, how it's connected, whether its picture is showing, and for how long. Tap it to go back to Headwire.</li>
+</ul>
+
+<h2 id="what-works-now">What works now</h2>
+<p><b class="ui">What works now</b>, over the stream, lists what works on the connection you're using, and what the stream is doing.</p>
+<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<div class="shots">
+<figure class="shot ipad"><img src="shots/capabilities-ipad-dark.avif" alt="The What works now sheet over the stream on iPad, with sections for Picture and Sound, Stream, Keyboard, Pointer and Apple Pencil." loading="lazy"><figcaption>What works now on iPad.</figcaption></figure>
+<figure class="shot phone"><img src="shots/capabilities-iphone-dark.avif" alt="The What works now sheet on iPhone." loading="lazy"><figcaption>On iPhone.</figcaption></figure>
+</div>
+<p>Its sections are <b class="ui">Picture and Sound</b>, <b class="ui">Stream</b>, <b class="ui">Keyboard</b>, <b class="ui">Pointer</b>, <b class="ui">Apple Pencil</b> on iPad, and <b class="ui">Clipboard and Files</b>. Each row says how that part of Headwire is doing right now:</p>
+<ul>
+<li><b class="ui">Works</b>, sometimes with what carries it.</li>
+<li><b class="ui">Limited</b>: it works with a difference, such as Bluetooth typing only the characters your Mac's keyboard layout has.</li>
+<li><b class="ui">Unavailable</b>: it doesn't work now. The row says why, and what would make it work.</li>
+</ul>
+<p>Tap the info button on a row that doesn't fully work for the longer steps. Tap a section's header to open or close it. Headwire remembers which you left open, and opens a section by itself where something isn't working.</p>
+<p>The <b class="ui">Stream</b> section shows where the picture comes from, its frame rate, and whether it's SDR or HDR, as it happens. With <b class="ui">Advanced mode</b> on in <b class="ui">Settings</b> › <b class="ui">General</b>, it adds the technical readings, such as the connection, the codec, the bitrate, the round trip and the sound's delay, and the other sections add rows about what Headwire reads from your Mac, such as its keyboard layout and shortcuts.</p>
+<p class="note">What works now asks your Mac for nothing; it reads what the connection already reports.</p>
+
+<nav class="pager" aria-label="Pages"><a href="input.html">← Touch, pointer and keyboard</a><a href="settings.html">Settings →</a></nav>
+</main>
+</div>
+
+<footer class="site-footer">
+<nav aria-label="Footer">
+<ul>
+<li><a href="../">Headwire</a></li>
+<li><a href="../helper/">Get Headwire Connect</a></li>
+<li><a href="../support/">Support</a></li>
+<li><a href="../privacy/">Privacy Policy</a></li>
+</ul>
+</nav>
+<p>Headwire and Headwire Connect are by Hung Nguyen.</p>
+</footer>
+</body>
+</html>

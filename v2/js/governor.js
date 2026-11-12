@@ -14,6 +14,18 @@ const BETTER = 0.85;
 
 const round = (value) => Math.round(value * 100) / 100;
 
+/**
+ * Device pixels the drawing draws per CSS pixel at full resolution, on a display of `ratio` device
+ * pixels per CSS pixel with the canvas `width` CSS pixels wide. Under 2x it draws at 2 and the
+ * browser scales the canvas down, which smooths its lines as supersampling does; at 2x and over
+ * it draws at the display's own pixels up to 2 on a phone, and at 1.5 on a wide screen, whose
+ * many pixels cost the most.
+ */
+export function drawingPixels(ratio, width) {
+    if (ratio < 2) return 2;
+    return width < 700 ? 2 : 1.5;
+}
+
 function median(list) {
     return [...list].sort((a, b) => a - b)[Math.floor(list.length / 2)];
 }

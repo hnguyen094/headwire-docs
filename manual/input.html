@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<title>Touch, pointer and keyboard – Headwire Manual</title>
+<meta name="description" content="Driving your Mac with touch, Apple Pencil, a trackpad or mouse and a keyboard, the Mac keys, custom keys and keyboard shortcuts.">
+<link rel="icon" href="../assets/headwire.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<script>
+// The theme is picked before the first paint, as on the home page: ?theme=, else the reader's
+// last choice, else Standard.
+(() => {
+    let theme = new URLSearchParams(location.search).get('theme');
+    try { theme ??= localStorage.getItem('headwire-theme'); } catch {}
+    document.documentElement.dataset.theme = theme === 'sketch' ? 'sketch' : 'standard';
+})();
+</script>
+<link rel="stylesheet" href="../v2/themes.css">
+<link rel="stylesheet" href="manual.css">
+<script type="module" src="theme.js"></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+<a class="brand" href="../"><img src="../assets/headwire.svg" alt="" width="28" height="28">Headwire</a>
+<nav aria-label="Site">
+<ul>
+<li><a href="../helper/">Headwire Connect</a></li>
+<li><a href="./" aria-current="page">Manual</a></li>
+<li><a href="../support/">Support</a></li>
+<li><a href="../privacy/">Privacy</a></li>
+</ul>
+</nav>
+<fieldset class="theme-switch" hidden>
+<legend>Theme</legend>
+<label><input type="radio" name="theme" value="standard"><span>Standard</span></label>
+<label><input type="radio" name="theme" value="sketch"><span>Sketch</span></label>
+</fieldset>
+</header>
+
+<div class="manual">
+<nav class="contents" aria-label="Manual">
+<h2>Manual</h2>
+<ol>
+<li><a href="./">Start here</a></li>
+<li><a href="capture-card.html">Capture card and Bluetooth</a></li>
+<li><a href="headwire-connect.html">Headwire Connect</a></li>
+<li><a href="macs.html">Pairing and more than one Mac</a></li>
+<li><a href="stream.html">The stream and its controls</a></li>
+<li><a href="input.html" aria-current="page">Touch, pointer and keyboard</a></li>
+<li><a href="extras.html">Picture in Picture, Glance and What works now</a></li>
+<li><a href="settings.html">Settings</a></li>
+<li><a href="profiles.html">Capture card profiles</a></li>
+<li><a href="connect-menu.html">The Headwire Connect menu</a></li>
+<li><a href="troubleshooting.html">Troubleshooting</a></li>
+</ol>
+</nav>
+
+<main id="main" class="doc">
+<h1>Touch, pointer and keyboard</h1>
+<p class="lede">Everything you do on the stream goes to your Mac: your fingers, Apple Pencil, a trackpad or mouse, and a keyboard. The settings for each are in <b class="ui">Settings</b> › <b class="ui">Touch and pointer</b> and <b class="ui">Settings</b> › <b class="ui">Keyboard</b>.</p>
+
+<h2 id="touch">Touch</h2>
+<p>In <b class="ui">Settings</b> › <b class="ui">Touch and pointer</b>, <b class="ui">Touch</b> picks how your fingers move the Mac's pointer.</p>
+<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<ul>
+<li><b class="ui">Point and tap</b>: tap anything on the Mac's picture to click it, and drag with one finger to drag it, as on a touch screen.</li>
+<li><b class="ui">Trackpad</b>: the screen works like a Mac trackpad. Drag a finger to move the pointer, and tap to click wherever it is. <b class="ui">Trackpad inertia</b> keeps the pointer moving after a quick swipe, slowing to a stop.</li>
+</ul>
+<p>In either mode:</p>
+<table>
+<thead><tr><th>To</th><th>Do this</th></tr></thead>
+<tbody>
+<tr><td>Right-click</td><td>Tap with two fingers, or touch and hold.</td></tr>
+<tr><td>Scroll</td><td>Drag two fingers. A quick flick keeps scrolling, as on a Mac.</td></tr>
+<tr><td>Zoom</td><td>Pinch with two fingers.</td></tr>
+<tr><td>Open Mission Control</td><td>Swipe up with three fingers.</td></tr>
+<tr><td>Open App Exposé</td><td>Swipe down with three fingers.</td></tr>
+<tr><td>Move between Spaces</td><td>Swipe left or right with three fingers.</td></tr>
+<tr><td>Open Apps</td><td>Pinch with three or four fingers.</td></tr>
+<tr><td>Show the desktop</td><td>Spread three or four fingers.</td></tr>
+</tbody>
+</table>
+<p>The opposite gesture closes what one opened: swipe down to leave Mission Control, for example.</p>
+<p><b class="ui">Pointer speed</b> sets how far the pointer moves for your finger's travel. <b class="ui">Reverse scrolling</b> flips the direction Headwire scrolls, on top of your Mac's own setting.</p>
+<p class="note">On iPad, touch works while Headwire fills the screen. In a window, use Apple Pencil, a mouse or a trackpad.</p>
+
+<h3 id="three-finger-drag">Three-finger drag</h3>
+<p>With <b class="ui">Three-finger drag</b> on, drag with three fingers to move windows and select text, as with the Mac trackpad setting of the same name. Mission Control and Spaces then take four fingers. With Headwire Connect, the switch follows your Mac's own setting, and says it's <b class="ui">From Headwire Connect on your Mac</b>.</p>
+
+<h2 id="apple-pencil">Apple Pencil</h2>
+<p>On iPad, Apple Pencil points straight at the Mac's picture, in full screen or in a window: touch to click, and draw to drag. Hovering moves the pointer without clicking.</p>
+<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<p>With <b class="ui">Scribble</b> on, under <b class="ui">Apple Pencil</b> in <b class="ui">Settings</b> › <b class="ui">Touch and pointer</b>, write in a text field on your Mac to type. Your handwriting turns into text as it does anywhere on iPad, in the languages you chose for Scribble. Scribble needs Headwire Connect, which tells Headwire where the Mac's text fields are.</p>
+
+<h2 id="trackpad-and-mouse">A trackpad or mouse</h2>
+<p>A trackpad or mouse connected to this iPad moves the Mac's pointer. Click, scroll with two fingers or the wheel, and use a mouse's back and forward buttons as you would on the Mac.</p>
+<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<ul>
+<li><b class="ui">Pointer style</b> draws the Mac's pointer as the Mac does, <b class="ui">Mac</b>, or as this iPad draws its own, <b class="ui">iPad</b>, over Headwire Connect's picture.</li>
+<li><b class="ui">Snap to controls</b> holds the pointer on buttons on your Mac, so clicks land on them, as the iPad's own pointer does. Where one control sits inside another, such as a close button on a tab, the pointer holds on the one inside, so you can reach it. In a browser tab, whose close button shows only under the pointer, the pointer moves freely until the button appears.</li>
+<li>A clickable area too large to highlight, such as a wide row, gets a soft tint while the pointer is over it, as iPadOS tints one, and the pointer keeps its shape.</li>
+</ul>
+
+<h2 id="keyboard">A keyboard</h2>
+<p>A keyboard connected to this iPad or iPhone types on your Mac, Command, Option and Control included. iPadOS keeps a few shortcuts, such as Command-Tab and Command-Space, for itself; <a href="#shortcuts">keyboard shortcuts</a> send them another way.</p>
+<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<ul>
+<li>Headwire keeps Control-Option-Command shortcuts for itself: with S, R and T for <a href="stream.html#capture">screenshots, recording and Live Text</a>, and with a number to <a href="macs.html">pick a Mac</a>.</li>
+<li>Over Bluetooth, your Mac reads keys by where they sit, so Headwire types through your Mac's keyboard layout: set it in <b class="ui">Settings</b> › <b class="ui">Keyboard</b> › <b class="ui">Mac keyboard layout</b>. Macs with Headwire Connect use their own layout.</li>
+<li>If a key seems stuck on your Mac, tap <b class="ui">Release all keys</b> in <b class="ui">Settings</b> › <b class="ui">Keyboard</b>.</li>
+</ul>
+
+<h3 id="on-screen-keyboard">The on-screen keyboard</h3>
+<p>Tap <b class="ui">Keyboard</b> over the stream, or the keyboard key at the end of the key row, to bring up the on-screen keyboard and type on your Mac. Headwire moves the picture up, or fits it above the keyboard, so you can see what you type. <b class="ui">Autocorrection</b> in <b class="ui">Settings</b> › <b class="ui">Keyboard</b> turns the keyboard's corrections on or off.</p>
+<div class="shots">
+<figure class="shot ipad"><img src="shots/stream-keys-ipad-dark.avif" alt="The Mac desktop above the iPad's on-screen keyboard, with a strip of Mac keys on top of the keyboard." loading="lazy"><figcaption>The on-screen keyboard with the Mac keys.</figcaption></figure>
+<figure class="shot phone"><img src="shots/stream-keys-iphone-dark.avif" alt="The same on iPhone." loading="lazy"><figcaption>On iPhone.</figcaption></figure>
+</div>
+<p>Over Bluetooth, Headwire can only type characters your Mac's keyboard layout has. When it leaves some out, such as an emoji, a note over the stream names them. Headwire Connect types any character.</p>
+
+<h2 id="mac-keys">The Mac keys</h2>
+<p>The on-screen keyboard has no Command, Escape or arrow keys, so a strip of <b class="ui">Mac keys</b> rides on top of it.</p>
+<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<ul>
+<li>Command, Option, Control and Shift: tap one to hold it for the next key. Tap it twice to lock it for every key, and tap it again to let go.</li>
+<li><b class="ui">Mac keys</b>: <b class="ui">Escape</b>, <b class="ui">Tab</b>, the arrows, <b class="ui">Forward delete</b>, <b class="ui">App Switcher</b>, <b class="ui">Spotlight</b> and <b class="ui">Paste to Mac</b>. The App Switcher stays open until you tap Command.</li>
+<li><b class="ui">Function keys</b>: F1 to F12.</li>
+<li><b class="ui">Your keys</b>: <a href="#custom-keys">keys of your own</a>.</li>
+<li>Keys for the app in front on your Mac, with Headwire Connect.</li>
+</ul>
+<p>In <b class="ui">Settings</b> › <b class="ui">Keyboard</b>, <b class="ui">Mac keys</b> picks when the strip shows: <b class="ui">Automatic</b> shows it on iPhone, and on an iPad with no keyboard connected; or choose <b class="ui">Show</b> or <b class="ui">Hide</b>.</p>
+
+<h2 id="custom-keys">Custom keys</h2>
+<p>Make keys of your own for the Mac keys: a shortcut, some text, or a sequence of both. They show on a page of their own in the strip.</p>
+<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<ol class="steps">
+<li>Open <b class="ui">Settings</b> › <b class="ui">Keyboard</b> › <b class="ui">Custom keys</b>, and tap <b class="ui">Add key</b>.</li>
+<li>Under <b class="ui">Sends</b>, choose <b class="ui">Shortcut</b>, <b class="ui">Text</b> or <b class="ui">Sequence</b>. For a sequence, build its steps with <b class="ui">Add shortcut to sequence</b>, <b class="ui">Add text</b> and <b class="ui">Add pause</b>.</li>
+<li>Under <b class="ui">Show</b>, choose whether the key shows a <b class="ui">Title</b> or a <b class="ui">Symbol</b>.</li>
+<li>Tap <b class="ui">Save</b>.</li>
+</ol>
+<ul>
+<li>Keys are for the Mac you're using. Turn on <b class="ui">Same keys on every Mac</b> to share them across every Mac.</li>
+<li><b class="ui">Keys for each app</b> show while that app is in front on your Mac, with Headwire Connect, which tells Headwire which app it is. The list offers to add keys for the app in front now.</li>
+<li>Text is typed through your Mac's keyboard layout.</li>
+<li>On the strip's page of your keys, <b class="ui">Add keys</b> or <b class="ui">Edit keys</b> opens <b class="ui">Custom keys</b>.</li>
+</ul>
+
+<h2 id="shortcuts">Keyboard shortcuts</h2>
+<p>Some Mac shortcuts never reach Headwire, because iPadOS keeps them. Keyboard shortcuts send them from a different chord on your keyboard.</p>
+<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<p>Open <b class="ui">Settings</b> › <b class="ui">Keyboard</b> › <b class="ui">Shortcuts</b>. Headwire starts with these:</p>
+<table>
+<thead><tr><th>Press</th><th>Mac gets</th></tr></thead>
+<tbody>
+<tr><td>Option-Tab</td><td>Command-Tab. Keep Option held and press Tab again to move through the apps; let go to switch.</td></tr>
+<tr><td>Option-Space</td><td>Command-Space, for Spotlight.</td></tr>
+<tr><td>Control-Command-Space</td><td>Command-Space, for Spotlight.</td></tr>
+</tbody>
+</table>
+<ol class="steps">
+<li>Tap <b class="ui">Add Shortcut</b>.</li>
+<li>Tap <b class="ui">Record</b> and press the chord on your keyboard. It needs Control, Option or Command, so the key still types on its own.</li>
+<li>Under <b class="ui">Send</b>, choose <b class="ui">Keystroke</b> and record what your Mac gets, or choose an action: <b class="ui">Mission Control</b>, <b class="ui">App Exposé</b>, <b class="ui">Previous Space</b>, <b class="ui">Next Space</b> or <b class="ui">Show Desktop</b>.</li>
+<li>Tap <b class="ui">Save</b>.</li>
+</ol>
+<p>Delete a shortcut by swiping it. <b class="ui">Restore Default Shortcuts</b> brings back the ones Headwire started with.</p>
+
+<nav class="pager" aria-label="Pages"><a href="stream.html">← The stream and its controls</a><a href="extras.html">Picture in Picture, Glance and What works now →</a></nav>
+</main>
+</div>
+
+<footer class="site-footer">
+<nav aria-label="Footer">
+<ul>
+<li><a href="../">Headwire</a></li>
+<li><a href="../helper/">Get Headwire Connect</a></li>
+<li><a href="../support/">Support</a></li>
+<li><a href="../privacy/">Privacy Policy</a></li>
+</ul>
+</nav>
+<p>Headwire and Headwire Connect are by Hung Nguyen.</p>
+</footer>
+</body>
+</html>

@@ -2,6 +2,7 @@
 // point on the timeline.
 import * as THREE from 'three';
 import { createSketch } from './sketch.js';
+import { drawingPixels } from './governor.js';
 import { currentTheme } from './theme.js';
 import { screenPictures } from './screens.js';
 import { buildDesk } from './scene.js';
@@ -22,7 +23,7 @@ function resize(view) {
     const { renderer, camera } = view;
     const canvas = renderer.domElement;
     const cssW = canvas.clientWidth, cssH = canvas.clientHeight;
-    const pixel = Math.min(devicePixelRatio || 1, cssW < 700 ? 2 : 1.5) * view.scale;
+    const pixel = drawingPixels(devicePixelRatio || 1, cssW) * view.scale;
     const width = Math.max(1, Math.round(cssW * pixel));
     const height = Math.max(1, Math.round(cssH * pixel));
     if (width === view.width && height === view.height && pixel === view.pixel) return false;
