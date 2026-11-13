@@ -50,7 +50,7 @@
 <li><a href="macs.html">Pairing and more than one Mac</a></li>
 <li><a href="stream.html">The stream and its controls</a></li>
 <li><a href="input.html">Touch, pointer and keyboard</a></li>
-<li><a href="extras.html">Picture in Picture, Glance and What works now</a></li>
+<li><a href="extras.html">Keep your Mac in view</a></li>
 <li><a href="settings.html">Settings</a></li>
 <li><a href="profiles.html" aria-current="page">Capture card profiles</a></li>
 <li><a href="connect-menu.html">The Headwire Connect menu</a></li>
@@ -60,81 +60,38 @@
 
 <main id="main" class="doc">
 <h1>Capture card profiles</h1>
-<p class="lede">Headwire keeps a profile for each capture card you plug in: what it has learnt about
-the capture card’s picture, the format you chose for it, and its sound timing. It uses the profile to
-correct the picture by itself, and you can look inside or change it.</p>
+<p class="lede">What Headwire learns about each capture card, and how to correct it.</p>
 
-<h2 id="what-a-profile-holds">What a profile holds</h2>
-<p>Each capture card gets its own profile the first time this iPad sees it, and keeps it when you
-plug it in again. Two capture cards of the same model each have their own.</p>
+<h2 id="open-a-profile">Open a profile</h2>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<ul>
-<li><b class="ui">Status</b> and <b class="ui">USB ID</b>: whether the capture card is connected, and which one it is.</li>
-<li><b class="ui">Brightness range</b>: whether the capture card’s blacks and whites arrive as labelled.
-Many capture cards label their range wrongly, which makes blacks look grey or crushed; Headwire
-notices and corrects it.</li>
-<li><b class="ui">Colour</b>: which colour matrix the capture card uses, so reds stay red.</li>
-<li><b class="ui">Mode</b>: the capture card’s own mode, and how many frames it really delivers.</li>
-<li><b class="ui">Calibration</b>: what the last calibration measured.</li>
-<li><b class="ui">Sound</b>: the capture card’s sound timing.</li>
-<li><b class="ui">Measurements</b>: what Headwire measured, kept for each Mac and each display mode, so a capture card used with two Macs keeps what it learnt about each.</li>
-<li><b class="ui">Known behaviour</b>: what the capture card has been seen to do, such as reconnecting, or slowing down over long sessions.</li>
-</ul>
-
-<h2 id="open-a-profile">Open a capture card’s profile</h2>
-<p>Profiles are in <a href="settings.html#general">Advanced mode</a>.</p>
-<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<ol class="steps">
-<li>Turn on <b class="ui">Advanced mode</b> in <b class="ui">Settings</b> › <b class="ui">General</b>.</li>
-<li>Open <b class="ui">Settings</b> › <b class="ui">Connections</b>. Every capture card is listed under <b class="ui">Capture cards</b>, connected or last seen.</li>
-<li>Tap the capture card. Its profile opens.</li>
-</ol>
-<p>The capture card plugged in now also has <b class="ui">Capture card profile</b> on its
-<a href="settings.html#capture-card-format">Format page</a>, opened from <b class="ui">Format</b> on the Capture card page, or <b class="ui">Picture</b> on the Mac’s page.</p>
+<div class="task">
 <div class="shots">
-<figure class="shot ipad"><img src="shots/settings-connections-ipad-dark.avif" alt="The Connections screen in Settings, listing the connections and the capture cards seen." loading="lazy"><figcaption>Connections in Advanced mode, with the capture cards under the connection switches.</figcaption></figure>
-<figure class="shot ipad"><img src="shots/settings-capture-card-format-ipad-dark.avif" alt="The capture card’s Format page, with its resolution, frame rate and the Capture card profile row." loading="lazy"><figcaption>The Format page: <b class="ui">Capture card profile</b> is the last row.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/general-advanced-ipad-dark.avif" alt="Settings › General, with 1 on Advanced mode." loading="lazy"></figure>
+<figure class="shot ipad"><img src="shots/connections-cards-ipad-dark.avif" alt="Settings › Connections, with 2 on a capture card under Capture cards." loading="lazy"></figure>
 </div>
+<ol class="steps">
+<li>In <b class="ui">Settings</b> › <b class="ui">General</b>, turn on <b class="ui">Advanced mode</b>.</li>
+<li>In <b class="ui">Settings</b> › <b class="ui">Connections</b>, tap your capture card under <b class="ui">Capture cards</b>.</li>
+</ol>
+</div>
+<p>The one in use also opens from its <a href="settings.html#capture-card-format">format page</a>: <b class="ui">Capture card profile</b>.</p>
 
-<h2 id="correct-the-picture">Correct the picture yourself</h2>
-<p>Headwire picks the range and colour on its own. Change them only if the picture looks wrong.</p>
+<h2 id="correct-the-picture">Correct the picture</h2>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<ul>
-<li>Under <b class="ui">Brightness range</b>, <b class="ui">Read as</b> offers
-<b class="ui">Automatic</b>, <b class="ui">Video (16–235)</b> and <b class="ui">Full (0–255)</b>.
-Change it only if blacks look grey or crushed. <b class="ui">Detected</b> says what Headwire found.</li>
-<li>Under <b class="ui">Colour</b>, <b class="ui">Read as</b> offers <b class="ui">Automatic</b>,
-<b class="ui">HD (BT.709)</b> and <b class="ui">SD (BT.601)</b>. Change it only if colours look off,
-such as reds turning orange.</li>
-</ul>
+<figure class="shot ipad"><img src="shots/profile-ipad-dark.avif" alt="A capture card’s profile, with 1 on Brightness range and 2 on Colour." loading="lazy"></figure>
+<ol class="callout-key">
+<li><b class="ui">Brightness range</b>: if blacks look grey or crushed, set <b class="ui">Read as</b> to <b class="ui">Video (16–235)</b> or <b class="ui">Full (0–255)</b>.</li>
+<li><b class="ui">Colour</b>: if reds look orange, set <b class="ui">Read as</b> to <b class="ui">HD (BT.709)</b> or <b class="ui">SD (BT.601)</b>.</li>
+</ol>
+<p>Headwire picks both by itself; change them only if the picture looks wrong.</p>
 
-<h2 id="calibration">Calibration</h2>
-<p>With Headwire Connect on your Mac, Headwire measures each capture card with a small test pattern.
-Headwire Connect shows a narrow strip in the corner of the Mac’s screen for under a second, and
-Headwire reads it from the capture card’s own frames.</p>
+<h2 id="calibration">Calibrate a capture card again</h2>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<ul>
-<li>It runs by itself the first time a capture card, one of its modes, or a mode your Mac sends is
-seen, while Headwire Connect is connected and the capture card is streaming.</li>
-<li>It measures the brightness range and colour the capture card really sends, how much fine detail
-survives, the time from your Mac to this iPad, and the frames the capture card delivers.</li>
-<li><b class="ui">Calibrate now</b> runs it again. Turn off <b class="ui">Calibrate automatically</b>
-to stop the automatic runs for that capture card. A capture card has to be streaming to calibrate.</li>
-<li><b class="ui">Last calibration</b> shows what it found.</li>
-</ul>
-<p>Without Headwire Connect, Headwire still learns the range from the picture while it streams; it
-just can’t measure the rest.</p>
-
-<h2 id="notes-over-the-picture">Notes over the picture</h2>
-<p>Some of what Headwire learns shows for a few seconds over the stream, such as
-<b class="ui">Protected video can't be shown</b> and <b class="ui">Capture is slowing down</b>.
-<a href="stream.html#banners">Notes over the picture</a> says what each means.</p>
-<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<p>With Headwire Connect, tap <b class="ui">Calibrate now</b> in the profile: Headwire flashes a test pattern on your Mac and measures the capture card. With only a capture card, it doesn’t show.</p>
 
 <h2 id="forget">Forget a capture card</h2>
-<p><b class="ui">Forget capture card</b>, at the bottom of its profile, removes the profile and the
-format you chose for it. Plug the capture card in again to start a new one.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<p>At the end of the profile, tap <b class="ui">Forget capture card</b>.</p>
 
 <nav class="pager" aria-label="Pages"><a href="settings.html">← Settings</a><a href="connect-menu.html">The Headwire Connect menu →</a></nav>
 </main>

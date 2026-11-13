@@ -50,7 +50,7 @@
 <li><a href="macs.html">Pairing and more than one Mac</a></li>
 <li><a href="stream.html">The stream and its controls</a></li>
 <li><a href="input.html">Touch, pointer and keyboard</a></li>
-<li><a href="extras.html">Picture in Picture, Glance and What works now</a></li>
+<li><a href="extras.html">Keep your Mac in view</a></li>
 <li><a href="settings.html">Settings</a></li>
 <li><a href="profiles.html">Capture card profiles</a></li>
 <li><a href="connect-menu.html" aria-current="page">The Headwire Connect menu</a></li>
@@ -60,125 +60,44 @@
 
 <main id="main" class="doc">
 <h1>The Headwire Connect menu</h1>
-<p class="lede">What each part of the Headwire Connect menu on your Mac does, and its Welcome, pairing and Settings windows.</p>
+<p class="lede">Headwire Connect’s menu bar menu on your Mac, and its windows.</p>
 
 <h2 id="the-menu">The menu</h2>
-<p>Click the Headwire Connect icon in the menu bar on your Mac. Like the Bluetooth menu, it has,
-from the top:</p>
-<ul>
-<li>the <a href="#streaming-and-input">Streaming and Input</a> switches;</li>
-<li>your <a href="#devices">devices</a>, and <b class="ui">Pair a Device…</b>;</li>
-<li><a href="#sidecar">Extend with Sidecar</a> and <a href="#capture-card">Capture Card</a>, when they apply;</li>
-<li><b class="ui">Settings…</b>, <b class="ui">About Headwire Connect</b> and <b class="ui">Quit Headwire Connect</b>.</li>
-</ul>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<figure class="shot mac"><picture><source srcset="shots/connect-menu-simple-mac-dark.avif" media="(prefers-color-scheme: dark)"><img src="shots/connect-menu-simple-mac-light.avif" alt="The Headwire Connect menu with Streaming and Input switched on, and three iPads and iPhones under Devices, two of them connected." loading="lazy"></picture><figcaption>Streaming and Input on, with each paired device under <b class="ui">Devices</b> saying how it’s connected.</figcaption></figure>
-
-<h3 id="streaming-and-input">Streaming and Input</h3>
-<ul>
-<li><b class="ui">Streaming</b> sends this Mac’s screen and sound to your iPad or iPhone. It needs <b class="system">Screen &amp; System Audio Recording</b> in <b class="system">System Settings</b> › <b class="system">Privacy &amp; Security</b>.</li>
-<li><b class="ui">Input</b> lets your iPad or iPhone control this Mac: the pointer, clicks, scrolling and typing. It needs <b class="system">Accessibility</b> in <b class="system">System Settings</b> › <b class="system">Privacy &amp; Security</b>.</li>
-</ul>
-<p>Headwire Connect listens for your iPad or iPhone only while one of the two is on. With both off,
-Headwire says <b class="ui">Streaming and Input are off</b>, and connects by itself once you turn one on.</p>
-
-<h3 id="devices">Devices</h3>
-<p>Under <b class="ui">Devices</b>, each iPad or iPhone you’ve paired says how it’s connected:
-<b class="ui">Not connected</b>, or by USB cable, over Ethernet or over Wi-Fi. Point at one to open its
-submenu, which says whether it shows this Mac, controls it, or both, and offers:</p>
-<ul>
-<li><b>Send a File to <i>name</i>…</b>, while it can take files, and a way to stop one on its way.</li>
-<li><b class="ui">Rename…</b>, to give it a name of your own.</li>
-<li><b>Forget <i>name</i>…</b>, to remove the pairing. It has to pair again to connect.</li>
-</ul>
-<p>While a device plays this Mac’s sound, a line under the devices says so.
-<b class="ui">Pair a Device…</b>, at the end of the list, opens the <a href="#pairing">pairing window</a>.</p>
+<figure class="shot mac"><picture><source srcset="shots/connect-menu-simple-mac-dark.avif" media="(prefers-color-scheme: dark)"><img src="shots/connect-menu-simple-mac-light.avif" alt="The Headwire Connect menu, with 1 on Streaming, 2 on Input, 3 on Devices, 4 on Pair a Device and 5 on Settings." loading="lazy"></picture></figure>
+<ol class="callout-key">
+<li id="streaming-and-input"><b class="ui">Streaming</b>: sends the screen and sound. Needs Screen &amp; System Audio Recording.</li>
+<li><b class="ui">Input</b>: lets your iPad or iPhone control the Mac. Needs Accessibility.</li>
+<li id="devices"><b class="ui">Devices</b>: each paired iPad and iPhone. Point at one to send a file, rename or forget it.</li>
+<li id="pairing"><b class="ui">Pair a Device…</b>: shows a code to scan or type.</li>
+<li><b class="ui">Settings…</b>: <a href="#settings">the Settings window</a>.</li>
+</ol>
+<p>With both switches off, Headwire can’t find your Mac. Anything that needs fixing shows at the top, with its button.</p>
 
 <h3 id="sidecar">Extend with Sidecar</h3>
-<p>Headwire Connect from the Headwire website has <b class="ui">Extend with Sidecar</b>, which lists
-the iPads near your Mac that can use Apple’s own Sidecar, to connect or disconnect each. Headwire
-Connect from the App Store doesn’t have it.</p>
+<p>Below <b class="ui">Pair a Device…</b>, in Headwire Connect from the Headwire website only: connect an iPad as Apple’s Sidecar.</p>
 
 <h3 id="capture-card">Capture Card</h3>
-<p>While a capture card is plugged into your Mac, the menu has a <b class="ui">Capture Card</b>
-submenu. Its second line names the display the capture card shows up as, and its mode.</p>
-<ul>
-<li><b class="ui">Display Mode</b> sets the mode your Mac sends to the capture card. Its four choices: <b class="ui">Match Headwire</b>, which follows what Headwire on your iPad asks for; the capture card’s own mode; <b class="ui">1080p at 50 Hz</b>; and <b class="ui">1080p at 30 Hz</b>.</li>
-<li><b class="ui">Capture Display</b> picks which of the Mac’s displays is the capture card. <b class="ui">Automatic</b> finds it by its name; choose it yourself when the menu says <b class="ui">Choose the display your capture card is plugged into</b>.</li>
-</ul>
-<p><b class="ui">Match Headwire</b> hears your iPad over Bluetooth. If Bluetooth is off or not allowed
-on your Mac, a line in the submenu says so.</p>
-
-<h3 id="fixes">When something needs fixing</h3>
-<p>Whatever stops Headwire Connect shows at the top of the menu, in plain words, with the button
-that fixes it, whether or not Advanced mode is on.</p>
-<ul>
-<li><b>A missing permission:</b> the switch that needs it has a button under it that opens the right page of <b class="system">System Settings</b>.</li>
-<li><b>Open at login waiting:</b> the menu says <b class="ui">Open at login needs your approval</b>, with <b class="ui">Open Login Items Settings…</b>.</li>
-<li><b>A key it can’t read:</b> unlock your Mac and choose <b class="ui">Try Again</b>. If the key is damaged, choose <b class="ui">Make New Key…</b>, then pair each device again.</li>
-<li><b>A capture card mode that didn’t take:</b> the Capture Card submenu says so, with <b class="ui">Try Again</b>.</li>
-</ul>
-<figure class="shot mac"><picture><source srcset="shots/connect-menu-fixes-mac-dark.avif" media="(prefers-color-scheme: dark)"><img src="shots/connect-menu-fixes-mac-light.avif" alt="The Headwire Connect menu with a button to allow Screen Recording under Streaming and a button to allow Accessibility under Input." loading="lazy"></picture><figcaption>Neither permission allowed yet: a button under each switch opens System Settings.</figcaption></figure>
-
-<h3 id="advanced-mode">Advanced mode</h3>
-<p>Turn on <b class="ui">Advanced mode</b> in Headwire Connect’s <a href="#settings-general">Settings › General</a>.
-It adds rows in place and never moves or renames one:</p>
-<ul>
-<li>which display is streamed, under Streaming, and whether each permission is allowed;</li>
-<li>in each device’s submenu, its key and when it paired;</li>
-<li>in the Capture Card submenu, <b class="ui">Restore previous mode on quit</b> and the colour range Headwire asks for;</li>
-<li>a line naming Headwire Connect’s version.</li>
-</ul>
-<figure class="shot mac"><picture><source srcset="shots/connect-menu-advanced-mac-dark.avif" media="(prefers-color-scheme: dark)"><img src="shots/connect-menu-advanced-mac-light.avif" alt="The Headwire Connect menu in Advanced mode, with a device's key and a Capture Card submenu open." loading="lazy"></picture><figcaption>In Advanced mode, a device’s submenu shows its key, and Capture Card shows the colour range.</figcaption></figure>
-
+<p>Below that, when your Mac’s HDMI goes to a capture card, <b class="ui">Display Mode</b> sets what your Mac sends it; <b class="ui">Match Headwire</b> follows your iPad.</p>
+<p><b class="ui">Capture Display</b> picks which display is the capture card.</p>
 <h2 id="welcome">The Welcome window</h2>
-<p>The Welcome window opens the first time Headwire Connect does: a line for Streaming and one for
-Input, each with <b class="ui">Turn On</b>, then <b class="ui">Open at login</b> and pairing. Turn on only
-what you use. <a href="headwire-connect.html#first-run">Set up Headwire Connect and see your Mac</a> walks
-through it. To see it again, choose <b class="ui">Show Welcome Window…</b> in
-<a href="#settings-general">Settings › General</a>.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<p>Opens the first time: <a href="headwire-connect.html#first-run">set up and see your Mac</a>. To see it again, use <b class="ui">Show Welcome Window…</b> in Settings › General.</p>
 
-<h2 id="pairing">The pairing window</h2>
-<p><b class="ui">Pair a Device…</b> opens the pairing window with a code to scan or type.
-<a href="macs.html">Pairing and more than one Mac</a> has every way to pair.</p>
+<h2 id="settings">Settings</h2>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<figure class="shot mac"><picture><source srcset="shots/connect-pairing-code-mac-dark.avif" media="(prefers-color-scheme: dark)"><img src="shots/connect-pairing-code-mac-light.avif" alt="The pairing window on the Mac, showing a code to scan and the numbers to type, and when the code closes." loading="lazy"></picture><figcaption>Scan the code with the Camera app, or type its 12 numbers in Headwire.</figcaption></figure>
+<div class="shots">
+<figure class="shot mac"><picture><source srcset="shots/connect-settings-general-mac-dark.avif" media="(prefers-color-scheme: dark)"><img src="shots/connect-settings-general-mac-light.avif" alt="Headwire Connect’s General settings: Open at login, Permissions, Welcome window and Advanced mode." loading="lazy"></picture><figcaption id="settings-general">General: Open at login and Permissions.</figcaption></figure>
+<figure class="shot mac"><picture><source srcset="shots/connect-settings-devices-mac-dark.avif" media="(prefers-color-scheme: dark)"><img src="shots/connect-settings-devices-mac-light.avif" alt="Headwire Connect’s Devices settings, listing paired iPads and iPhones." loading="lazy"></picture><figcaption id="settings-devices">Devices: Control-click to rename or forget.</figcaption></figure>
+<figure class="shot mac"><picture><source srcset="shots/connect-settings-display-mac-dark.avif" media="(prefers-color-scheme: dark)"><img src="shots/connect-settings-display-mac-light.avif" alt="Headwire Connect’s Display settings: Let devices extend this Mac, and the capture card’s Display Mode." loading="lazy"></picture><figcaption>Display: extending, and the capture card.</figcaption></figure>
+</div>
 <ul>
-<li>When a device pairs, the window names it and it appears under <b class="ui">Devices</b>. Choose <b class="ui">Pair Another Device</b> for the next one, or <b class="ui">Done</b>.</li>
-<li>A code closes after five minutes; the window says when.</li>
-<li>If the window says <b class="ui">The pairing code expired</b> or <b class="ui">Pairing stopped</b>, choose <b class="ui">Show New Code</b>.</li>
+<li><b class="ui">Open at login</b>, <b class="ui">Permissions</b> and <b class="ui">Advanced mode</b>, in General.</li>
+<li><b class="ui">Ask on this Mac before pairing</b>, in Devices: off, a device on a USB cable or Bluetooth pairs without asking, even while the Mac is locked.</li>
+<li><b class="ui">This Mac's key</b>, in Devices with Advanced mode: compare with <a href="settings.html#keys">Keys</a>.</li>
+<li><b class="ui">Let devices extend this Mac</b>, in Display: only in Headwire Connect from the Headwire website.</li>
+<li><b class="ui">Restore previous mode on quit</b>, in Display with Advanced mode: puts the capture card’s mode back.</li>
 </ul>
-
-<h2 id="settings">Headwire Connect’s Settings</h2>
-<p>Choose <b class="ui">Settings…</b> in the menu. The window has three tabs.</p>
-<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-
-<h3 id="settings-general">General</h3>
-<ul>
-<li><b class="ui">Open at login</b> opens Headwire Connect when you log in to your Mac.</li>
-<li><b class="ui">Permissions</b> lists what the switches you’ve turned on need, each <b class="ui">Allowed</b> or with <b class="ui">Allow…</b>.</li>
-<li><b class="ui">Welcome window</b> has <b class="ui">Show Welcome Window…</b>.</li>
-<li><b class="ui">Advanced mode</b> adds connection details, keys and capture card controls to the menu and Settings.</li>
-</ul>
-<p>Headwire Connect from the Headwire website also has its update rows here.</p>
-<figure class="shot mac"><picture><source srcset="shots/connect-settings-general-mac-dark.avif" media="(prefers-color-scheme: dark)"><img src="shots/connect-settings-general-mac-light.avif" alt="Headwire Connect's General settings: Open at login, the permissions each switch needs, the Welcome window and Advanced mode." loading="lazy"></picture><figcaption>General: each permission shows <b class="ui">Allowed</b>, or a button to allow it.</figcaption></figure>
-
-<h3 id="settings-devices">Devices</h3>
-<ul>
-<li>Every paired iPad and iPhone, with how it’s connected. Its info button shows its details; Control-click a row to <b class="ui">Rename…</b> it or <b class="ui">Forget This Device…</b>.</li>
-<li><b class="ui">Pair a Device…</b> opens the pairing window.</li>
-<li><b class="ui">Ask on this Mac before pairing</b>: when it’s off, an iPad or iPhone connected by USB cable or Bluetooth pairs without asking, even while this Mac is locked. Leave it off on a Mac with no screen.</li>
-<li><b class="ui">This Mac's key</b>, in Advanced mode: the key to compare with <a href="settings.html#keys">Keys</a> on this iPad or iPhone. Each device’s own key is in its submenu in Advanced mode.</li>
-</ul>
-<figure class="shot mac"><picture><source srcset="shots/connect-settings-devices-mac-dark.avif" media="(prefers-color-scheme: dark)"><img src="shots/connect-settings-devices-mac-light.avif" alt="Headwire Connect's Devices settings, listing paired iPads and iPhones and how each is connected." loading="lazy"></picture><figcaption>Devices: Control-click a row to rename or forget it.</figcaption></figure>
-
-<h3 id="settings-display">Display</h3>
-<ul>
-<li><b class="ui">Let devices extend this Mac</b>: an iPad or iPhone that chooses Extend gets a display of its own beside this Mac’s. It needs Streaming on, and it’s only in Headwire Connect from the Headwire website.</li>
-<li><b class="ui">Capture Card</b>: the same <b class="ui">Display Mode</b> and <b class="ui">Capture Display</b> as the menu, and, in Advanced mode, <b class="ui">Restore previous mode on quit</b>.</li>
-</ul>
-<figure class="shot mac"><picture><source srcset="shots/connect-settings-display-mac-dark.avif" media="(prefers-color-scheme: dark)"><img src="shots/connect-settings-display-mac-light.avif" alt="Headwire Connect's Display settings, with the switch to let devices extend this Mac and the capture card's Display Mode and Capture Display." loading="lazy"></picture><figcaption>Display: extending, and the capture card’s mode.</figcaption></figure>
 
 <nav class="pager" aria-label="Pages"><a href="profiles.html">← Capture card profiles</a><a href="troubleshooting.html">Troubleshooting →</a></nav>
 </main>

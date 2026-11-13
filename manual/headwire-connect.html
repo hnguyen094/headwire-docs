@@ -50,7 +50,7 @@
 <li><a href="macs.html">Pairing and more than one Mac</a></li>
 <li><a href="stream.html">The stream and its controls</a></li>
 <li><a href="input.html">Touch, pointer and keyboard</a></li>
-<li><a href="extras.html">Picture in Picture, Glance and What works now</a></li>
+<li><a href="extras.html">Keep your Mac in view</a></li>
 <li><a href="settings.html">Settings</a></li>
 <li><a href="profiles.html">Capture card profiles</a></li>
 <li><a href="connect-menu.html">The Headwire Connect menu</a></li>
@@ -60,91 +60,47 @@
 
 <main id="main" class="doc">
 <h1>Headwire Connect</h1>
-<p class="lede">Set up Headwire Connect, the Mac app for Headwire, to see and control your Mac from
-your iPad or iPhone over a USB cable or wirelessly, with the most features Headwire has.</p>
-
-<p>It is one of two ways to use Headwire. The other, a <a href="capture-card.html">capture card and
-Bluetooth</a>, needs nothing installed on your Mac. Use either, or both: Headwire picks the
-connection and moves to another when one drops.</p>
+<p class="lede">The Mac app: your Mac by USB cable or wirelessly, with the most features.</p>
 
 <h2 id="get-it">What you need</h2>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
 <ul>
-<li>A Mac with Apple silicon and macOS 27 or later.</li>
-<li>Headwire Connect on that Mac, from <a href="../helper/">Get Headwire Connect</a>.</li>
-<li>A USB cable between your Mac and your iPad or iPhone, or both on the same network.</li>
+<li>A Mac with Apple silicon and macOS 27.</li>
+<li>Headwire Connect from <a href="../helper/">Get Headwire Connect</a>.</li>
+<li>A USB cable, or the same network.</li>
 </ul>
-<p>Headwire Connect comes in two builds:</p>
-<ul>
-<li><strong>Headwire Connect from the Headwire website</strong> adds what Apple doesn’t allow in the
-Mac App Store, such as extending your Mac onto your iPad or iPhone as a second display.</li>
-<li><strong>Headwire Connect from the App Store</strong> needs a display connected to the Mac to
-stream, such as a monitor, the capture card or an HDMI dummy plug.</li>
-</ul>
+<p><b>Headwire Connect from the Headwire website</b> can extend your Mac’s display. <b>Headwire Connect from the App Store</b> shows a display the Mac already has.</p>
 
-<h2 id="first-run">Set up Headwire Connect and see your Mac</h2>
-<p>The first time it opens, Headwire Connect shows the <b class="ui">Welcome to Headwire Connect</b>
-window. Its icon stays in the menu bar, where the <a href="connect-menu.html">Headwire Connect menu</a> is.</p>
+<h2 id="first-run">Set up and see your Mac</h2>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<figure class="shot mac"><picture><source srcset="shots/connect-welcome-mac-dark.avif" media="(prefers-color-scheme: dark)"><img src="shots/connect-welcome-mac-light.avif" alt="The Welcome to Headwire Connect window: a line for Streaming, already On, and a line for Input whose Turn On has become a button to allow Accessibility; then Open at login, and Show Pairing Code under Pair your iPad or iPhone." loading="lazy"></picture><figcaption>Each line has <b class="ui">Turn On</b>, then a button for the permission macOS needs, then <b class="ui">On</b>.</figcaption></figure>
-<ol class="steps">
-<li>On your Mac, in the Welcome window, click <b class="ui">Turn On</b> beside Streaming, then allow Headwire Connect in <b class="system">Screen &amp; System Audio Recording</b>.</li>
-<li>Click <b class="ui">Turn On</b> beside Input, then allow Headwire Connect in <b class="system">Accessibility</b>.</li>
-<li>In Headwire, open <b class="ui">Settings</b> › <b class="ui">Add Mac…</b>.</li>
-<li>Under <b class="ui">Macs nearby</b>, tap your Mac. If it isn’t there, see <a href="troubleshooting.html#mac-not-listed">Your Mac isn’t in Add Mac</a>.</li>
-<li>If Headwire asks for a code, on your Mac, click <b class="ui">Show Pairing Code</b> in the Welcome window.</li>
-<li>In Headwire, type the 12 numbers your Mac shows. Headwire pairs once the last one is in, and your Mac’s screen appears.</li>
-</ol>
+<div class="task">
 <div class="shots">
-<figure class="shot ipad"><img src="shots/connect-stream-ipad-dark.avif" alt="A Mac desktop shown on iPad, streamed by Headwire Connect." loading="lazy"><figcaption>Paired: your Mac’s screen fills the iPad, with the controls folded into a corner.</figcaption></figure>
-<figure class="shot phone across"><img src="shots/connect-stream-iphone-dark.avif" alt="A Mac desktop shown on an iPhone held across, streamed by Headwire Connect." loading="lazy"><figcaption>On iPhone, hold it across to see the Mac at its largest.</figcaption></figure>
+<figure class="shot mac"><picture><source srcset="shots/connect-welcome-start-mac-dark.avif" media="(prefers-color-scheme: dark)"><img src="shots/connect-welcome-start-mac-light.avif" alt="The Welcome to Headwire Connect window on the Mac as it first opens, with 1 on Turn On for Streaming, 2 on Turn On for Input and 3 on Show Pairing Code." loading="lazy"></picture></figure>
+<figure class="shot ipad"><img src="shots/pair-add-mac-ipad-dark.avif" alt="Settings on iPad, with 4 on Add Mac." loading="lazy"></figure>
+<figure class="shot ipad"><img src="shots/add-mac-pair-ipad-dark.avif" alt="Add Mac on iPad, with 5 on your Mac under Macs nearby." loading="lazy"></figure>
+<figure class="shot ipad"><img src="shots/pairing-code-ipad-dark.avif" alt="The pairing screen on iPad, with 6 on Pairing code." loading="lazy"></figure>
 </div>
-<ul>
-<li>Over a USB cable there’s no code to type. Every other way to pair, and pairing more than one Mac, is in <a href="macs.html">Pairing and more than one Mac</a>.</li>
-<li>Turn on <b class="ui">Open at login</b> in the Welcome window so Headwire Connect is there whenever your Mac starts.</li>
-<li>To see the Welcome window again, choose <b class="ui">Settings…</b> in the Headwire Connect menu, then <b class="ui">Show Welcome Window…</b>.</li>
-</ul>
-<p class="note">Headwire Connect listens for your iPad or iPhone only while Streaming or Input is on.
-With both off, Headwire can’t find your Mac.</p>
-
-<h2 id="connections">How your iPad or iPhone connects</h2>
-<p>Once paired, Headwire connects to your Mac by itself whenever it can reach it, in whichever of
-three ways works best:</p>
-<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<table>
-<thead><tr><th>Connection</th><th>What it needs</th></tr></thead>
-<tbody>
-<tr><td><b class="ui">USB cable</b></td><td>A USB cable between your Mac and your iPad or iPhone. It has
-the shortest delay, and it charges your iPad or iPhone.</td></tr>
-<tr><td><b class="ui">Local network</b></td><td>Your Mac and your iPad or iPhone on the same
-network, over Wi-Fi or over Ethernet on a USB-C dock or adapter. Headwire prefers Ethernet when
-both reach your Mac.</td></tr>
-<tr><td><b class="ui">Peer-to-peer Wi-Fi</b></td><td>No network at all: your iPad or iPhone talks to
-your Mac’s Wi-Fi directly. It’s slower than a local network, so Headwire uses it only when there is
-no shared network.</td></tr>
-</tbody>
-</table>
-<p>The picture and the controls are chosen separately. On iPad, the picture can come from the
-capture card or from Headwire Connect, and the controls can go over Bluetooth or through Headwire
-Connect, in any mix. Headwire moves to another connection when one drops, without a blank frame
-and without leaving a key held down on your Mac.</p>
-<ul>
-<li>To keep Headwire on one connection, change <b class="ui">Picture</b>, <b class="ui">Connection</b>
-or <b class="ui">Controls</b> from <b class="ui">Automatic</b> on <a href="settings.html#mac-page">a Mac’s page</a>.</li>
-<li>To turn a connection off, or keep a backup stream ready with <b class="ui">Instant switch</b>,
-use <a href="settings.html#connections">Connections</a>.</li>
-</ul>
-
-<h2 id="local-network">Allow Local Network access</h2>
-<p>The first time Headwire looks for your Mac, iOS asks whether Headwire may find devices on your
-local network. Choose <b class="system">Allow</b> to connect over a local network or peer-to-peer
-Wi-Fi. A USB cable, a capture card and Bluetooth work without it.</p>
-<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<p>If you chose Don’t Allow, Add Mac says <b class="ui">Local Network access is off</b>.</p>
 <ol class="steps">
-<li>Tap <b class="ui">Open Settings</b>.</li>
-<li>In the Settings app, turn on <b class="system">Local Network</b>.</li>
+<li>On your Mac, click <b class="ui">Turn On</b> for Streaming, then allow it in System Settings. If asked, choose <b class="system">Quit &amp; Reopen</b>.</li>
+<li>Click <b class="ui">Turn On</b> for Input, then allow it in System Settings.</li>
+<li>Click <b class="ui">Show Pairing Code</b>.</li>
+<li>In Headwire, open <b class="ui">Settings</b> › <b class="ui">Add Mac…</b>.</li>
+<li>Tap your Mac.</li>
+<li>Type the 12 numbers; none over a USB cable. Your Mac appears.</li>
 </ol>
+</div>
+<p><a href="macs.html">Other ways to pair</a>.</p>
+
+<h2 id="connections">How it connects</h2>
+<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<figure class="diagram" id="diagram-connections"><svg viewBox="0 0 400 170" role="img" aria-label="Your Mac with Headwire Connect reaches your iPad or iPhone three ways: a USB cable, the fastest, which also charges; a local network over Wi-Fi or Ethernet; or peer-to-peer Wi-Fi with no network at all.">
+<rect class="box" x="10" y="45" width="110" height="80" rx="8"/><text x="65" y="82" text-anchor="middle">Mac</text><text class="note" x="65" y="102" text-anchor="middle">Headwire Connect</text>
+<rect class="box" x="280" y="45" width="110" height="80" rx="8"/><text x="335" y="82" text-anchor="middle">iPad or</text><text x="335" y="102" text-anchor="middle">iPhone</text>
+<path class="wire" d="M120 55 H280"/><text class="note" x="200" y="45" text-anchor="middle">USB cable: fastest, charges</text>
+<path class="wireless" d="M120 85 H280"/><text class="note" x="200" y="77" text-anchor="middle">Local network</text>
+<path class="wireless" d="M120 115 H280"/><text class="note" x="200" y="140" text-anchor="middle">Peer-to-peer Wi-Fi: no network</text>
+</svg></figure>
+<p>Headwire picks the best and moves when one drops. To pin one, use <a href="settings.html#mac-page">the page of the Mac on screen</a>.</p>
 
 <nav class="pager" aria-label="Pages"><a href="capture-card.html">← Capture card and Bluetooth</a><a href="macs.html">Pairing and more than one Mac →</a></nav>
 </main>

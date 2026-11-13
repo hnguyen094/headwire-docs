@@ -50,7 +50,7 @@
 <li><a href="macs.html">Pairing and more than one Mac</a></li>
 <li><a href="stream.html">The stream and its controls</a></li>
 <li><a href="input.html">Touch, pointer and keyboard</a></li>
-<li><a href="extras.html">Picture in Picture, Glance and What works now</a></li>
+<li><a href="extras.html">Keep your Mac in view</a></li>
 <li><a href="settings.html">Settings</a></li>
 <li><a href="profiles.html">Capture card profiles</a></li>
 <li><a href="connect-menu.html">The Headwire Connect menu</a></li>
@@ -60,357 +60,152 @@
 
 <main id="main" class="doc">
 <h1>Troubleshooting</h1>
-<p class="lede">Find what you see: each title below is the message Headwire shows, with what to do. Problems that show no message come first.</p>
-<nav class="on-page" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#no-message">When there’s no message</a></li><li><a href="#picture">The picture</a></li><li><a href="#extending">Your Mac shows its own display instead of extending</a></li><li><a href="#sound">Sound</a></li><li><a href="#connection">Connecting to Headwire Connect</a></li><li><a href="#pairing">Pairing with Headwire Connect</a></li><li><a href="#bluetooth">Bluetooth</a></li><li><a href="#input">Input</a></li><li><a href="#permissions">Permissions</a></li><li><a href="#files">Files</a></li><li><a href="#calibration">Calibration</a></li><li><a href="#app-store">The App Store</a></li></ul></nav>
-<div class="card">
-<p>Still stuck? <a href="../support/">Headwire Support</a> has the questions that come up most and how to reach the developer. In Headwire, <b class="ui">Settings</b> › <b class="ui">About</b> › <b class="ui">Send feedback</b> writes an email with the app and system versions filled in.</p>
-</div>
+<p class="lede">Find what you see: first problems with no message, then each message Headwire shows.</p>
+<nav class="on-page" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#no-message">When there’s no message</a></li><li><a href="#picture">The picture</a></li><li><a href="#extending">Your Mac shows its own display instead of extending</a></li><li><a href="#sound">Sound</a></li><li><a href="#connection">Connecting to Headwire Connect</a></li><li><a href="#pairing">Pairing</a></li><li><a href="#bluetooth">Bluetooth</a></li><li><a href="#permissions">Permissions</a></li><li><a href="#files">Files</a></li><li><a href="#calibration">Calibration</a></li><li><a href="#app-store">Tipping the developer</a></li></ul></nav>
+<p class="note">Still stuck? <a href="../support/">Headwire Support</a>, or <b class="ui">Settings</b> › <b class="ui">About</b> › <b class="ui">Send feedback</b>.</p>
 
 <h2 id="no-message">When there’s no message</h2>
-<p>Some problems show nothing on screen. Find yours by what you see.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-
-<h3 id="black-bars">There are black bars around the picture</h3>
-<p>Your Mac’s screen and this screen are different shapes. In <b class="ui">Settings</b> › <b class="ui">Picture</b>, set <b class="ui">Scaling</b> to <b class="ui">Fill</b> or <b class="ui">Zoom to content</b> (<a href="stream.html#scaling">How the picture fits</a>).</p>
-
+<h3 id="black-bars">Black bars around the picture</h3>
+<p>Set <a href="stream.html#scaling">Scaling</a> to <b class="ui">Fill</b> or <b class="ui">Zoom to content</b>.</p>
 <h3 id="soft-text">Text looks soft</h3>
-<p>The picture is smaller than this screen.</p>
-<ul>
-<li><b>With Headwire Connect:</b> set <b class="ui">Optimize for</b> to <b class="ui">Sharpness</b> in <b class="ui">Settings</b> › <b class="ui">Picture</b>.</li>
-<li><b>With a capture card:</b> choose a larger resolution on <a href="settings.html#capture-card-format">the capture card’s Format page</a>, in Advanced mode.</li>
-<li><b>Either way:</b> <b class="ui">Sharpen picture</b> in <b class="ui">Settings</b> › <b class="ui">Picture</b> helps.</li>
-</ul>
-
-<h3 id="choppy">Motion looks choppy</h3>
-<p>With Headwire Connect, set <b class="ui">Optimize for</b> to <b class="ui">Responsiveness</b>, and connect by USB cable if you can (<a href="headwire-connect.html#connections">How your iPad or iPhone connects</a>). Under <b class="ui">Automatic</b>, Low Power Mode uses <b class="ui">Battery Life</b>, which sends fewer frames.</p>
-
+<p>Set <a href="settings.html#picture">Optimize for</a> to <b class="ui">Sharpness</b>, or pick a larger capture card <a href="settings.html#capture-card-format">resolution</a>.</p>
+<h3 id="choppy">Motion looks choppy, or the pointer lags</h3>
+<p>Use a USB cable, and set <a href="settings.html#picture">Optimize for</a> to <b class="ui">Responsiveness</b>.</p>
 <h3 id="grey-blacks">Blacks look grey, or colours look off</h3>
-<p>The capture card labels its picture wrongly. <a href="profiles.html#open-a-profile">Open its profile</a> and set <b class="ui">Read as</b> under <b class="ui">Brightness range</b> or <b class="ui">Colour</b> (<a href="profiles.html#correct-the-picture">Correct the picture yourself</a>).</p>
-
-<h3 id="sound-out-of-step">Sound comes before or after the picture</h3>
-<p>In <b class="ui">Settings</b> › <b class="ui">Sound</b>, move <b class="ui">Sound timing</b> towards <b class="ui">Later</b> if the sound comes first, or <b class="ui">Earlier</b> if it comes after.</p>
-
-<h3 id="key-stuck">A key stays held down on your Mac</h3>
-<p>In <b class="ui">Settings</b> › <b class="ui">Keyboard</b>, tap <b class="ui">Release all keys</b>.</p>
-
-<h3 id="shortcut-missing">Command-Tab or Command-Space doesn’t reach your Mac</h3>
-<p>iPadOS keeps them. Press Option-Tab or Option-Space instead, or add your own in <a href="input.html#shortcuts">Send the shortcuts iPadOS keeps</a>.</p>
-
-<h3 id="wrong-characters">Some keys type the wrong characters</h3>
-<p>Over Bluetooth, Headwire types through your Mac’s keyboard layout. Set the one your Mac uses in <b class="ui">Settings</b> › <b class="ui">Keyboard</b> › <b class="ui">Mac keyboard layout</b>.</p>
-
-<h3 id="touch-in-window">Touch does nothing in a window on iPad</h3>
-<p>Touch works while Headwire fills the screen. In a window, use Apple Pencil, a mouse or a trackpad, or make Headwire full screen.</p>
-
+<p>Set <b class="ui">Read as</b> in the <a href="profiles.html#correct-the-picture">capture card’s profile</a>.</p>
+<h3 id="sound-out-of-step">Sound and picture out of step</h3>
+<p>Move <a href="settings.html#sound">Sound timing</a> <b class="ui">Earlier</b> or <b class="ui">Later</b>. With Headwire Connect, turn on Advanced mode first.</p>
+<h3 id="silent">No sound, and no message</h3>
+<p>Check <a href="settings.html#sound">Play Mac sound on</a> isn’t <b class="ui">Mac</b>, and this iPad’s or iPhone’s volume.</p>
+<h3 id="key-stuck">A key stays held down</h3>
+<p>Tap <b class="ui">Release all keys</b> in <a href="settings.html#keyboard">Keyboard</a>.</p>
+<h3 id="shortcut-missing">Command-Tab doesn’t reach your Mac</h3>
+<p>Press Option-Tab. <a href="input.html#shortcuts">More shortcuts</a>.</p>
+<h3 id="wrong-characters">Keys type the wrong characters</h3>
+<p>Set <a href="settings.html#keyboard">Mac keyboard layout</a> to your Mac’s.</p>
+<h3 id="clicks-do-nothing">Clicks and typing do nothing</h3>
+<p>Set up <a href="capture-card.html#set-up">Bluetooth</a>, or turn on <b class="ui">Input</b> in the <a href="connect-menu.html#streaming-and-input">Headwire Connect menu</a>.</p>
+<h3 id="touch-in-window">Touch does nothing in a window</h3>
+<p>Make Headwire full screen, or use Apple Pencil, a mouse or a trackpad.</p>
 <h3 id="mac-not-listed">Your Mac isn’t in Add Mac</h3>
-<ol class="steps">
-<li>On your Mac, turn on <b class="ui">Streaming</b> or <b class="ui">Input</b> in the Headwire Connect menu.</li>
-<li>Connect your Mac and this iPad or iPhone with a USB cable, or put both on the same network.</li>
-<li>If Headwire said <b class="ui">Local Network access is off</b>, follow <a href="#local-network-off">Local Network access is off</a>.</li>
-</ol>
-
+<p>On your Mac, turn on <b class="ui">Streaming</b> or <b class="ui">Input</b>. Use a USB cable or the same network.</p>
 <h3 id="headwire-not-in-bluetooth">Headwire isn’t in your Mac’s Bluetooth list</h3>
-<ol class="steps">
-<li>In Headwire, open <b class="ui">Settings</b> › <b class="ui">Add Mac…</b>.</li>
-<li>Tap <b class="ui">Connect over Bluetooth…</b>. This iPad or iPhone gets ready for your Mac to find.</li>
-<li>On your Mac, look again in System Settings › Bluetooth (<a href="capture-card.html#bluetooth">Use your iPad as the Mac’s keyboard and mouse</a>).</li>
-</ol>
-
-<h3 id="clicks-do-nothing">The picture shows, but clicks and typing do nothing</h3>
-<p>Nothing is sending input to your Mac yet; the settings button over the stream carries a small mark.</p>
-<ul>
-<li>With a capture card only, set up Bluetooth: in <b class="ui">Settings</b>, tap <b class="ui">Capture card</b> (<a href="capture-card.html#bluetooth">Use your iPad as the Mac’s keyboard and mouse</a>).</li>
-<li>With Headwire Connect, on your Mac, turn on <b class="ui">Input</b> in the <a href="connect-menu.html#streaming-and-input">Headwire Connect menu</a>.</li>
-</ul>
-
-<h3 id="lag">The pointer lags, or typing arrives late</h3>
-<ul>
-<li>Connect your Mac and your iPad or iPhone with a USB cable, which has the shortest delay.</li>
-<li>With Headwire Connect, set <b class="ui">Optimize for</b> to <b class="ui">Responsiveness</b> in <b class="ui">Settings</b> › <b class="ui">Picture</b>.</li>
-<li>On a busy Wi-Fi network, move closer to the router, or use Ethernet on a USB-C adapter.</li>
-</ul>
-
-<h3 id="silent">There’s no sound, and no message</h3>
-<ul>
-<li>In <a href="settings.html#sound">Settings › Sound</a>, check that <b class="ui">Play Mac sound on</b> isn’t set to <b class="ui">Mac</b>, and that <b class="ui">Volume</b> is up.</li>
-<li>Check this iPad’s or iPhone’s own volume and silent mode.</li>
-<li>With a capture card, check that Headwire is allowed the <b class="system">Microphone</b> in the Settings app.</li>
-</ul>
+<p>In Headwire, tap <b class="ui">Connect over Bluetooth…</b> under <a href="macs.html#add-mac">Add Mac…</a> or on <a href="settings.html#mac-page">your Mac’s page</a>. On your Mac, look again in System Settings › Bluetooth.</p>
 
 <h2 id="picture">The picture</h2>
-<p>These show on the stream screen, in place of your Mac's picture.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<h3 id="no-video">No video</h3>
-<p>No capture card is plugged in and no Headwire Connect link carries your Mac's screen. Choose <b class="ui">Connection options</b> to see every way in and what each needs: plug a capture card into your iPad, or open Headwire Connect on your Mac (<a href="./">Start here</a> has both).</p>
 <div class="shots">
-<figure class="shot ipad"><img src="shots/no-picture-ipad-dark.avif" alt="The stream screen on iPad saying No video, with a Connection options button." loading="lazy"><figcaption><b class="ui">No video</b>, with <b class="ui">Connection options</b> under it.</figcaption></figure>
-<figure class="shot phone"><img src="shots/no-picture-iphone-dark.avif" alt="The stream screen on iPhone saying No video, with a Connection options button." loading="lazy"><figcaption>The same message on iPhone.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/no-picture-ipad-dark.avif" alt="The stream saying No video, with Connection options." loading="lazy"></figure>
+
 </div>
-<h3 id="mac-asleep-capture-card">Your Mac is asleep or not sending a picture</h3>
-<p>The capture card is running, but nothing comes from the Mac. Wake your Mac or check its HDMI cable. The picture comes back on its own.</p>
-<h3 id="mac-display-asleep">Your Mac’s display is asleep</h3>
-<p>Headwire Connect is connected, but the Mac's display sleeps. Wake your Mac to see its screen here. The picture comes back on its own.</p>
-<h3 id="connecting">Connecting to your Mac…</h3>
-<p>Headwire is starting the stream from Headwire Connect; when the Mac has said its name, the title names it. Nothing to do: the picture follows.</p>
-<h3 id="cant-reach">Can’t reach <i>name</i></h3>
-<p>With more than one Mac paired, the one you chose can't be reached; the title names it. Make sure it's awake with Headwire Connect open. To use another Mac, choose it in the <b class="ui">Macs</b> menu over the stream (<a href="macs.html">Pairing and more than one Mac</a>).</p>
-<h3 id="reconnecting">Reconnecting…</h3>
-<p>The Mac's last frame stays on screen, dimmed, while Headwire waits for a way back to the Mac. It picks up by itself. If it stays, check that your Mac is awake and Headwire Connect is open.</p>
-<figure class="shot ipad"><img src="shots/reconnecting-ipad-dark.avif" alt="The Mac's last frame dimmed on iPad, with a Reconnecting note over it." loading="lazy"><figcaption>Reconnecting over the last frame.</figcaption></figure>
-
-<h3 id="starting-capture">Starting capture…</h3>
-<p>A capture card is plugged in and Headwire is starting it. If it stays here, unplug the capture card and plug it back in.</p>
-<h3 id="capture-paused">Capture paused</h3>
-<p>The system paused the capture card. The line under the title says why:</p>
-<ul>
-<li>Headwire went to the background: capture resumes when Headwire is back on screen.</li>
-<li>Another app is using the capture card: close that app, or stream your Mac's screen with Headwire Connect.</li>
-<li>Other apps share the screen: capture cards only work while Headwire is the only app on screen.</li>
-<li>This iPad is too warm: capture resumes when it cools down.</li>
-<li>Any other reason: it resumes on its own.</li>
-</ul>
-<h3 id="capture-card-unplugged">Capture card unplugged</h3>
-<p>Plug the capture card back in to continue.</p>
-<h3 id="capture-stopped">Capture stopped</h3>
-<p>Headwire couldn't start the capture card. Unplug it and plug it back in, or choose <b class="ui">Try again</b>.</p>
-<h3 id="capture-card-not-ready">Capture card not ready</h3>
-<p>The capture card didn't list its video formats in time. Choose <b class="ui">Try again</b>. If it keeps happening, unplug the capture card and plug it back in.</p>
-<h3 id="capture-card-not-supported">Capture card not supported</h3>
-<p>This capture card doesn't offer a video format Headwire can show. Try a different capture card, or stream with Headwire Connect.</p>
-
-<h3 id="not-streaming">Headwire Connect isn’t streaming</h3>
-<p>Headwire Connect is connected but may not stream. The line under the title gives the reason, such as a permission to turn on or Streaming switched off. If it says to look in the menu, open the Headwire Connect menu on your Mac (<a href="connect-menu.html">The Headwire Connect menu</a>).</p>
-<h3 id="streaming-off">Streaming is off</h3>
-<p>On your Mac, turn on <b class="ui">Streaming</b> in the Headwire Connect menu.</p>
-<h3 id="turn-on-screen-recording">Turn on Screen Recording</h3>
-<ol class="steps">
-<li>On your Mac, open <b class="system">System Settings</b> › <b class="system">Privacy &amp; Security</b> › <b class="system">Screen &amp; System Audio Recording</b>.</li>
-<li>Turn on Headwire Connect.</li>
-<li>If macOS asks, choose <b class="system">Quit &amp; Reopen</b>. The stream starts by itself.</li>
-</ol>
-<h3 id="reopen">Reopen Headwire Connect</h3>
-<p>Screen Recording is on, but macOS applies it only after Headwire Connect reopens. On your Mac, quit Headwire Connect and open it again.</p>
-<h3 id="not-sending">Your Mac isn’t sending a picture</h3>
-<p>Headwire Connect is connected and Streaming is on, but no picture arrived. Headwire asks again by itself; <b class="ui">Try again</b> asks now. If it keeps happening, on your Mac, quit Headwire Connect and open it again.</p>
-<h3 id="no-picture-from-mac">No picture from the Mac</h3>
-<p>Your Mac's screen gave Headwire Connect no picture when it started; the display may need reconnecting. Headwire Connect tries again by itself, or choose <b class="ui">Try again</b>.</p>
-<h3 id="mac-stopped-sharing">Your Mac stopped sharing its screen</h3>
-<p>macOS stopped the screen capture. Headwire Connect tries again by itself; if the message stays, on your Mac, quit Headwire Connect and open it again.</p>
-<h3 id="display-went-away">The display went away</h3>
-<p>The display Headwire Connect streamed was disconnected. Headwire Connect tries again by itself; if the message stays, on your Mac, quit Headwire Connect and open it again.</p>
-<h3 id="mac-stream-stopped">The Mac stream stopped</h3>
-<p>The stream from Headwire Connect ended. Headwire Connect tries again by itself; if the message stays, on your Mac, quit Headwire Connect and open it again.</p>
-<h3 id="encoder-stopped">Your Mac’s video encoder stopped</h3>
-<p>Headwire Connect stopped streaming because your Mac's video encoder kept stopping. On your Mac, choose <b class="ui">Try Again</b> in the Headwire Connect menu.</p>
-<h3 id="no-display">Your Mac has no display</h3>
-<p>Headwire Connect from the App Store streams a display the Mac already has.</p>
-<ul>
-<li>On your Mac, plug in the capture card, a monitor or an HDMI dummy plug.</li>
-<li>Or install <a href="../helper/">Headwire Connect from the Headwire website</a>, which adds a display by itself.</li>
-<li>If macOS refused that display, on your Mac, quit Headwire Connect and open it again.</li>
-</ul>
+<dl>
+<dt id="no-video"><b class="ui">No video</b></dt><dd>Plug in a capture card, or open Headwire Connect. <b class="ui">Connection options</b> shows each way.</dd>
+<dt id="reconnecting"><b class="ui">Reconnecting…</b></dt><dd>It comes back by itself. If not, wake your Mac.</dd>
+<dt id="mac-asleep-capture-card"><b class="ui">Your Mac is asleep or not sending a picture</b></dt><dd>Wake your Mac, or check the HDMI cable.</dd>
+<dt id="mac-display-asleep"><b class="ui">Your Mac’s display is asleep</b></dt><dd>Wake your Mac.</dd>
+<dt id="connecting"><b class="ui">Connecting to your Mac…</b></dt><dd>Wait; the picture follows.</dd>
+<dt id="starting-capture"><b class="ui">Starting capture…</b></dt><dd>The capture card is slow to start. If it stays, plug it in again. If it can’t draw, Headwire names why: <a href="#mac-asleep-capture-card">no picture</a>, <a href="#capture-paused">paused</a> or <a href="#capture-stopped">stopped</a>.</dd>
+<dt id="cant-reach"><b>Can’t reach <i>name</i></b></dt><dd>Wake that Mac, or <a href="macs.html#switch">switch Macs</a>.</dd>
+<dt id="capture-paused"><b class="ui">Capture paused</b></dt><dd>Close other apps on screen or using the capture card. It resumes by itself.</dd>
+<dt id="capture-card-unplugged"><b class="ui">Capture card unplugged</b></dt><dd>Plug it back in.</dd>
+<dt id="capture-stopped"><b class="ui">Capture stopped</b>, <b class="ui">Capture card not ready</b></dt><dd>Tap <b class="ui">Try again</b>, or plug it in again.</dd>
+<dt id="capture-card-not-supported"><b class="ui">Capture card not supported</b></dt><dd>Try another capture card, or Headwire Connect.</dd>
+<dt id="not-streaming"><b class="ui">Headwire Connect isn’t streaming</b>, <b class="ui">Streaming is off</b></dt><dd>On your Mac, turn on <b class="ui">Streaming</b>.</dd>
+<dt id="turn-on-screen-recording"><b class="ui">Turn on Screen Recording</b></dt><dd>On your Mac, turn on Headwire Connect in Privacy &amp; Security › Screen &amp; System Audio Recording.</dd>
+<dt id="reopen"><b class="ui">Reopen Headwire Connect</b></dt><dd>On your Mac, quit Headwire Connect and open it again.</dd>
+<dt id="not-sending"><b class="ui">Your Mac isn’t sending a picture</b>, <b class="ui">No picture from the Mac</b></dt><dd>Tap <b class="ui">Try again</b>. If it stays, reopen Headwire Connect.</dd>
+<dt id="mac-stopped-sharing"><b class="ui">Your Mac stopped sharing its screen</b>, <b class="ui">The display went away</b>, <b class="ui">The Mac stream stopped</b></dt><dd>It retries. If it stays, reopen Headwire Connect.</dd>
+<dt id="encoder-stopped"><b class="ui">Your Mac’s video encoder stopped</b></dt><dd>On your Mac, choose <b class="ui">Try Again</b> in the Headwire Connect menu.</dd>
+<dt id="no-display"><b class="ui">Your Mac has no display</b></dt><dd>Plug in a display or the capture card, or use <a href="../helper/">Headwire Connect from the Headwire website</a>.</dd>
+</dl>
 
 <h2 id="extending">Your Mac shows its own display instead of extending</h2>
-<p>When you choose Extend and your Mac shows its own display instead, the line under the display setting says why, and what to do:</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<p>The line under <a href="settings.html#mac-page">Mac display</a> says which to do:</p>
 <ul>
-<li>Headwire Connect from the App Store can't add a display. On your Mac, install <a href="../helper/">Headwire Connect from the Headwire website</a>.</li>
-<li>Extending is off on the Mac: on your Mac, turn on <b class="ui">Let devices extend this Mac</b> in Headwire Connect, and turn on <b class="ui">Streaming</b>.</li>
-<li>Your Mac can't make a display this shape: rotate the screen to try another shape.</li>
-<li>Another device is using the extended display: disconnect it to extend to this one.</li>
-<li>Your Mac couldn't add a display: on your Mac, quit Headwire Connect and open it again.</li>
-<li>Headwire Connect or macOS is too old: on your Mac, <a href="#update-connect">update Headwire Connect</a>.</li>
+<li>Install <a href="../helper/">Headwire Connect from the Headwire website</a>.</li>
+<li>On your Mac, turn on <b class="ui">Let devices extend this Mac</b>.</li>
+<li>Turn this iPad or iPhone to another shape.</li>
+<li>Disconnect the other device.</li>
 </ul>
 
 <h2 id="sound">Sound</h2>
-<p>Sound problems show in Settings, beside the sound setting.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<h3 id="no-sound-capture-card">No sound from this capture card</h3>
-<p>This capture card doesn't carry sound. To hear your Mac here, use one that carries sound, or stream with Headwire Connect.</p>
-<h3 id="several-inputs">Several sound inputs</h3>
-<p>Several sound inputs are plugged in, and none is named like the capture card. Unplug the ones you don't need.</p>
-<h3 id="sound-couldnt-start">Sound couldn’t start</h3>
-<ol class="steps">
-<li>Close other apps that use sound.</li>
-<li>In <a href="settings.html#sound">Settings › Sound</a>, set <b class="ui">Play Mac sound on</b> to <b class="ui">Mac</b>.</li>
-<li>Set it back to this iPad or iPhone.</li>
-</ol>
-<h3 id="sound-stopped">Sound stopped</h3>
-<p>The capture card’s sound stopped. Plug the capture card back in.</p>
-<h3 id="no-sound-from-mac">No sound from your Mac</h3>
-<p>Headwire Connect isn't sending sound. The line under the title says why.</p>
-<ol class="steps">
-<li>On your Mac, check that <b class="ui">Streaming</b> is on in the Headwire Connect menu.</li>
-<li>If the line says this version doesn't send sound, <a href="#update-connect">update Headwire Connect</a>.</li>
-<li>If the sound stopped, turn <b class="ui">Streaming</b> off and on again.</li>
-</ol>
+<dl>
+<dt id="no-sound-capture-card"><b class="ui">No sound from this capture card</b></dt><dd>Use one that carries sound, or Headwire Connect.</dd>
+<dt id="several-inputs"><b class="ui">Several sound inputs</b></dt><dd>Unplug the ones you don’t need.</dd>
+<dt id="sound-couldnt-start"><b class="ui">Sound couldn’t start</b></dt><dd>Close other sound apps, then set Play Mac sound on to Mac and back.</dd>
+<dt id="sound-stopped"><b class="ui">Sound stopped</b></dt><dd>Plug the capture card in again.</dd>
+<dt id="no-sound-from-mac"><b class="ui">No sound from your Mac</b></dt><dd>On your Mac, turn <b class="ui">Streaming</b> off and on, or <a href="#update-connect">update Headwire Connect</a>.</dd>
+</dl>
 
 <h2 id="connection">Connecting to Headwire Connect</h2>
-<p>These show on your Mac’s page in Settings, under <b class="ui">Status</b>.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<h3 id="cant-find">Can’t find Headwire Connect</h3>
-<ol class="steps">
-<li>On your Mac, check that Headwire Connect is open.</li>
-<li>Check that your Mac and this iPad or iPhone are on the same network. Some hotel and guest Wi-Fi hides devices from each other; connect by USB cable there.</li>
-<li>In Headwire, choose <b class="ui">Try again</b>.</li>
-</ol>
-<h3 id="not-answering">Your Mac isn’t answering</h3>
-<p>Your Mac is on this network, but this iPad or iPhone can't connect to it. The Wi-Fi may stop devices reaching each other, or a VPN may be in the way.</p>
-<ol class="steps">
-<li>Connect your Mac and this iPad or iPhone by USB cable, or join another network.</li>
-<li>In Headwire, choose <b class="ui">Try again</b>.</li>
-</ol>
-<h3 id="disconnected">Headwire Connect disconnected</h3>
-<p>Your iPad or iPhone tries again by itself. If it keeps happening, on your Mac, quit Headwire Connect and open it again.</p>
-<h3 id="other-user">Another user is on your Mac</h3>
-<p>Headwire Connect pauses while another account is in use on your Mac. On your Mac, switch back to your account; your iPad or iPhone connects by itself.</p>
-<h3 id="both-off">Streaming and Input are off</h3>
-<p>On your Mac, turn on <b class="ui">Streaming</b> or <b class="ui">Input</b> in the Headwire Connect menu. Your iPad or iPhone connects by itself once one is on.</p>
-<h3 id="mac-asleep">Your Mac is asleep</h3>
-<p>Headwire Connect pauses while your Mac sleeps. Wake your Mac; your iPad or iPhone connects by itself.</p>
-<h3 id="mac-restarting">Your Mac is restarting or shutting down</h3>
-<p>Headwire Connect closed as your Mac logs out, restarts or shuts down. Once your Mac is back, log in; your iPad or iPhone connects by itself when Headwire Connect opens.</p>
-<h3 id="connect-quit">Headwire Connect quit</h3>
-<p>On your Mac, open Headwire Connect again. Your iPad or iPhone connects by itself when it's back.</p>
-<h3 id="not-recognised">Not recognised by your Mac</h3>
-<p>Your Mac no longer recognises this iPad or iPhone, usually because it was forgotten in Headwire Connect. Choose <b class="ui">Pair again</b>.</p>
-<h3 id="pair-again">Pair with your Mac again</h3>
-<p>Headwire Connect on your Mac has a new key, so your iPad or iPhone can't be sure it's the one it paired with. Choose <b class="ui">Pair again</b> to keep using it.</p>
-<h3 id="update-connect">Update Headwire Connect</h3>
-<p>On your Mac, update Headwire Connect: through the App Store for Headwire Connect from the App Store, or with the update rows in its <a href="connect-menu.html#settings-general">Settings › General</a> for Headwire Connect from the Headwire website. <a href="../helper/">Get Headwire Connect</a> always has the newest.</p>
-<h3 id="update-headwire">Update Headwire</h3>
-<p>Headwire Connect on your Mac is newer than Headwire on this iPad or iPhone. Update Headwire in the App Store. If the message stays, update Headwire Connect too.</p>
-<h3 id="keys">Can’t read Headwire’s keys</h3>
-<p>Headwire couldn't read its pairing keys from the keychain on your iPad or iPhone. Unlock it, then choose <b class="ui">Try again</b>.</p>
-<h3 id="local-network-off">Local Network access is off</h3>
-<p>Headwire needs Local Network access to find your Mac over a local network or peer-to-peer Wi-Fi. A USB cable, a capture card and Bluetooth work without it.</p>
-<ol class="steps">
-<li>Tap <b class="ui">Open Settings</b>.</li>
-<li>In the Settings app, turn on <b class="system">Local Network</b>.</li>
-</ol>
+<dl>
+<dt id="cant-find"><b class="ui">Can’t find Headwire Connect</b></dt><dd>Open it on your Mac, and use the same network or a USB cable.</dd>
+<dt id="not-answering"><b class="ui">Your Mac isn’t answering</b></dt><dd>The network or a VPN blocks it. Use a USB cable.</dd>
+<dt id="disconnected"><b class="ui">Headwire Connect disconnected</b>, <b class="ui">Headwire Connect quit</b></dt><dd>On your Mac, open Headwire Connect again.</dd>
+<dt id="both-off"><b class="ui">Streaming and Input are off</b></dt><dd>On your Mac, turn one on.</dd>
+<dt id="other-user"><b class="ui">Another user is on your Mac</b></dt><dd>On your Mac, switch back to your account.</dd>
+<dt id="mac-asleep"><b class="ui">Your Mac is asleep</b>, <b class="ui">Your Mac is restarting or shutting down</b></dt><dd>Wake it, or log in. Headwire reconnects by itself.</dd>
+<dt id="not-recognised"><b class="ui">Not recognised by your Mac</b>, <b class="ui">Pair with your Mac again</b></dt><dd>Tap <b class="ui">Pair again</b>.</dd>
+<dt id="update-connect"><b class="ui">Update Headwire Connect</b></dt><dd>On your Mac, update it from the App Store, or from <a href="../helper/">Get Headwire Connect</a>.</dd>
+<dt id="update-headwire"><b class="ui">Update Headwire</b></dt><dd>Update Headwire in the App Store.</dd>
+<dt id="keys"><b class="ui">Can’t read Headwire’s keys</b></dt><dd>Unlock this iPad or iPhone, then tap <b class="ui">Try again</b>.</dd>
+<dt id="local-network-off"><b class="ui">Local Network access is off</b></dt><dd>Tap <b class="ui">Open Settings</b> and turn on Local Network.</dd>
+</dl>
 
-<h2 id="pairing">Pairing with Headwire Connect</h2>
-<p>When pairing doesn't finish, Headwire says <b class="ui">Couldn't pair</b>, and the line under it says what happened.</p>
+<h2 id="pairing">Pairing</h2>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<table>
-<thead><tr><th scope="col">What it says</th><th scope="col">What to do</th></tr></thead>
-<tbody>
-<tr><td>That code didn't match.</td><td>Check the numbers on your Mac and type them again. It says how many tries are left.</td></tr>
-<tr><td>One of the numbers looks mistyped.</td><td>On your Mac, find the pairing window and check the numbers against it.</td></tr>
-<tr><td>That isn't a pairing code.</td><td>Type the 12 numbers shown on your Mac.</td></tr>
-<tr><td>Too many tries in a row.</td><td>Wait as long as it says, then choose <b class="ui">Try again</b>.</td></tr>
-<tr><td>Pairing isn't open on your Mac, Pairing timed out, Pairing stopped on your Mac.</td><td>On your Mac, choose <b class="ui">Pair a Device…</b> in the Headwire Connect menu for a new code.</td></tr>
-<tr><td>Another device paired with this code first.</td><td>If it isn't yours, on your Mac, forget it under <b class="ui">Devices</b> in the Headwire Connect menu. Then choose <b class="ui">Pair a Device…</b> for a new code.</td></tr>
-<tr><td>Your Mac turned down the pairing, or Headwire couldn't confirm it reached the Mac showing the code.</td><td>Choose <b class="ui">Pair again</b>, with a new code from <b class="ui">Pair a Device…</b>.</td></tr>
-<tr><td>On your Mac, unlock the screen.</td><td>Unlock your Mac, then choose <b class="ui">Try again</b>.</td></tr>
-<tr><td>Headwire can't reach your Mac.</td><td>On your Mac, check that Headwire Connect is open and on the same network, then choose <b class="ui">Try again</b>, by cable or wirelessly.</td></tr>
-<tr><td>Headwire couldn't read the pairing code through the capture card.</td><td>On your Mac, choose <b class="ui">Pair a Device…</b>, then type the 12 numbers it shows.</td></tr>
-<tr><td>This isn't a Headwire pairing code.</td><td>Scan the code that <b class="ui">Pair a Device…</b> shows on your Mac.</td></tr>
-<tr><td>Headwire couldn't save the pairing.</td><td>Choose <b class="ui">Pair again</b>; if it keeps happening, restart your iPad or iPhone.</td></tr>
-<tr><td>Update Headwire Connect, or Update Headwire, to pair this way.</td><td>Update the one it names, then try again.</td></tr>
-</tbody>
-</table>
+<p>Under <b class="ui">Couldn't pair</b>, the line says what happened:</p>
+<ul>
+<li><b>The code didn’t match, or looks mistyped:</b> check it against your Mac.</li>
+<li><b>Too many tries:</b> wait, then <b class="ui">Try again</b>.</li>
+<li><b>Pairing isn’t open, timed out or stopped:</b> on your Mac, choose <b class="ui">Pair a Device…</b>.</li>
+<li><b>Your Mac is locked:</b> unlock it.</li>
+<li><b>The code wasn’t read through the capture card:</b> type it.</li>
+<li><b>Anything else:</b> <b class="ui">Pair again</b> with a new code.</li>
+</ul>
 
 <h2 id="bluetooth">Bluetooth</h2>
-<p>With a capture card, Headwire reaches your Mac as a Bluetooth keyboard and mouse (<a href="capture-card.html">Capture card and Bluetooth</a>).</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<h3 id="bluetooth-off">Bluetooth is off</h3>
-<p>Turn on Bluetooth in <b class="system">Control Center</b> or the Settings app, or connect to Headwire Connect on your Mac.</p>
-<h3 id="bluetooth-didnt-start">Bluetooth keyboard didn’t start</h3>
-<ol class="steps">
-<li>In <b class="system">Control Center</b>, turn Bluetooth off and on.</li>
-<li>In Headwire, choose <b class="ui">Try again</b>.</li>
-</ol>
-<p>Or connect through <a href="headwire-connect.html">Headwire Connect</a> instead.</p>
-<h3 id="bluetooth-not-available">Bluetooth keyboard not available</h3>
-<p>This iPad or iPhone can't be a Bluetooth keyboard and mouse. Connect to Headwire Connect on your Mac instead, by cable or wirelessly.</p>
-<h3 id="bluetooth-no-input">Bluetooth isn’t taking input</h3>
-<p>Turn Bluetooth off and on in <b class="system">Control Center</b>, or connect to Headwire Connect on your Mac.</p>
-<h3 id="bluetooth-pairing">Pairing didn’t finish</h3>
-<p>Pairing over Bluetooth through Headwire Connect didn't finish. The line under it says why:</p>
-<ul>
-<li>the codes didn't match;</li>
-<li>the code wasn't confirmed within a minute;</li>
-<li>your Mac didn't answer, or couldn't find this iPad or iPhone;</li>
-<li>Bluetooth is off or not allowed on your Mac;</li>
-<li>another device was pairing at the same time.</li>
-</ul>
-<p>Do what it says, then choose <b class="ui">Try again</b>. Tap <b class="ui">They match</b> only if both codes are the same.</p>
-<h3 id="pair-from-system-settings">Pair from System Settings</h3>
-<p>Headwire Connect can’t pair for you on this Mac.</p>
-<ol class="steps">
-<li>On your Mac, open <b class="system">System Settings</b> › <b class="system">Bluetooth</b>.</li>
-<li>Under Nearby Devices, click <b class="system">Connect</b> beside Headwire.</li>
-<li>Check that both screens show the same code, then confirm it on your Mac.</li>
-<li>On this iPad or iPhone, tap <b class="system">Pair</b> in the alert.</li>
-</ol>
-
-<h2 id="input">Input</h2>
-<p>Shown when the way input reaches your Mac stops taking it.</p>
-<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<h3 id="connect-no-input">Headwire Connect isn’t taking input</h3>
-<ol class="steps">
-<li>On your Mac, open Headwire Connect.</li>
-<li>Check that <b class="ui">Input</b> is on in its menu.</li>
-<li>In Headwire, choose <b class="ui">Try again</b>.</li>
-</ol>
-<p>Or control your Mac over <a href="capture-card.html#bluetooth">Bluetooth</a>.</p>
+<dl>
+<dt id="bluetooth-off"><b class="ui">Bluetooth is off</b></dt><dd>Turn it on in Control Center.</dd>
+<dt id="bluetooth-didnt-start"><b class="ui">Bluetooth keyboard didn’t start</b>, <b class="ui">Bluetooth isn’t taking input</b></dt><dd>Turn Bluetooth off and on, then <b class="ui">Try again</b>.</dd>
+<dt id="bluetooth-not-available"><b class="ui">Bluetooth keyboard not available</b></dt><dd>Use <a href="headwire-connect.html">Headwire Connect</a>.</dd>
+<dt id="bluetooth-pairing"><b class="ui">Pairing didn’t finish</b></dt><dd>Do what the line says, then <b class="ui">Try again</b>.</dd>
+<dt id="pair-from-system-settings"><b class="ui">Pair from System Settings</b></dt><dd>On your Mac, connect to Headwire in System Settings › Bluetooth.</dd>
+<dt id="connect-no-input"><b class="ui">Headwire Connect isn’t taking input</b></dt><dd>On your Mac, turn on <b class="ui">Input</b>, then <b class="ui">Try again</b>.</dd>
+</dl>
 
 <h2 id="permissions">Permissions</h2>
-<p>Each of these offers <b class="ui">Open Settings</b>, which opens Headwire's page in the Settings app.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<h3 id="camera-off">Camera access is off</h3>
-<p>Headwire reads capture cards as a camera. Turn on <b class="system">Camera</b> for Headwire, or stream your Mac's screen with Headwire Connect.</p>
-<h3 id="microphone-off">Microphone access is off</h3>
-<p>Headwire can't play the capture card's sound without it. Turn on <b class="system">Microphone</b> for Headwire, or stream your Mac's sound with Headwire Connect. Headwire only takes the capture card's sound, never the built-in microphone.</p>
-<h3 id="bluetooth-access-off">Bluetooth access is off</h3>
-<p>Headwire reaches your Mac as a Bluetooth keyboard and mouse. Turn on <b class="system">Bluetooth</b> for Headwire, or connect to Headwire Connect on your Mac.</p>
-<h3 id="photos-off">Photos access is off</h3>
-<p>Headwire isn't allowed to add screenshots and recordings to your photo library. Turn on <b class="system">Photos</b> for Headwire, or use Share instead.</p>
-<h3 id="blocked">Blocked by Screen Time or your organisation</h3>
-<p>Screen Time or a management profile blocks a permission, so there's no switch to offer. The line names what's blocked and the way around it: Headwire Connect streams your Mac's screen and sound and takes input by cable or wirelessly, and Share keeps a screenshot or recording.</p>
+<p>Each has <b class="ui">Open Settings</b>, to Headwire’s page in the Settings app.</p>
+<dl>
+<dt id="camera-off"><b class="ui">Camera access is off</b>, <b class="ui">Microphone access is off</b></dt><dd>Turn on Camera and Microphone, for the capture card.</dd>
+<dt id="bluetooth-access-off"><b class="ui">Bluetooth access is off</b></dt><dd>Turn on Bluetooth.</dd>
+<dt id="photos-off"><b class="ui">Photos access is off</b></dt><dd>Turn on Photos, or use Share.</dd>
+<dt id="blocked"><b class="ui">Blocked by Screen Time or your organisation</b></dt><dd>Use Headwire Connect instead.</dd>
+</dl>
 
 <h2 id="files">Files</h2>
-<p>Files go between your iPad or iPhone and your Mac through Headwire Connect.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<p>A title with <i>file</i> names the file you sent.</p>
-<table>
-<thead><tr><th scope="col">What it says</th><th scope="col">What to do</th></tr></thead>
-<tbody>
-<tr><td><b class="ui">Sending files needs Headwire Connect</b></td><td>On your Mac, install or open Headwire Connect, then drop the file again.</td></tr>
-<tr><td><b><i>file</i> is too large</b></td><td>Send a file under 2 GB.</td></tr>
-<tr><td><b class="ui">Your Mac is out of space</b></td><td>On your Mac, free up space, then drop the file again.</td></tr>
-<tr><td><b>No room for <i>file</i></b></td><td>Free up space on this iPad or iPhone, then on your Mac, send the file again.</td></tr>
-<tr><td><b class="ui">Your Mac is taking another file</b></td><td>Drop the file again when that one is done.</td></tr>
-<tr><td><b class="ui">The connection to your Mac ended</b></td><td>Once it’s back, send the file again.</td></tr>
-<tr><td><b>Your Mac couldn’t save <i>file</i></b></td><td>On your Mac, check that the Downloads folder is there, then drop the file again.</td></tr>
-<tr><td><b>Headwire couldn’t save <i>file</i></b></td><td>On your Mac, send it again.</td></tr>
-<tr><td><b class="ui">Stopped on your Mac</b></td><td>Headwire Connect stopped the file. Drop it again to send it.</td></tr>
-<tr><td><b><i>file</i> didn’t reach your Mac</b>, or <b><i>file</i> didn’t arrive</b></td><td>Send it again from where you sent it.</td></tr>
-</tbody>
-</table>
+<ul>
+<li><b class="ui">Sending files needs Headwire Connect</b>: open it on your Mac.</li>
+<li><b><i>file</i> is too large</b>: up to 2 GB.</li>
+<li><b class="ui">Your Mac is out of space</b>, <b>No room for <i>file</i></b>: free up space.</li>
+<li><b class="ui">Your Mac is taking another file</b>: wait.</li>
+<li>Anything else: send the file again.</li>
+</ul>
 
 <h2 id="calibration">Calibration</h2>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<h3 id="calibration-didnt-finish">Calibration didn't finish</h3>
-<p>The line under the title says why. Fix it, then choose <b class="ui">Try again</b> (<a href="profiles.html#calibration">Calibration</a>).</p>
-<ul>
-<li><b>Headwire Connect isn’t connected, or can’t show the test pattern:</b> on your Mac, open Headwire Connect and turn on <b class="ui">Streaming</b>.</li>
-<li><b>It’s showing the pattern for another device:</b> wait for that calibration to end.</li>
-<li><b>It can’t find the capture card’s display:</b> choose it under <a href="connect-menu.html#capture-card">Capture Card</a> in the Headwire Connect menu.</li>
-<li><b>The pattern didn’t come through, or it took too long:</b> keep the capture card streaming, and try again.</li>
-</ul>
+<p><b class="ui">Calibration didn't finish</b>: keep Headwire Connect connected and the capture card streaming, then <b class="ui">Try again</b>.</p>
 
-<h2 id="app-store">The App Store</h2>
-<p>Tips come from the App Store.</p>
+<h2 id="app-store">Tipping the developer</h2>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<h3 id="tips"><b class="ui">Tips couldn't load</b>, <b class="ui">Tip didn't go through</b> or <b class="ui">Past tips couldn't be restored</b></h3>
-<p>The line under the title says why:</p>
-<ul>
-<li><b>Headwire couldn't reach the App Store:</b> check that this iPad or iPhone is online, then try again.</li>
-<li><b>In-app purchases are blocked:</b> allow them in Screen Time in the Settings app, or ask whoever manages this iPad or iPhone.</li>
-<li><b>The App Store didn't send the tips, or couldn't finish:</b> try again in a moment.</li>
-</ul>
+<p><b class="ui">Tips couldn't load</b> or <b class="ui">Tip didn't go through</b>: check you’re online, or that Screen Time allows purchases.</p>
 
 <nav class="pager" aria-label="Pages"><a href="connect-menu.html">← The Headwire Connect menu</a></nav>
 </main>

@@ -50,7 +50,7 @@
 <li><a href="macs.html">Pairing and more than one Mac</a></li>
 <li><a href="stream.html">The stream and its controls</a></li>
 <li><a href="input.html">Touch, pointer and keyboard</a></li>
-<li><a href="extras.html">Picture in Picture, Glance and What works now</a></li>
+<li><a href="extras.html">Keep your Mac in view</a></li>
 <li><a href="settings.html">Settings</a></li>
 <li><a href="profiles.html">Capture card profiles</a></li>
 <li><a href="connect-menu.html">The Headwire Connect menu</a></li>
@@ -60,96 +60,55 @@
 
 <main id="main" class="doc">
 <h1>Capture card and Bluetooth</h1>
-<p class="lede">Set up the way in that needs nothing installed on your Mac: a capture card brings the
-Mac’s screen and sound to your iPad, and Bluetooth makes your iPad the Mac’s keyboard and mouse.</p>
+<p class="lede">Nothing to install on your Mac: a capture card for the picture, Bluetooth for control.</p>
 
-<h2 id="what-you-need">What you need</h2>
+<h2 id="set-up">Set up a capture card</h2>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<p>You need:</p>
 <ul>
-<li>An iPad with a USB-C port.</li>
-<li>A USB video capture card, the standard “HDMI to USB” kind.</li>
-<li>An HDMI cable from your Mac to the capture card, or an HDMI adapter on your Mac’s USB-C or Thunderbolt port.</li>
-<li>Bluetooth on your Mac and your iPad.</li>
+<li>An iPad with USB-C.</li>
+<li>An “HDMI to USB” capture card.</li>
+<li>An HDMI cable.</li>
 </ul>
-<p>Your Mac sees the capture card as a display, so this works with a Mac mini that has no monitor,
-and it shows the login window too.</p>
-<p class="note">On iPhone, capture cards may not work, and Headwire says so in
-<a href="extras.html#what-works-now">What works now</a>. To see your Mac on this iPhone, use
-<a href="headwire-connect.html">Headwire Connect</a>, by cable or wirelessly.</p>
-
-<h2 id="picture-and-sound">See your Mac’s screen and hear its sound</h2>
-<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<div class="task">
+<figure class="diagram" id="diagram-capture"><svg viewBox="0 0 400 190" role="img" aria-label="Setting up a capture card: 1, the HDMI cable from your Mac into the capture card; 2, the capture card into the iPad’s USB-C port; 3, Headwire on the iPad, allowing Camera, Microphone and Bluetooth; 4, Bluetooth in System Settings on the Mac, connecting to Headwire; 5, the code on both screens; 6, Pair on the iPad.">
+<rect class="box" x="10" y="30" width="90" height="64" rx="8"/><text x="55" y="67" text-anchor="middle">Mac</text>
+<path class="wire" d="M100 62 H145"/>
+<rect class="box" x="145" y="44" width="110" height="36" rx="7"/><text x="200" y="67" text-anchor="middle">capture card</text>
+<path class="wire" d="M255 62 H300"/>
+<rect class="box" x="300" y="30" width="90" height="64" rx="8"/><text x="345" y="60" text-anchor="middle">iPad</text><text class="note" x="345" y="80" text-anchor="middle">Headwire</text>
+<path class="wireless" d="M345 94 C345 150 55 150 55 94"/><text class="note" x="200" y="172" text-anchor="middle">Bluetooth</text>
+<g class="callout"><circle cx="122" cy="62" r="13"/><text x="122" y="62">1</text></g>
+<g class="callout"><circle cx="278" cy="62" r="13"/><text x="278" y="62">2</text></g>
+<g class="callout"><circle cx="385" cy="30" r="13"/><text x="385" y="30">3</text></g>
+<g class="callout"><circle cx="15" cy="94" r="13"/><text x="15" y="94">4</text></g>
+<g class="callout"><circle cx="200" cy="136" r="13"/><text x="200" y="136">5</text></g>
+<g class="callout"><circle cx="385" cy="94" r="13"/><text x="385" y="94">6</text></g>
+</svg></figure>
 <ol class="steps">
-<li>Connect your Mac’s HDMI port to the capture card.</li>
-<li>Plug the capture card into your iPad’s USB-C port.</li>
-<li>Open Headwire.</li>
-<li>When Headwire asks, allow <b class="system">Camera</b> for the picture. The system treats a capture card as a camera.</li>
-<li>When Headwire asks, allow <b class="system">Microphone</b> for the sound. Your Mac’s screen fills this iPad.</li>
+<li>Connect your Mac’s HDMI to the capture card.</li>
+<li>Plug the capture card into your iPad.</li>
+<li>Open Headwire, then allow <b class="system">Camera</b>, <b class="system">Microphone</b> and <b class="system">Bluetooth</b>.</li>
+<li>On your Mac, in <b class="system">System Settings</b> › <b class="system">Bluetooth</b>, click <b class="system">Connect</b> beside Headwire.</li>
+<li>Check the codes match, then confirm on your Mac.</li>
+<li>On this iPad, tap <b class="system">Pair</b>.</li>
 </ol>
-<div class="shots">
-<figure class="shot ipad"><img src="shots/stream-ipad-dark.avif" alt="A Mac desktop filling an iPad screen, with a dimmed settings button in the corner." loading="lazy"><figcaption>Your Mac’s screen from the capture card, with nothing else over it.</figcaption></figure>
 </div>
-<p>Headwire picks the capture card’s best format by itself, and only takes the capture card’s sound,
-never your iPad’s own microphone.</p>
+<figure class="shot ipad"><img src="shots/stream-ipad-dark.avif" alt="Your Mac’s desktop filling the iPad." loading="lazy"><figcaption>Done: your Mac, on your iPad.</figcaption></figure>
 <ul>
-<li>To choose a resolution or frame rate yourself, turn on <b class="ui">Advanced mode</b> in <b class="ui">Settings</b> › <b class="ui">General</b>, then open <b class="ui">Settings</b> › <b class="ui">Capture card</b> › <b class="ui">Format</b> (<a href="settings.html#capture-card-format">the Format page</a>). Once your Mac has its own page, it’s under <b class="ui">Picture</b> there.</li>
-<li>If the sound runs ahead of or behind the picture, change <a href="settings.html#sound">Sound timing</a>.</li>
-<li>Headwire keeps what it learns about each capture card in its <a href="profiles.html">profile</a>.</li>
+<li><b>Resolution:</b> the capture card’s <a href="settings.html#capture-card-format">format page</a>.</li>
+<li><b>Sound timing:</b> <a href="settings.html#sound">Sound</a>.</li>
 </ul>
+<p class="note">On iPhone, capture cards may not work. Use <a href="headwire-connect.html">Headwire Connect</a>.</p>
 
-<h3 id="camera-off">If you turned Camera off</h3>
-<p>Headwire shows <b class="ui">Camera access is off</b>.</p>
-<ol class="steps">
-<li>Tap <b class="ui">Open Settings</b>.</li>
-<li>In the Settings app, turn on <b class="system">Camera</b>.</li>
-<li>Turn on <b class="system">Microphone</b> too, for the sound.</li>
-</ol>
-
-<h2 id="bluetooth">Use your iPad as the Mac’s keyboard and mouse</h2>
-<p>You pair once from your Mac. From then on they connect by themselves.</p>
+<h2 id="choose-the-device">Choose which device to control</h2>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<ol class="steps">
-<li>Open Headwire.</li>
-<li>When Headwire asks, allow <b class="system">Bluetooth</b>.</li>
-<li>On your Mac, open <b class="system">System Settings</b> › <b class="system">Bluetooth</b>.</li>
-<li>Under Nearby Devices, click <b class="system">Connect</b> beside Headwire.</li>
-<li>Both screens show a code. Check that they match.</li>
-<li>On your Mac, confirm the code.</li>
-<li>On this iPad, tap <b class="system">Pair</b> in the alert.</li>
+<p>When a new Bluetooth device connects, Headwire asks once.</p>
+<figure class="shot ipad"><img src="shots/bluetooth-host-ipad-dark.avif" alt="An alert over the stream about a Bluetooth device that connected, with 1 on Use It and 2 on Not Now." loading="lazy"></figure>
+<ol class="callout-key">
+<li><b class="ui">Use It</b>: control it.</li>
+<li><b class="ui">Not Now</b>: leave it.</li>
 </ol>
-<p>Your Mac lists this iPad under its own name, not as Headwire. Touch, a trackpad, a mouse and a
-keyboard on this iPad now reach the Mac: see <a href="input.html">Touch, pointer and keyboard</a>.</p>
-<p>Until this Mac can be controlled, Settings shows it as <b class="ui">Capture card</b> (<a href="settings.html#capture-card">Capture card in Settings</a>).</p>
-<figure class="shot ipad"><img src="shots/settings-capture-card-ipad-dark.avif" alt="The Capture card page in Settings, with Control this Mac, and Connect over Bluetooth… under Bluetooth." loading="lazy"><figcaption>Until Bluetooth is set up, Settings lists your Mac as <b class="ui">Capture card</b>.</figcaption></figure>
-
-<h3 id="choose-the-device">Choose which device gets input</h3>
-<p>When a Bluetooth device first uses this iPad as its keyboard, Headwire asks whether to control it.</p>
-<figure class="shot ipad"><img src="shots/bluetooth-host-ipad-dark.avif" alt="An alert over the stream asking whether to control a Bluetooth device that just connected, with Use It and Not Now." loading="lazy"><figcaption>The alert names the device, or reads <b class="ui">A Bluetooth device connected</b>.</figcaption></figure>
-<ul>
-<li>Tap <b class="ui">Use It</b> to control it.</li>
-<li>Tap <b class="ui">Not Now</b> to leave it be.</li>
-</ul>
-<p>To choose later:</p>
-<ol class="steps">
-<li>Open <b class="ui">Settings</b> › <b class="ui">Add Mac…</b>.</li>
-<li>Tap <b class="ui">Connect over Bluetooth…</b>.</li>
-<li>Under <b class="ui">Devices</b>, tap the one to control.</li>
-</ol>
-
-<h2 id="pair-through-headwire-connect">Pair Bluetooth without opening your Mac’s settings</h2>
-<p>When Headwire Connect is on your Mac and connected, it answers the Mac’s side of the Bluetooth
-pairing, so you compare one code on this iPad.</p>
-<aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<ol class="steps">
-<li>In Headwire, open <b class="ui">Settings</b> › <b class="ui">Add Mac…</b>.</li>
-<li>Under <b class="ui">Other ways</b>, tap <b class="ui">Connect over Bluetooth…</b>.</li>
-<li>Tap <b class="ui">Pair</b>. This iPad shows its own pairing alert.</li>
-<li>Check that the code in Headwire matches the one in the alert, then tap <b class="ui">They match</b>.</li>
-<li>Tap <b class="system">Pair</b> in the alert. Headwire shows <b class="ui">Paired</b>.</li>
-</ol>
-<p>If the codes differ, tap <b class="ui">They don't match</b>. Nothing is confirmed without your tap,
-and Headwire Connect gives up after a minute. If pairing doesn’t finish,
-<a href="troubleshooting.html#bluetooth">Troubleshooting</a> has every message.</p>
 
 <nav class="pager" aria-label="Pages"><a href="./">← Start here</a><a href="headwire-connect.html">Headwire Connect →</a></nav>
 </main>

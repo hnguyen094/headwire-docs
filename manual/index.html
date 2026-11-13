@@ -50,7 +50,7 @@
 <li><a href="macs.html">Pairing and more than one Mac</a></li>
 <li><a href="stream.html">The stream and its controls</a></li>
 <li><a href="input.html">Touch, pointer and keyboard</a></li>
-<li><a href="extras.html">Picture in Picture, Glance and What works now</a></li>
+<li><a href="extras.html">Keep your Mac in view</a></li>
 <li><a href="settings.html">Settings</a></li>
 <li><a href="profiles.html">Capture card profiles</a></li>
 <li><a href="connect-menu.html">The Headwire Connect menu</a></li>
@@ -60,79 +60,57 @@
 
 <main id="main" class="doc">
 <h1>The Headwire manual</h1>
-<p class="lede">Headwire puts your Mac’s screen and sound on your iPad or iPhone, and drives the Mac
-with touch, a trackpad, a mouse or a keyboard. This manual shows how to get going and where to find
-every setting.</p>
-
-<div class="shots">
-<figure class="shot ipad"><img src="shots/stream-ipad-dark.avif" alt="An iPad showing a Mac’s desktop edge to edge, with a dimmed settings button in a corner." loading="lazy"><figcaption>The Mac’s screen on an iPad, from a capture card.</figcaption></figure>
-<figure class="shot phone across"><img src="shots/connect-stream-iphone-dark.avif" alt="An iPhone held across, showing a Mac’s desktop, streamed by Headwire Connect." loading="lazy"><figcaption>The same Mac on an iPhone, through Headwire Connect.</figcaption></figure>
-</div>
+<p class="lede">See and control your Mac from your iPad or iPhone.</p>
 
 <h2 id="two-ways">Two ways in</h2>
-<p>Headwire reaches your Mac in two ways. Use one, or both: with both, Headwire picks the
-connection that works best and moves to another when one drops.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<figure class="diagram" id="diagram-ways"><svg viewBox="0 0 400 300" role="img" aria-label="Two ways in. A capture card and Bluetooth: your Mac’s HDMI goes into a capture card plugged into your iPad, and your iPad is the Mac’s Bluetooth keyboard and mouse. Headwire Connect: an app on your Mac sends its screen to your iPad or iPhone by USB cable or wirelessly.">
+<text x="10" y="20">A capture card and Bluetooth</text>
+<rect class="box" x="10" y="35" width="80" height="50" rx="8"/><text x="50" y="65" text-anchor="middle">Mac</text>
+<path class="wire" d="M90 60 H145"/><text class="note" x="117" y="52" text-anchor="middle">HDMI</text>
+<rect class="box" x="145" y="42" width="110" height="36" rx="7"/><text x="200" y="65" text-anchor="middle">capture card</text>
+<path class="wire" d="M255 60 H310"/><text class="note" x="282" y="52" text-anchor="middle">USB-C</text>
+<rect class="box" x="310" y="35" width="80" height="50" rx="8"/><text x="350" y="65" text-anchor="middle">iPad</text>
+<path class="wireless" d="M350 85 C350 125 50 125 50 85"/><text class="note" x="200" y="134" text-anchor="middle">Bluetooth keyboard and mouse</text>
+<text x="10" y="180">Headwire Connect</text>
+<rect class="box" x="10" y="195" width="140" height="64" rx="8"/><text x="80" y="222" text-anchor="middle">Mac</text><text class="note" x="80" y="244" text-anchor="middle">+ Headwire Connect</text>
+<path class="wire" d="M150 227 H250"/><text class="note" x="200" y="219" text-anchor="middle">cable or</text><text class="note" x="200" y="245" text-anchor="middle">wireless</text>
+<rect class="box" x="250" y="195" width="140" height="64" rx="8"/><text x="320" y="232" text-anchor="middle">iPad or iPhone</text>
+</svg></figure>
 <div class="ways">
 <div class="card">
 <h3 id="way-capture-card">A capture card and Bluetooth</h3>
-<p>Nothing to install on the Mac: a capture card brings its picture and sound to an iPad, and
-Headwire is the Mac’s Bluetooth keyboard and mouse.</p>
-<ol class="steps">
-<li>Connect your Mac’s HDMI port to the capture card.</li>
-<li>Plug the capture card into your iPad.</li>
-<li>Open Headwire.</li>
-<li>Allow <b class="system">Camera</b> and <b class="system">Microphone</b> when asked. Your Mac’s screen appears.</li>
-<li>On your Mac, open <b class="system">System Settings</b> › <b class="system">Bluetooth</b>, then click <b class="system">Connect</b> beside Headwire.</li>
-<li>Confirm the code on your Mac, then tap <b class="system">Pair</b> on your iPad.</li>
-</ol>
-<p><a href="capture-card.html">Set up a capture card and Bluetooth</a> has every step.</p>
+<p>Nothing to install on your Mac. Shows the login window too.</p>
+<p><a href="capture-card.html">Set up a capture card</a></p>
 </div>
 <div class="card">
 <h3 id="way-headwire-connect">Headwire Connect</h3>
-<p>An app on your Mac sends its screen and sound to an iPad or an iPhone by USB cable or wirelessly,
-with the most features, such as typing any character, the clipboard and files.</p>
-<ol class="steps">
-<li>On your Mac, install Headwire Connect from <a href="../helper/">Get Headwire Connect</a>.</li>
-<li>On your Mac, in the Welcome window, click <b class="ui">Turn On</b> beside Streaming, then allow what macOS asks.</li>
-<li>Click <b class="ui">Turn On</b> beside Input, then allow what macOS asks.</li>
-<li>In Headwire, open <b class="ui">Settings</b> › <b class="ui">Add Mac…</b>.</li>
-<li>Tap your Mac.</li>
-<li>If Headwire asks for a code, on your Mac, click <b class="ui">Show Pairing Code</b> in the Welcome window.</li>
-<li>In Headwire, type the 12 numbers. Your Mac’s screen appears.</li>
-</ol>
-<p><a href="headwire-connect.html">Set up Headwire Connect</a> has every step.</p>
+<p>An app on your Mac. By cable or wirelessly, with the most features.</p>
+<p><a href="headwire-connect.html">Set up Headwire Connect</a></p>
 </div>
 </div>
+<p>Use either, or both: Headwire moves to another connection when one drops.</p>
 
 <h2 id="what-you-need">What you need</h2>
-<p>Headwire runs on iPadOS 26 and iOS 26 or later.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
 <ul>
-<li>For a capture card: an iPad with a USB-C port, and a USB video capture card, the common “HDMI to
-USB” kind, with a cable from an HDMI port on your Mac.</li>
-<li>For Headwire Connect: Headwire Connect on your Mac, and a USB cable or the same network for both.
-<a href="../helper/">Get Headwire Connect</a> has the download and the steps on the Mac.</li>
+<li>iPadOS 26 or iOS 26, or later.</li>
+<li>For each way in: <a href="capture-card.html#set-up">a capture card</a> or <a href="headwire-connect.html#get-it">Headwire Connect</a>.</li>
 </ul>
 
-<h2 id="this-manual">In this manual</h2>
-<p>Start with the way in you’re using, then read about the screen and its controls. The rest is
-there to look things up.</p>
+<h2 id="contents">In this manual</h2>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
 <ul>
-<li><a href="capture-card.html">Capture card and Bluetooth</a>: plugging in, the picture and sound, and pairing as a keyboard and mouse.</li>
-<li><a href="headwire-connect.html">Headwire Connect</a>: setting it up on your Mac and each way it connects.</li>
-<li><a href="macs.html">Pairing and more than one Mac</a>: adding a Mac, and moving between Macs.</li>
-<li><a href="stream.html">The stream and its controls</a>: the one screen, scaling, notices, screenshots and recordings, the clipboard and files.</li>
-<li><a href="input.html">Touch, pointer and keyboard</a>: driving the Mac with touch, a trackpad, a mouse, Apple Pencil or a keyboard.</li>
-<li><a href="extras.html">Picture in Picture, Glance and What works now</a>.</li>
-<li><a href="settings.html">Settings</a>: every screen and row.</li>
-<li><a href="profiles.html">Capture card profiles</a>: what Headwire learns about each capture card.</li>
-<li><a href="connect-menu.html">The Headwire Connect menu</a> on your Mac.</li>
-<li><a href="troubleshooting.html">Troubleshooting</a>: every message Headwire shows, and what to do.</li>
+<li><a href="stream.html">The stream and its controls</a></li>
+<li><a href="input.html">Touch, pointer and keyboard</a></li>
+<li><a href="macs.html">Pairing and more than one Mac</a></li>
+<li><a href="extras.html">Keep your Mac in view</a></li>
+<li><a href="settings.html">Settings</a> and <a href="profiles.html">capture card profiles</a></li>
+<li><a href="connect-menu.html">The Headwire Connect menu</a></li>
+<li><a href="troubleshooting.html">Troubleshooting</a></li>
 </ul>
 
-<nav class="pager" aria-label="Pages"><span></span><a href="capture-card.html">Capture card and Bluetooth →</a></nav>
+<nav class="pager" aria-label="Pages"><a href="capture-card.html">Capture card and Bluetooth →</a></nav>
 </main>
 </div>
 
