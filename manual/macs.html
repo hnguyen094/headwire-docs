@@ -60,123 +60,119 @@
 
 <main id="main" class="doc">
 <h1>Pairing and more than one Mac</h1>
-<p class="lede">Pair your iPad or iPhone with Headwire Connect on your Mac once, and Headwire
-connects to it by itself from then on. Pair more than one Mac and switch between them.</p>
+<p class="lede">Pair your iPad or iPhone with Headwire Connect on your Mac once, and Headwire connects
+to it by itself from then on. Pair more than one Mac and switch between them.</p>
 
-<p>Pairing is for Headwire Connect. To use your Mac with a capture card and Bluetooth instead, with
-nothing installed on it, see <a href="capture-card.html">Capture card and Bluetooth</a>.</p>
+<p>Pairing is for Headwire Connect. To use your Mac with nothing installed on it, see
+<a href="capture-card.html">Capture card and Bluetooth</a>.</p>
 
 <h2 id="add-mac">Add a Mac</h2>
-<p>In Headwire, open <b class="ui">Settings</b> and tap <b class="ui">Add Mac…</b> under your Macs.
-<b class="ui">Add Mac</b> lists every Mac with Headwire Connect it can find under
-<b class="ui">Macs nearby</b>, each once, with how a tap on it pairs.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<ol class="steps">
+<li>In Headwire, open <b class="ui">Settings</b>.</li>
+<li>Under your Macs, tap <b class="ui">Add Mac…</b>. Every Mac with Headwire Connect that Headwire finds is listed under <b class="ui">Macs nearby</b>.</li>
+<li>Tap your Mac. Its row says how it pairs:</li>
+</ol>
 <div class="shots">
-<figure class="shot ipad"><img src="shots/settings-top-ipad-dark.avif" alt="Settings on iPad, with two Macs, Mac mini and Office, at the top and Add Mac under them." loading="lazy"><figcaption>Your Macs, at the top of Settings.</figcaption></figure>
-<figure class="shot phone"><img src="shots/settings-top-iphone-dark.avif" alt="Settings on iPhone, with the two Macs and Add Mac." loading="lazy"><figcaption>The same on iPhone.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/add-mac-ipad-dark.avif" alt="Add Mac on iPad, with a Mac named Studio under Macs nearby, On this network, and Other ways below." loading="lazy"><figcaption>Each Mac under <b class="ui">Macs nearby</b> says how it pairs.</figcaption></figure>
+<figure class="shot phone"><img src="shots/add-mac-iphone-dark.avif" alt="Add Mac on iPhone, with Studio under Macs nearby." loading="lazy"><figcaption>Add Mac on iPhone, with one Mac found on the network.</figcaption></figure>
 </div>
-<p>While the list is empty, Headwire is still looking. On your Mac, turn on Streaming or Input in the
-Headwire Connect menu: Headwire Connect listens only while one of them is on.</p>
-<p>Each Mac’s row says how it pairs:</p>
 <table>
 <thead><tr><th>The row says</th><th>What happens when you tap it</th></tr></thead>
 <tbody>
 <tr><td><b class="ui">Connected by USB cable</b></td><td>Headwire asks you to confirm the Mac, then
-pairs over the cable with nothing to type. On your Mac, click Allow if it asks.</td></tr>
-<tr><td><b class="ui">Shown on the capture card</b></td><td>Headwire asks Headwire Connect to show its
-pairing code on your Mac’s screen, then reads it through the capture card, so there’s nothing to
-type.</td></tr>
-<tr><td><b class="ui">On this network</b></td><td>Headwire asks for the code your Mac shows.</td></tr>
+pairs over the cable with nothing to type (<a href="#cable">Pair over the USB cable</a>).</td></tr>
+<tr><td><b class="ui">Shown on the capture card</b></td><td>Headwire reads the pairing code off your
+Mac’s screen through the capture card, so there’s nothing to type (<a href="#capture-card-code">Pair through the capture card</a>).</td></tr>
+<tr><td><b class="ui">On this network</b></td><td>Headwire asks for the code your Mac shows (<a href="#by-code">Pair with a code</a>).</td></tr>
 </tbody>
 </table>
-<p>A Mac you’ve paired already is marked <b class="ui">Paired</b> and can’t be chosen again.</p>
+<p>A Mac you’ve paired already is marked <b class="ui">Paired</b>. While the list is empty, Headwire
+is still looking: on your Mac, turn on <b class="ui">Streaming</b> or <b class="ui">Input</b> in the
+<a href="connect-menu.html#streaming-and-input">Headwire Connect menu</a>.</p>
 
 <h3 id="by-code">Pair with a code</h3>
 <ol class="steps">
-<li>On your Mac, choose <b class="ui">Pair a Device…</b> in the Headwire Connect menu. It shows a
-code.</li>
+<li>On your Mac, choose <b class="ui">Pair a Device…</b> in the Headwire Connect menu. It shows a code.</li>
 <li>In Headwire, tap your Mac under <b class="ui">Macs nearby</b>.</li>
-<li>Type the 12 numbers in <b class="ui">Pairing code</b>. Spaces and hyphens don’t matter. Tap
-<b class="ui">Pair</b>.</li>
+<li>Type the 12 numbers in <b class="ui">Pairing code</b>. Spaces and hyphens don’t matter. Headwire pairs once the last one is in.</li>
 </ol>
-<figure class="shot mac"><picture><source srcset="shots/connect-pairing-code-mac-dark.avif" media="(prefers-color-scheme: dark)"><img src="shots/connect-pairing-code-mac-light.avif" alt="Headwire Connect's pairing window on the Mac, showing a code and the 12 numbers to type." loading="lazy"></picture><figcaption>The pairing code on your Mac.</figcaption></figure>
-<p>If the code is wrong, Headwire says so and you can type it again. To pair with a different Mac,
+<figure class="shot mac"><picture><source srcset="shots/connect-pairing-code-mac-dark.avif" media="(prefers-color-scheme: dark)"><img src="shots/connect-pairing-code-mac-light.avif" alt="Headwire Connect's pairing window on the Mac, showing a code to scan and the 12 numbers to type." loading="lazy"></picture><figcaption>Type the 12 numbers under the code, or scan the code itself.</figcaption></figure>
+<p>If the code is wrong, Headwire says so and you can type it again (<a href="troubleshooting.html#pairing">Pairing with Headwire Connect</a>). To pair with a different Mac,
 tap <b class="ui">Choose another Mac</b>.</p>
 
 <h3 id="capture-card-code">Pair through the capture card</h3>
-<p>While the capture card shows your Mac’s screen, Headwire can read the code itself. Tap the Mac;
-Headwire asks Headwire Connect for its code, finds it on the screen and pairs. If the code doesn’t
-appear, on your Mac, choose Pair a Device in the Headwire Connect menu, or tap
-<b class="ui">Type the code instead</b>.</p>
+<p>While the capture card shows your Mac’s screen, Headwire reads the code itself.</p>
+<ol class="steps">
+<li>In Add Mac, tap the Mac marked <b class="ui">Shown on the capture card</b>.</li>
+<li>Wait while Headwire Connect shows its code and Headwire reads it. Headwire pairs by itself.</li>
+</ol>
+<p>If the code doesn’t appear, tap <b class="ui">Type the code instead</b> and <a href="#by-code">pair with a code</a>.</p>
 
 <h3 id="camera">Pair by scanning the code</h3>
-<p>The code Headwire Connect shows is also a link. On your iPad or iPhone, scan it with the
-<b class="system">Camera</b> app and tap the link: Headwire opens and asks
-<b class="ui">Pair with this Mac?</b>. It shows the Mac’s key; pair only if it matches the one in
-Headwire Connect’s pairing window on your Mac.</p>
+<ol class="steps">
+<li>On your Mac, choose <b class="ui">Pair a Device…</b> in the Headwire Connect menu.</li>
+<li>On your iPad or iPhone, scan the code with the <b class="system">Camera</b> app.</li>
+<li>Tap the link. Headwire opens and asks <b class="ui">Pair with this Mac?</b></li>
+<li>On your Mac, click <b class="ui">Show Key</b> in the pairing window.</li>
+<li>Check that it matches the key Headwire shows.</li>
+<li>In Headwire, tap <b class="ui">Pair</b>.</li>
+</ol>
 
 <h3 id="cable">Pair over the USB cable</h3>
-<p>With your Mac and your iPad or iPhone connected by a USB cable, Headwire offers the Mac on the
-cable by itself. Tap <b class="ui">Pair</b> to confirm it, or <b class="ui">Cancel</b>. On your Mac,
-click Allow if Headwire Connect asks.</p>
-
-<p>Once paired, Headwire says it’s paired with your Mac and connects to it by itself from now on.
-Tap <b class="ui">Done</b>.</p>
+<ol class="steps">
+<li>Connect your Mac and your iPad or iPhone with a USB cable.</li>
+<li>In Headwire, open <b class="ui">Settings</b> › <b class="ui">Add Mac…</b>.</li>
+<li>Tap the Mac marked <b class="ui">Connected by USB cable</b>.</li>
+<li>Tap <b class="ui">Pair</b>.</li>
+<li>On your Mac, click <b class="system">Allow</b> if Headwire Connect asks.</li>
+</ol>
 
 <h3 id="other-ways">Other ways in</h3>
-<p>Under <b class="ui">Other ways</b>, <b class="ui">Connect over Bluetooth…</b> sets up this iPad or
-iPhone as your Mac’s Bluetooth keyboard and mouse, with nothing installed on your Mac (see
-<a href="capture-card.html">Capture card and Bluetooth</a>). <b class="ui">Get Headwire Connect on your Mac</b>
-sends the link to Headwire Connect to your Mac, for example by AirDrop.</p>
+<p>Under <b class="ui">Other ways</b> in Add Mac:</p>
+<ul>
+<li><b class="ui">Connect over Bluetooth…</b> makes this iPad or iPhone your Mac’s Bluetooth keyboard and mouse (<a href="capture-card.html#bluetooth">Capture card and Bluetooth</a>).</li>
+<li><b class="ui">Get Headwire Connect on your Mac</b> sends the link to Headwire Connect to your Mac, for example by AirDrop.</li>
+</ul>
 
 <h2 id="more-than-one">More than one Mac</h2>
-<p>Pair each Mac the same way. Headwire shows one Mac at a time, and remembers what each Mac taught
-it, such as its keyboard layout and how it last connected, so switching never carries one Mac’s
-setup to another.</p>
+<p>Pair each Mac the same way. Headwire shows one Mac at a time and remembers each Mac’s own setup,
+such as its keyboard layout and how it last connected.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
 
 <h3 id="switch">Switch Macs</h3>
 <ul>
-<li>While more than one Mac is paired, a <b class="ui">Macs</b> menu sits beside Settings over the
-stream. It lists each Mac under <b class="ui">Mac on screen</b>, with the one on screen checked.
-Choose another to show it.</li>
-<li>With a hardware keyboard, press Control-Option-Command with 1 to 9 to show the Mac at that place
-in the list, in the order you paired them, or with 0 for the overview.</li>
-<li>In a Mac’s page in Settings, tap <b class="ui">Show on screen</b>.</li>
+<li><b>Macs menu:</b> while more than one Mac is paired, a <b class="ui">Macs</b> menu sits next to <b class="ui">Capture</b> over the stream. Choose a Mac under <b class="ui">Mac on screen</b>.</li>
+<li><b>Keyboard:</b> press Control-Option-Command with 1 to 9 for the Mac at that place, in the order you paired them, or with 0 for every Mac at once.</li>
+<li><b>Settings:</b> on a Mac’s page, tap <b class="ui">Show on screen</b>.</li>
 </ul>
 <p>Headwire lets go of every key and click on the old Mac before it shows the new one.</p>
 
 <h3 id="overview">See every Mac at once</h3>
-<p>Choose <b class="ui">All Macs</b> in the Macs menu to open <b class="ui">Your Macs</b>: a live
-tile for every paired Mac, each saying whether it’s on screen, awake, asleep, at the login window or
-can’t be reached. Tap a tile to show that Mac, or tap <b class="ui">Done</b>.</p>
+<p>Choose <b class="ui">All Macs</b> in the Macs menu to open <b class="ui">Your Macs</b>: a live tile
+for every paired Mac, saying whether it’s on screen, awake, asleep, at the login window or can’t be
+reached. Tap a tile to show that Mac.</p>
 
-<h2 id="mac-page">Each Mac’s page in Settings</h2>
-<p>Each paired Mac has a row at the top of <b class="ui">Settings</b>. Tap it to open its page.</p>
+<h2 id="mac-page">Change one Mac’s settings</h2>
+<p>In <b class="ui">Settings</b>, tap the Mac’s row at the top. Its page puts the Mac on screen,
+mirrors or extends its display, picks where its sound plays, and holds its connection choices
+(<a href="settings.html#mac-page">A Mac’s page</a> covers every row).</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
 <div class="shots">
-<figure class="shot ipad"><img src="shots/settings-mac-ipad-dark.avif" alt="The Mac mini's page in Settings on iPad, with its status, Mac display and Forget this Mac." loading="lazy"><figcaption>A Mac’s page.</figcaption></figure>
-<figure class="shot phone"><img src="shots/settings-mac-iphone-dark.avif" alt="The Mac mini's page in Settings on iPhone." loading="lazy"><figcaption>The same on iPhone.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/settings-mac-ipad-dark.avif" alt="The Mac mini's page in Settings on iPad: Status with Picture over USB cable and Controls, a step to pair over Bluetooth, Mac display, Play sound on, and Headwire Connect, Connected." loading="lazy"><figcaption>Under <b class="ui">Status</b>, how the picture arrives and how the controls reach the Mac.</figcaption></figure>
 </div>
-<ul>
-<li><b class="ui">Status</b> says how the Mac’s <b class="ui">Picture</b> arrives and how its
-<b class="ui">Controls</b> reach it.</li>
-<li><b class="ui">Show on screen</b> puts this Mac on screen.</li>
-<li><b class="ui">Mac display</b> chooses <b class="ui">Mirror main display</b> or
-<b class="ui">Extend as a second display</b>. Extending needs the picture from Headwire Connect,
-and Headwire Connect from the Headwire website.</li>
-<li><b class="ui">Play sound on</b> chooses where this Mac’s sound plays.</li>
-<li>The <b class="ui">Picture</b>, <b class="ui">Connection</b> and <b class="ui">Controls</b> choices
-(see <a href="headwire-connect.html#connections">How your iPad or iPhone connects</a>) show in
-Advanced mode, or while one isn’t Automatic.</li>
-</ul>
-<p>The rest of the page is in <a href="settings.html">Settings</a>.</p>
 
 <h3 id="forget">Forget a Mac</h3>
-<p>On the Mac’s page, tap <b class="ui">Forget this Mac</b> and confirm. Headwire stops connecting
-to it and forgets its settings. To remove your iPad or iPhone on the Mac’s side too,
-on your Mac, open the Headwire Connect menu, choose it under <b class="ui">Devices</b> and forget
-it there.</p>
+<ol class="steps">
+<li>On the Mac’s page, tap <b class="ui">Forget this Mac</b>.</li>
+<li>Confirm. Headwire stops connecting to it and forgets its settings.</li>
+</ol>
+<p>To remove this iPad or iPhone on the Mac’s side too:</p>
+<ol class="steps">
+<li>On your Mac, open the Headwire Connect menu.</li>
+<li>Under <b class="ui">Devices</b>, point at this iPad or iPhone.</li>
+<li>Choose <b>Forget <i>name</i>…</b>, where <i>name</i> is this iPad’s or iPhone’s.</li>
+</ol>
 
 <nav class="pager" aria-label="Pages"><a href="headwire-connect.html">← Headwire Connect</a><a href="stream.html">The stream and its controls →</a></nav>
 </main>

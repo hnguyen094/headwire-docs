@@ -60,9 +60,10 @@
 
 <main id="main" class="doc">
 <h1>The stream and its controls</h1>
-<p class="lede">Headwire has one screen: your Mac, edge to edge. Everything else sits in a few glass buttons over it, and folds away while you use the Mac.</p>
+<p class="lede">Use Headwire’s one screen, your Mac edge to edge, and the few buttons over it: fit the picture, take screenshots and recordings, copy and paste, send files and play sound.</p>
+<nav class="on-page" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#the-screen">See your Mac on the screen</a></li><li><a href="#controls">The buttons over the stream</a></li><li><a href="#notices">What the stream tells you</a></li><li><a href="#capture">Take screenshots and recordings</a></li><li><a href="#clipboard-and-files">Copy, paste and send files</a></li><li><a href="#sound">Sound</a></li><li><a href="#iphone-duo">iPhone Duo and a fold</a></li></ul></nav>
 
-<h2 id="the-screen">The screen</h2>
+<h2 id="the-screen">See your Mac on the screen</h2>
 <p>Once Headwire has a picture of your Mac, from a capture card or from Headwire Connect, it fills the screen. Touches, a trackpad, a mouse and a keyboard all go to the Mac (see <a href="input.html">Touch, pointer and keyboard</a>).</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
 <div class="shots">
@@ -95,17 +96,22 @@
 <table>
 <thead><tr><th>Button</th><th>What it does</th></tr></thead>
 <tbody>
-<tr><td><b class="ui">Capture</b></td><td>Screenshots, recordings and Live Text of your Mac (<a href="#capture">below</a>).</td></tr>
+<tr><td><b class="ui">Capture</b></td><td>Screenshots, recordings and Live Text of your Mac (<a href="#capture">Take screenshots and recordings</a>).</td></tr>
 <tr><td><b class="ui">Macs</b></td><td>With more than one Mac paired, picks the Mac to show (<a href="macs.html">Pairing and more than one Mac</a>).</td></tr>
-<tr><td><b class="ui">Picture in Picture</b></td><td>Puts your Mac in a small window (<a href="extras.html#picture-in-picture">Picture in Picture</a>).</td></tr>
-<tr><td><b class="ui">Keyboard</b></td><td>Brings up the on-screen keyboard for typing to the Mac. It shows while the key row isn't showing.</td></tr>
+<tr><td><b class="ui">Picture in Picture</b></td><td>Shown while your Mac’s picture shows: puts your Mac in a small window (<a href="extras.html#picture-in-picture">Picture in Picture</a>).</td></tr>
+<tr><td><b class="ui">Keyboard</b></td><td>Brings up the on-screen keyboard for typing to the Mac. It shows while the media and system keys aren't showing.</td></tr>
 <tr><td><b class="ui">What works now</b></td><td>What works on the connection in use (<a href="extras.html#what-works-now">What works now</a>).</td></tr>
 <tr><td><b class="ui">Settings</b></td><td>Opens Settings (<a href="settings.html">Settings</a>). It carries a small mark while nothing can send input to your Mac.</td></tr>
 </tbody>
 </table>
 
-<h3 id="key-row">The key row</h3>
-<p>iPadOS keeps some keys from apps: back and forward, Mission Control, the apps list, brightness and the media keys. The key row puts them on screen as glass buttons along the bottom. It's hidden until you choose otherwise in <b class="ui">Settings</b> › <b class="ui">Keyboard</b> › <b class="ui">Media and system keys</b>:</p>
+<h3 id="key-row">Show the media and system keys</h3>
+<p>To put the keys iPadOS keeps, such as Mission Control, brightness and the media keys, on screen as a row of glass buttons:</p>
+<ol class="steps">
+<li>Turn on <b class="ui">Advanced mode</b> in <b class="ui">Settings</b> › <b class="ui">General</b>.</li>
+<li>In <b class="ui">Settings</b> › <b class="ui">Keyboard</b>, choose <b class="ui">Media and system keys</b>.</li>
+<li>Choose how the row shows:</li>
+</ol>
 <ul>
 <li><b class="ui">Show</b> keeps the row over the picture.</li>
 <li><b class="ui">Auto-hide</b> shows it when you touch the screen and fades it with the settings button when you stop.</li>
@@ -118,15 +124,15 @@
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
 <div class="shots">
 <figure class="shot ipad"><img src="shots/no-picture-ipad-dark.avif" alt="A black iPad screen saying No video, with a Connection options button." loading="lazy"><figcaption>No capture card and no Headwire Connect yet.</figcaption></figure>
-<figure class="shot phone"><img src="shots/no-picture-iphone-dark.avif" alt="The same No video message on iPhone." loading="lazy"><figcaption>The same on iPhone.</figcaption></figure>
+<figure class="shot phone"><img src="shots/no-picture-iphone-dark.avif" alt="The same No video message on iPhone." loading="lazy"><figcaption>The <b class="ui">No video</b> message on iPhone.</figcaption></figure>
 </div>
 <ul>
-<li><b class="ui">No video</b>: nothing gives Headwire a picture yet. <b class="ui">Connection options</b> shows every way to connect and what each needs.</li>
-<li><b class="ui">Starting capture…</b> or <b class="ui">Connecting to your Mac…</b>: the picture is on its way.</li>
-<li><b class="ui">Your Mac is asleep or not sending a picture</b>: the capture card runs, but the Mac sends nothing. Wake your Mac or check its HDMI cable; the picture comes back by itself.</li>
-<li><b class="ui">Your Mac's display is asleep</b>: Headwire Connect is connected, but the Mac's display sleeps. Wake your Mac to see its screen.</li>
-<li><b class="ui">Capture paused</b>: the system paused the capture card, for example while another app uses it or Headwire isn't the only app on screen. It says which, and capture resumes by itself.</li>
-<li><b class="ui">Reconnecting…</b>: the last picture stays up, dimmed, while Headwire finds its way back to the Mac.</li>
+<li><a href="troubleshooting.html#no-video"><b class="ui">No video</b></a>: nothing gives Headwire a picture yet. <b class="ui">Connection options</b> shows every way to connect.</li>
+<li><a href="troubleshooting.html#starting-capture"><b class="ui">Starting capture…</b></a> or <a href="troubleshooting.html#connecting"><b class="ui">Connecting to your Mac…</b></a>: the picture is on its way.</li>
+<li><a href="troubleshooting.html#mac-asleep-capture-card"><b class="ui">Your Mac is asleep or not sending a picture</b></a>: wake your Mac or check its HDMI cable.</li>
+<li><a href="troubleshooting.html#mac-display-asleep"><b class="ui">Your Mac's display is asleep</b></a>: wake your Mac.</li>
+<li><a href="troubleshooting.html#capture-paused"><b class="ui">Capture paused</b></a>: the system paused the capture card. It says why, and resumes by itself.</li>
+<li><a href="troubleshooting.html#reconnecting"><b class="ui">Reconnecting…</b></a>: the last picture stays up, dimmed, while Headwire finds its way back.</li>
 </ul>
 <figure class="shot ipad"><img src="shots/reconnecting-ipad-dark.avif" alt="The Mac desktop dimmed under a glass note reading Reconnecting." loading="lazy"><figcaption>Reconnecting keeps the last picture in sight.</figcaption></figure>
 <p>Anything else the stream says, such as a Mac that can't stream yet, is in <a href="troubleshooting.html">Troubleshooting</a>, in the same words.</p>
@@ -138,17 +144,36 @@
 <li><b class="ui">Capture is slowing down</b>: the capture card is sending fewer frames. Unplug it for a few minutes, then plug it back in.</li>
 </ul>
 
-<h2 id="capture">Screenshots, recordings and Live Text</h2>
+<h2 id="capture">Take screenshots and recordings</h2>
 <p>The <b class="ui">Capture</b> button takes pictures of your Mac's screen as Headwire shows it, with nothing to install or set up on the Mac. It works while there's a picture.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<ul>
-<li><b class="ui">Take screenshot</b> opens the picture full screen. Choose <b class="ui">Markup</b> to draw on it with Apple Pencil or a finger, or <b class="ui">Live Text</b> to select, copy, translate and look up its text. Then <b class="ui">Share</b> it, <b class="ui">Save to Photos</b>, or tap <b class="ui">Done</b>.</li>
-<li><b class="ui">Record screen</b> records the Mac's picture. A red dot with the time recorded stays in sight while it runs; tap it, or choose <b class="ui">Stop recording</b>, to stop. The clip then opens to <b class="ui">Share</b> or <b class="ui">Save to Photos</b>.</li>
-<li><b class="ui">Look at text</b> takes a screenshot and opens it ready for Live Text.</li>
-</ul>
-<p>With a keyboard, Control-Option-Command-S takes a screenshot, Control-Option-Command-R starts or stops recording, and Control-Option-Command-T looks at text.</p>
+<h3 id="screenshot">Take a screenshot</h3>
+<ol class="steps">
+<li>Tap <b class="ui">Capture</b> over the stream.</li>
+<li>Choose <b class="ui">Take screenshot</b>. The picture opens full screen.</li>
+<li>To draw on it, choose <b class="ui">Markup</b>. To select, copy, translate or look up its text, choose <b class="ui">Live Text</b>.</li>
+<li>Choose <b class="ui">Share</b> or <b class="ui">Save to Photos</b>, or tap <b class="ui">Done</b>.</li>
+</ol>
+<p><b class="ui">Look at text</b>, in the same menu, takes a screenshot and opens it ready for Live Text.</p>
 
-<h2 id="clipboard-and-files">Clipboard and files</h2>
+<h3 id="record">Record your Mac’s screen</h3>
+<ol class="steps">
+<li>Tap <b class="ui">Capture</b> over the stream.</li>
+<li>Choose <b class="ui">Record screen</b>. A red dot with the time recorded stays in sight while it runs.</li>
+<li>To stop, tap the red dot, or choose <b class="ui">Stop recording</b> in the Capture menu. The clip opens.</li>
+<li>Choose <b class="ui">Share</b> or <b class="ui">Save to Photos</b>.</li>
+</ol>
+<p>With a keyboard:</p>
+<table>
+<thead><tr><th>Press</th><th>To</th></tr></thead>
+<tbody>
+<tr><td>Control-Option-Command-S</td><td>Take a screenshot</td></tr>
+<tr><td>Control-Option-Command-R</td><td>Start or stop recording</td></tr>
+<tr><td>Control-Option-Command-T</td><td>Look at text</td></tr>
+</tbody>
+</table>
+
+<h2 id="clipboard-and-files">Copy, paste and send files</h2>
 <p>With Headwire Connect, text you copy on your Mac is ready to paste on this iPad or iPhone, and files move both ways.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
 <ul>
@@ -163,13 +188,13 @@
 <h2 id="sound">Sound</h2>
 <p>Your Mac's sound plays from whichever picture is on screen: the capture card's HDMI sound, or the sound Headwire Connect streams. When the picture moves from one to the other, the sound moves with it.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<p>For a capture card, Headwire needs <b class="system">Microphone</b> access, because the system treats the capture card's sound as a microphone. Headwire only takes the capture card's sound, never the built-in microphone. Where the sound plays, its volume and its timing are in <a href="settings.html#sound">Settings › Sound</a>.</p>
+<p>A capture card’s sound needs <b class="system">Microphone</b> access (<a href="capture-card.html#picture-and-sound">See your Mac’s screen and hear its sound</a>). Where the sound plays, its volume and its timing are in <a href="settings.html#sound">Settings › Sound</a>.</p>
 
 <h2 id="iphone-duo">iPhone Duo and a fold</h2>
 <p>On iPhone Duo, open flat or closed, the stream fills the screen as it does on any iPhone. Half folded, the stream takes the upper or leading half and a trackpad for your Mac takes the other.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
 <ul>
-<li>Held like a laptop, the lower half is a keyboard deck: the key row along its top, the Mac keys under it, and the trackpad below. The keyboard key brings up the on-screen keyboard over the trackpad, and the picture stays put.</li>
+<li>Held like a laptop, the lower half is a keyboard deck: the media and system keys along its top, the Mac keys under it, and the trackpad below. The keyboard key brings up the on-screen keyboard over the trackpad, and the picture stays put.</li>
 <li>The trackpad half drives the Mac even with no picture, while you watch the Mac's own display.</li>
 <li>Folded, the picture uses its own <b class="ui">Scaling when folded</b> in <b class="ui">Settings</b> › <b class="ui">Picture</b>, <b class="ui">Fit</b> to start with. The setting shows once this iPhone has been folded.</li>
 </ul>

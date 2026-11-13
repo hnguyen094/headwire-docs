@@ -69,6 +69,7 @@ correct the picture by itself, and you can look inside or change it.</p>
 plug it in again. Two capture cards of the same model each have their own.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
 <ul>
+<li><b class="ui">Status</b> and <b class="ui">USB ID</b>: whether the capture card is connected, and which one it is.</li>
 <li><b class="ui">Brightness range</b>: whether the capture card’s blacks and whites arrive as labelled.
 Many capture cards label their range wrongly, which makes blacks look grey or crushed; Headwire
 notices and corrects it.</li>
@@ -76,27 +77,26 @@ notices and corrects it.</li>
 <li><b class="ui">Mode</b>: the capture card’s own mode, and how many frames it really delivers.</li>
 <li><b class="ui">Calibration</b>: what the last calibration measured.</li>
 <li><b class="ui">Sound</b>: the capture card’s sound timing.</li>
+<li><b class="ui">Measurements</b>: what Headwire measured, kept for each Mac and each display mode, so a capture card used with two Macs keeps what it learnt about each.</li>
 <li><b class="ui">Known behaviour</b>: what the capture card has been seen to do, such as reconnecting, or slowing down over long sessions.</li>
 </ul>
-<p>Evidence is kept for each Mac and each display mode, so a capture card used with two Macs keeps
-what it learnt about each.</p>
 
-<h2 id="open-a-profile">Opening a profile</h2>
-<p>Profiles are in Advanced mode. Turn on <b class="ui">Advanced mode</b> at the bottom of
-Settings › <b class="ui">General</b>.</p>
+<h2 id="open-a-profile">Open a capture card’s profile</h2>
+<p>Profiles are in <a href="settings.html#general">Advanced mode</a>.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<ul>
-<li>Settings › <b class="ui">Connections</b> lists every capture card under
-<b class="ui">Capture cards</b>, with whether it’s connected or when it was last seen. Tap one to open its profile.</li>
-<li>The capture card’s page, opened from the Mac’s page in Settings, shows its format and has
-<b class="ui">Capture card profile</b>.</li>
-</ul>
+<ol class="steps">
+<li>Turn on <b class="ui">Advanced mode</b> in <b class="ui">Settings</b> › <b class="ui">General</b>.</li>
+<li>Open <b class="ui">Settings</b> › <b class="ui">Connections</b>. Every capture card is listed under <b class="ui">Capture cards</b>, connected or last seen.</li>
+<li>Tap the capture card. Its profile opens.</li>
+</ol>
+<p>The capture card plugged in now also has <b class="ui">Capture card profile</b> on its
+<a href="settings.html#capture-card-format">Format page</a>, opened from <b class="ui">Format</b> on the Capture card page, or <b class="ui">Picture</b> on the Mac’s page.</p>
 <div class="shots">
-<figure class="shot ipad"><img src="shots/settings-connections-ipad-dark.avif" alt="The Connections screen in Settings, listing the connections and the capture cards seen." loading="lazy"><figcaption>Connections, in Advanced mode.</figcaption></figure>
-<figure class="shot ipad"><img src="shots/settings-capture-card-format-ipad-dark.avif" alt="The capture card’s page, with its resolution, frame rate and the Capture card profile row." loading="lazy"><figcaption>The capture card’s page.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/settings-connections-ipad-dark.avif" alt="The Connections screen in Settings, listing the connections and the capture cards seen." loading="lazy"><figcaption>Connections in Advanced mode, with the capture cards under the connection switches.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/settings-capture-card-format-ipad-dark.avif" alt="The capture card’s Format page, with its resolution, frame rate and the Capture card profile row." loading="lazy"><figcaption>The Format page: <b class="ui">Capture card profile</b> is the last row.</figcaption></figure>
 </div>
 
-<h2 id="correct-the-picture">Correcting the picture yourself</h2>
+<h2 id="correct-the-picture">Correct the picture yourself</h2>
 <p>Headwire picks the range and colour on its own. Change them only if the picture looks wrong.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
 <ul>
@@ -126,16 +126,12 @@ to stop the automatic runs for that capture card. A capture card has to be strea
 just can’t measure the rest.</p>
 
 <h2 id="notes-over-the-picture">Notes over the picture</h2>
-<p>Some of what Headwire learns shows for a few seconds over the stream, without covering it.</p>
+<p>Some of what Headwire learns shows for a few seconds over the stream, such as
+<b class="ui">Protected video can't be shown</b> and <b class="ui">Capture is slowing down</b>.
+<a href="stream.html#banners">Notes over the picture</a> says what each means.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<ul>
-<li><b class="ui">Protected video can't be shown</b>: streaming apps black out their video on capture
-cards. That’s the protection working; the rest of your screen still works.</li>
-<li><b class="ui">Capture is slowing down</b>: the capture card is sending fewer frames, likely from
-heat over a long session. Unplug it for a few minutes, then plug it back in.</li>
-</ul>
 
-<h2 id="forget">Forgetting a capture card</h2>
+<h2 id="forget">Forget a capture card</h2>
 <p><b class="ui">Forget capture card</b>, at the bottom of its profile, removes the profile and the
 format you chose for it. Plug the capture card in again to start a new one.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>

@@ -140,3 +140,8 @@ img { max-width: 100%; height: auto; display: block; }
 .site-footer { padding: 1.5rem var(--edge-right) calc(1.5rem + env(safe-area-inset-bottom, 0px)) var(--edge-left); border-top: var(--rule); color: var(--ink-soft); font-size: 0.875rem; }
 .site-footer a { color: var(--ink-soft); }
 .site-footer p { margin: 0.75rem 0 0; }
+
+/* A long page's own sections, under its lede. */
+.on-page { margin: 1rem 0 1.5rem; padding: 0.75rem 1rem; border: var(--rule); border-radius: var(--card-radius); }
+.on-page h2 { font: var(--heading-weight) 0.8125rem/1.3 var(--display); letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); margin: 0 0 0.5rem; border: 0; padding: 0; }
+.on-page ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; }

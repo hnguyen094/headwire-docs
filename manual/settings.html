@@ -61,6 +61,7 @@
 <main id="main" class="doc">
 <h1>Settings</h1>
 <p class="lede">Every screen in Settings, row by row: what each one does, and what Advanced mode adds.</p>
+<nav class="on-page" aria-label="On this page"><h2>On this page</h2><ul><li><a href="#top-level">The top level</a></li><li><a href="#mac-page">A Mac’s page</a></li><li><a href="#capture-card">Capture card</a></li><li><a href="#picture">Picture</a></li><li><a href="#touch-and-pointer">Touch and pointer</a></li><li><a href="#keyboard">Keyboard</a></li><li><a href="#sound">Sound</a></li><li><a href="#general">General</a></li><li><a href="#connections">Connections</a></li><li><a href="#about">About</a></li></ul></nav>
 
 <p>Tap the settings button over the stream to open Settings. Each screen below is a row on its
 top level; tap <b class="ui">Done</b> to close the sheet.</p>
@@ -68,7 +69,7 @@ top level; tap <b class="ui">Done</b> to close the sheet.</p>
 <div class="card">
 <p><strong>Advanced mode.</strong> Settings starts short. Turn on <b class="ui">Advanced mode</b> in
 <b class="ui">General</b> to add the rows for connection choices, pairing keys, exact capture card
-formats and capture card details. It changes no setting by itself. A setting you changed stays in
+formats and capture card details. A setting you changed stays in
 view with Advanced mode off, with <b class="ui">Use Automatic</b> beside it to go back.</p>
 </div>
 
@@ -76,15 +77,15 @@ view with Advanced mode off, with <b class="ui">Use Automatic</b> beside it to g
 <p>At the top are your Macs, then a row for each screen.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
 <div class="shots">
-<figure class="shot ipad"><img src="shots/settings-top-ipad-dark.avif" alt="Settings on iPad: two Macs, Mac mini and Office, then Add Mac and the rows Picture, Touch and pointer, Keyboard, Sound, General and About." loading="lazy"><figcaption>Settings on iPad, with two Macs paired.</figcaption></figure>
-<figure class="shot phone"><img src="shots/settings-top-iphone-dark.avif" alt="The same Settings top level on iPhone." loading="lazy"><figcaption>The same on iPhone.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/settings-top-ipad-dark.avif" alt="Settings on iPad: two Macs, Mac mini and Office, then Add Mac and the rows Picture, Touch and pointer, Keyboard, Sound, General and About." loading="lazy"><figcaption>Two paired Macs at the top, each with a dot for how it’s doing.</figcaption></figure>
+<figure class="shot phone"><img src="shots/settings-top-iphone-dark.avif" alt="Settings on iPhone: the two Macs, Add Mac, and the rows for each screen." loading="lazy"><figcaption>On iPhone, Settings fills the screen.</figcaption></figure>
 </div>
 <table>
 <thead><tr><th>Row</th><th>What it does</th></tr></thead>
 <tbody>
-<tr><td>A Mac</td><td>One row for each Mac you paired or that connects over Bluetooth, with how it is doing. The dot is green while it works and orange when something needs you. Tap it for <a href="#mac-page">its page</a>.</td></tr>
 <tr><td><b class="ui">Capture card</b></td><td>Shown while the capture card shows a Mac that nothing controls yet, with <b class="ui">Controls not set up</b> under it. Tap it to <a href="#capture-card">set up controls</a>.</td></tr>
-<tr><td>A Mac nearby</td><td>A Mac with Headwire Connect on your network that isn’t paired yet. Tap it to pair.</td></tr>
+<tr><td>A Mac</td><td>One row for each Mac you paired or that connects over Bluetooth, with how it is doing. The dot is green while it works and orange when something needs you. Tap it for <a href="#mac-page">its page</a>.</td></tr>
+<tr><td>A Mac nearby</td><td>Shown when Headwire finds one Mac with Headwire Connect, by cable or on your network, that isn’t paired yet, as <b>Pair with <i>name</i></b>. Tap it to pair.</td></tr>
 <tr><td><b class="ui">Add Mac…</b></td><td>Pairs another Mac. <a href="macs.html">Pairing and more than one Mac</a> has the steps.</td></tr>
 <tr><td><b class="ui">Picture</b></td><td>How the picture fits the screen; its value is the scaling in use.</td></tr>
 <tr><td><b class="ui">Touch and pointer</b></td><td>How touch, a trackpad and a mouse move the Mac’s pointer.</td></tr>
@@ -101,38 +102,37 @@ view with Advanced mode off, with <b class="ui">Use Automatic</b> beside it to g
 alone. Some sections show only while the Mac is the one on screen.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
 <div class="shots">
-<figure class="shot ipad"><img src="shots/settings-mac-ipad-dark.avif" alt="The page for Mac mini on iPad: its picture and controls, the connection choices, Mac display and Play sound on, Headwire Connect, Bluetooth, and Forget this Mac." loading="lazy"><figcaption>The page for Mac mini.</figcaption></figure>
-<figure class="shot phone"><img src="shots/settings-mac-iphone-dark.avif" alt="The same Mac page on iPhone." loading="lazy"><figcaption>The same on iPhone.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/settings-mac-ipad-dark.avif" alt="The page for Mac mini on iPad: Status with Picture over USB cable and Controls, a step to pair over Bluetooth, Mac display, Play sound on, and Headwire Connect, Connected." loading="lazy"><figcaption>Under <b class="ui">Status</b>, how the picture arrives and how the controls reach the Mac, with what to do when they don’t.</figcaption></figure>
+<figure class="shot phone"><img src="shots/settings-mac-iphone-dark.avif" alt="The Mac mini page on iPhone, with Status, Mac display and Play sound on." loading="lazy"><figcaption>On iPhone, the same rows fill the screen.</figcaption></figure>
 </div>
 <table>
 <thead><tr><th>Row</th><th>What it does</th></tr></thead>
 <tbody>
 <tr><td><b class="ui">Show on screen</b></td><td>With more than one Mac paired, puts this Mac’s picture on screen. Shown while another Mac is on screen.</td></tr>
-<tr><td><b class="ui">Picture</b> and <b class="ui">Controls</b></td><td>How the picture arrives, by the capture card or a Headwire Connect connection, and how keys and clicks reach the Mac. With the capture card, <b class="ui">Picture</b> opens its <a href="#capture-card-format">format page</a> in Advanced mode.</td></tr>
-<tr><td><b class="ui">Picture</b>, <b class="ui">Connection</b> and <b class="ui">Controls</b> choices</td><td>Advanced mode. Choose where the picture comes from (<b class="ui">Automatic</b>, <b class="ui">Capture card</b> or <b class="ui">Mac stream</b>), which connection the Mac stream takes (<b class="ui">Automatic</b>, <b class="ui">USB cable</b>, <b class="ui">Local network</b> or <b class="ui">Peer-to-peer Wi-Fi</b>), and how controls reach the Mac (<b class="ui">Automatic</b>, <b class="ui">Bluetooth</b> or <b class="ui">Headwire Connect</b>). With Advanced mode off, a changed choice shows with <b class="ui">Use Automatic</b>.</td></tr>
-<tr><td><b class="ui">Mac display</b></td><td><b class="ui">Mirror main display</b> shows the Mac’s own screen. <b class="ui">Extend as a second display</b> adds this screen to the Mac as another display; arrange it on your Mac in <b class="system">System Settings › Displays</b>. Extending works when the picture comes from Headwire Connect.</td></tr>
+<tr><td><b class="ui">Status</b>: <b class="ui">Picture</b> and <b class="ui">Controls</b></td><td>How the picture arrives, by the capture card or a Headwire Connect connection, and how keys and clicks reach the Mac. With the capture card, <b class="ui">Picture</b> opens its <a href="#capture-card-format">format page</a> in Advanced mode.</td></tr>
+<tr><td><b class="ui">Picture</b>, <b class="ui">Connection</b> and <b class="ui">Controls</b> choices</td><td>Advanced mode: where the picture comes from (<b class="ui">Automatic</b>, <b class="ui">Capture card</b> or <b class="ui">Mac stream</b>), which connection the Mac stream takes (<b class="ui">Automatic</b>, <b class="ui">USB cable</b>, <b class="ui">Local network</b> or <b class="ui">Peer-to-peer Wi-Fi</b>), and how controls reach the Mac (<b class="ui">Automatic</b>, <b class="ui">Bluetooth</b> or <b class="ui">Headwire Connect</b>); a changed choice also shows outside Advanced mode, with <b class="ui">Use Automatic</b>.</td></tr>
+<tr><td><b class="ui">Mac display</b></td><td><b class="ui">Mirror main display</b> shows the Mac’s own screen. <b class="ui">Extend as a second display</b> adds this screen to the Mac as another display, when the picture comes from Headwire Connect. Hidden for Headwire Connect from the App Store unless <b class="ui">Show features of Headwire Connect from the Headwire website</b> is on.</td></tr>
 <tr><td><b class="ui">Play sound on</b></td><td>Where this Mac’s sound plays. The first choice follows the setting in <a href="#sound">Sound</a>; the others give this Mac its own.</td></tr>
 <tr><td><b class="ui">Headwire Connect</b></td><td>Whether the Mac’s Headwire Connect is <b class="ui">Connected</b> or <b class="ui">Not connected</b>. In Advanced mode, <b class="ui">Keys</b> opens <a href="#keys">the pairing keys</a>.</td></tr>
-<tr><td><b class="ui">Bluetooth</b></td><td>Whether the Mac uses your iPad or iPhone as its Bluetooth keyboard and mouse. <b class="ui">Connect over Bluetooth…</b> gets ready for the Mac to connect; <b class="ui">Stop waiting</b> stops; <b class="ui">Disconnect</b> ends it. Bluetooth lets you type and point even with Headwire Connect closed.</td></tr>
+<tr><td><b class="ui">Bluetooth</b></td><td>Whether the Mac uses your iPad or iPhone as its Bluetooth keyboard and mouse, with <b class="ui">Connect over Bluetooth…</b>, <b class="ui">Stop waiting</b> or <b class="ui">Disconnect</b>. It works even with Headwire Connect closed.</td></tr>
 <tr><td><b class="ui">Forget this Mac</b></td><td>Removes the Mac and its pairing from your iPad or iPhone.</td></tr>
 </tbody>
 </table>
 
 <h3 id="keys">Keys</h3>
 <p>Advanced mode. <b class="ui">Keys</b> on a Mac’s page lists the key of the Mac’s Headwire
-Connect and the key of this iPad or iPhone. On your Mac, check that they match the keys in
-Headwire Connect’s Settings.</p>
+Connect and the key of this iPad or iPhone, to compare with <a href="connect-menu.html#settings-devices">This Mac's key</a> in Headwire Connect’s Settings.</p>
 <figure class="shot ipad"><img src="shots/settings-keys-ipad-dark.avif" alt="The Keys page for Mac mini: the key of its Headwire Connect and the key of this iPad." loading="lazy"><figcaption>The pairing keys, in Advanced mode.</figcaption></figure>
 
 <h2 id="capture-card">Capture card</h2>
 <p>While the capture card shows a Mac that you haven’t set up controls for, its row at the top
 of Settings opens this page.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<figure class="shot ipad"><img src="shots/settings-capture-card-ipad-dark.avif" alt="The Capture card page: Control this Mac, with a way to pair with Headwire Connect, and Bluetooth." loading="lazy"><figcaption>The capture card’s page.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/settings-capture-card-ipad-dark.avif" alt="The Capture card page: Control this Mac, with a way to pair with Headwire Connect, and Bluetooth." loading="lazy"><figcaption><b class="ui">Control this Mac</b> lists the ways to control the Mac the capture card shows.</figcaption></figure>
 <table>
 <thead><tr><th>Row</th><th>What it does</th></tr></thead>
 <tbody>
-<tr><td><b class="ui">Control this Mac</b></td><td>The ways to control the Mac the capture card shows. With one Mac with Headwire Connect found nearby, pairing with it reads a code off the screen, with nothing to type. Otherwise <b class="ui">Pair with a Mac…</b> opens pairing.</td></tr>
+<tr><td><b class="ui">Control this Mac</b></td><td>The ways to control the Mac the capture card shows: pairing with the one Mac with Headwire Connect nearby, which reads its code off the screen, or <b class="ui">Pair with a Mac…</b>.</td></tr>
 <tr><td><b class="ui">Bluetooth</b></td><td>Lets the Mac use your iPad as its Bluetooth keyboard and mouse, as on a Mac’s page.</td></tr>
 <tr><td><b class="ui">Format</b></td><td>Advanced mode, or while a format is chosen: opens <a href="#capture-card-format">the capture card’s format</a>.</td></tr>
 </tbody>
@@ -155,12 +155,12 @@ its profile. Headwire picks the best format by itself; choose one here only if y
 <h2 id="picture">Picture</h2>
 <p>How the Mac’s picture fits this screen, and how Headwire Connect’s stream behaves.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<figure class="shot ipad"><img src="shots/settings-picture-ipad-dark.avif" alt="The Picture screen: Scaling, Optimize for and Sharpen picture." loading="lazy"><figcaption>Picture.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/settings-picture-ipad-dark.avif" alt="The Picture screen: Scaling, Optimize for and Sharpen picture." loading="lazy"><figcaption><b class="ui">Optimize for</b> sets what Headwire Connect’s stream favours.</figcaption></figure>
 <table>
 <thead><tr><th>Row</th><th>What it does</th></tr></thead>
 <tbody>
-<tr><td><b class="ui">Scaling</b></td><td><b class="ui">Fit</b> shows the whole picture, with black bars. <b class="ui">Fill</b> fills the screen and crops the edges. <b class="ui">Zoom to content</b> hides the black bars your Mac adds around its picture.</td></tr>
-<tr><td><b class="ui">Optimize for</b></td><td>What Headwire Connect’s stream favours: <b class="ui">Automatic</b> (chosen by what’s on screen), <b class="ui">Responsiveness</b> (frame rate first, for typing and games), <b class="ui">Sharpness</b> (full size first, for reading and design) or <b class="ui">Battery Life</b> (fewer frames). Battery Life is used while Low Power Mode is on.</td></tr>
+<tr><td><b class="ui">Scaling</b></td><td><b class="ui">Fit</b> shows the whole picture, with black bars. <b class="ui">Fill</b> fills the screen and crops the edges. <b class="ui">Zoom to content</b> hides the black bars your Mac adds around its picture (<a href="stream.html#scaling">How the picture fits</a>).</td></tr>
+<tr><td><b class="ui">Optimize for</b></td><td>What Headwire Connect’s stream favours: <b class="ui">Automatic</b> (chosen by what’s on screen), <b class="ui">Responsiveness</b> (frame rate first, for typing and games), <b class="ui">Sharpness</b> (full size first, for reading and design) or <b class="ui">Battery Life</b> (fewer frames). Under Automatic, Low Power Mode uses Battery Life.</td></tr>
 <tr><td><b class="ui">HDR</b></td><td>On a screen that shows HDR: <b class="ui">Automatic</b> switches to HDR while your Mac shows HDR content; <b class="ui">Always</b> stays in HDR, which uses more power on your Mac; <b class="ui">Off</b>.</td></tr>
 <tr><td><b class="ui">Stream limits</b></td><td>Advanced mode, or while set: the <b class="ui">Largest size</b> and <b class="ui">Highest frame rate</b> Headwire Connect streams at. It still adapts below them.</td></tr>
 <tr><td><b class="ui">Sharpen picture</b></td><td>Sharpens text when the picture is smaller than this screen. In Advanced mode it is <b class="ui">Upscaling</b>, with a choice of <b class="ui">Off</b>, <b class="ui">MetalFX</b> or <b class="ui">Super Resolution</b> where this iPad or iPhone has them.</td></tr>
@@ -173,21 +173,21 @@ its profile. Headwire picks the best format by itself; choose one here only if y
 pointer and keyboard</a> shows each in use.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
 <div class="shots">
-<figure class="shot ipad"><img src="shots/settings-input-ipad-dark.avif" alt="The Touch and pointer screen: Touch, Pointer speed, Pointer style, Scribble, Reverse scrolling and Three-finger drag." loading="lazy"><figcaption>Touch and pointer on iPad.</figcaption></figure>
-<figure class="shot phone"><img src="shots/settings-input-iphone-dark.avif" alt="The Touch and pointer screen on iPhone." loading="lazy"><figcaption>The same on iPhone.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/settings-input-ipad-dark.avif" alt="The Touch and pointer screen: Touch, Pointer speed, Scribble under Apple Pencil, Reverse scrolling and Three-finger drag." loading="lazy"><figcaption><b class="ui">Pointer style</b> shows once a Mac with Headwire Connect is paired.</figcaption></figure>
+<figure class="shot phone"><img src="shots/settings-input-iphone-dark.avif" alt="The Touch and pointer screen on iPhone: Touch, Pointer speed, Reverse scrolling and Three-finger drag." loading="lazy"><figcaption>Touch and pointer on iPhone, with no Apple Pencil section.</figcaption></figure>
 </div>
 <table>
 <thead><tr><th>Row</th><th>What it does</th></tr></thead>
 <tbody>
 <tr><td><b class="ui">Touch your Mac directly</b></td><td>Shown while Headwire Connect can take touches: your fingers tap, scroll and pinch on your Mac’s screen as on a touch screen.</td></tr>
-<tr><td><b class="ui">Touch</b></td><td><b class="ui">Point and tap</b> clicks where you tap. <b class="ui">Trackpad</b> moves the pointer as a trackpad does. Touch works in full screen; in a window, use Apple Pencil, a mouse or a trackpad.</td></tr>
+<tr><td><b class="ui">Touch</b></td><td><b class="ui">Point and tap</b> clicks where you tap. <b class="ui">Trackpad</b> moves the pointer as a trackpad does. Works in full screen.</td></tr>
 <tr><td><b class="ui">Pointer speed</b></td><td>How fast the pointer moves.</td></tr>
 <tr><td><b class="ui">Trackpad inertia</b></td><td>With <b class="ui">Trackpad</b>: after a quick swipe, the pointer keeps moving and slows to a stop.</td></tr>
 <tr><td><b class="ui">Pointer style</b></td><td>With a Mac paired: draw the pointer as the <b class="ui">Mac</b> draws it, or as this iPad or iPhone does.</td></tr>
-<tr><td><b class="ui">Snap to controls</b></td><td>With this iPad’s or iPhone’s pointer style: with a mouse or trackpad, the pointer holds on to buttons on your Mac so clicks land on them, even a button inside another, such as a tab’s close button. A clickable area too large to highlight gets a soft tint instead.</td></tr>
+<tr><td><b class="ui">Snap to controls</b></td><td>With this iPad’s or iPhone’s pointer style: a mouse or trackpad pointer holds on to buttons on your Mac (<a href="input.html#trackpad-and-mouse">A trackpad or mouse</a>).</td></tr>
 <tr><td><b class="ui">Scribble</b></td><td>On iPad, under <b class="ui">Apple Pencil</b>: write in a text field on your Mac to type.</td></tr>
 <tr><td><b class="ui">Reverse scrolling</b></td><td>Flips the scroll direction sent to the Mac, on top of the Mac’s own setting.</td></tr>
-<tr><td><b class="ui">Three-finger drag</b></td><td>Three fingers drag a window or a selection; Mission Control and Spaces then take four fingers. With Headwire Connect, it follows your Mac’s own setting, marked <b class="ui">From Headwire Connect on your Mac</b>.</td></tr>
+<tr><td><b class="ui">Three-finger drag</b></td><td>Three fingers drag a window or a selection (<a href="input.html#three-finger-drag">Three-finger drag</a>). With Headwire Connect, it follows your Mac’s own setting, marked <b class="ui">From Headwire Connect on your Mac</b>.</td></tr>
 </tbody>
 </table>
 
@@ -195,48 +195,47 @@ pointer and keyboard</a> shows each in use.</p>
 <p>Typing to your Mac: the on-screen keyboard, the keys iPadOS and iOS keep for themselves, and
 your own keys and shortcuts.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<figure class="shot ipad"><img src="shots/settings-keyboard-ipad-dark.avif" alt="The Keyboard screen: Autocorrection, Shortcuts, Mac keys, Custom keys, Mac keyboard layout and Release all keys." loading="lazy"><figcaption>Keyboard.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/settings-keyboard-ipad-dark.avif" alt="The Keyboard screen: Autocorrection, Shortcuts, Mac keys, Custom keys, Mac keyboard layout and Release all keys." loading="lazy"><figcaption><b class="ui">Release all keys</b> is at the bottom, for a key stuck down on your Mac.</figcaption></figure>
 <table>
 <thead><tr><th>Row</th><th>What it does</th></tr></thead>
 <tbody>
 <tr><td><b class="ui">Autocorrection</b></td><td>Lets the on-screen keyboard correct words as you type to the Mac.</td></tr>
-<tr><td><b class="ui">Shortcuts</b></td><td>Keyboard shortcuts of your own for the stream. <a href="input.html">Touch, pointer and keyboard</a> covers them.</td></tr>
+<tr><td><b class="ui">Shortcuts</b></td><td>Keyboard shortcuts of your own for the stream. <a href="input.html#shortcuts">Send the shortcuts iPadOS keeps</a> covers them.</td></tr>
 <tr><td><b class="ui">Media and system keys</b></td><td>Advanced mode, or while changed: a row of media and system keys over the stream, <b class="ui">Show</b>, <b class="ui">Auto-hide</b> or <b class="ui">Always hide</b>.</td></tr>
-<tr><td><b class="ui">Mac keys</b></td><td>The bar of Mac keys on the on-screen keyboard: <b class="ui">Automatic</b>, <b class="ui">Show</b> or <b class="ui">Hide</b>. On iPad, set it to <b class="ui">Show</b> to send the shortcuts iPadOS keeps for itself, such as Command-Tab.</td></tr>
+<tr><td><b class="ui">Mac keys</b></td><td>The strip of Mac keys on the on-screen keyboard: <b class="ui">Automatic</b> (on iPhone, and on an iPad with no keyboard), <b class="ui">Show</b> or <b class="ui">Hide</b>.</td></tr>
 <tr><td><b class="ui">Custom keys</b></td><td>Keys of your own beside the Mac keys, for every Mac or one, and for the app in front.</td></tr>
 <tr><td><b class="ui">Mac keyboard layout</b></td><td>The layout your Mac types with, so the keys you press arrive as the letters you mean. A Mac with Headwire Connect reports its own, marked <b class="ui">From Headwire Connect on your Mac</b>.</td></tr>
-<tr><td><b class="ui">Release all keys</b></td><td>Use this if a key seems stuck on your Mac.</td></tr>
+<tr><td><b class="ui">Release all keys</b></td><td>Lets go of every key held down on your Mac.</td></tr>
 </tbody>
 </table>
 
 <h2 id="sound">Sound</h2>
 <p>Where the Mac’s sound plays, and how it lines up with the picture.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<figure class="shot ipad"><img src="shots/settings-sound-ipad-dark.avif" alt="The Sound screen: Play Mac sound on, Volume and Sound timing." loading="lazy"><figcaption>Sound.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/settings-sound-ipad-dark.avif" alt="The Sound screen: Play Mac sound on, Volume and Sound timing." loading="lazy"><figcaption><b class="ui">Sound timing</b> moves the sound to match the picture.</figcaption></figure>
 <table>
 <thead><tr><th>Row</th><th>What it does</th></tr></thead>
 <tbody>
 <tr><td><b class="ui">Play Mac sound on</b></td><td><b class="ui">This iPad</b> or <b class="ui">This iPhone</b>, <b class="ui">Both</b>, or <b class="ui">Mac</b>. A Mac set to its own choice on its page keeps it, and the footer says so.</td></tr>
 <tr><td><b class="ui">Volume</b></td><td>The Mac’s sound on this iPad or iPhone.</td></tr>
-<tr><td><b class="ui">Sound timing</b></td><td>With the capture card, or in Advanced mode: moves the sound <b class="ui">Earlier</b> or <b class="ui">Later</b> to match the picture. If sound comes before the picture, move towards Later.</td></tr>
+<tr><td><b class="ui">Sound timing</b></td><td>With the capture card, or in Advanced mode: moves the sound <b class="ui">Earlier</b> or <b class="ui">Later</b> to match the picture.</td></tr>
 </tbody>
 </table>
 
 <h2 id="general">General</h2>
 <p>How the screen behaves, the features that run when you leave Headwire, and Advanced mode.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<figure class="shot ipad"><img src="shots/settings-general-ipad-dark.avif" alt="The General screen: Keep screen awake, Hide controls completely, Start Picture in Picture automatically, Glance at your Mac and Advanced mode." loading="lazy"><figcaption>General.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/settings-general-ipad-dark.avif" alt="The General screen: Keep screen awake, Hide controls completely, Start Picture in Picture automatically, Glance at your Mac and Advanced mode." loading="lazy"><figcaption><b class="ui">Advanced mode</b> is the last switch on the screen.</figcaption></figure>
 <table>
 <thead><tr><th>Row</th><th>What it does</th></tr></thead>
 <tbody>
 <tr><td><b class="ui">Keep screen awake</b></td><td>Keeps this screen from locking while a picture of the Mac shows.</td></tr>
 <tr><td><b class="ui">Hide controls completely</b></td><td>Hides the buttons over the picture while you use the Mac. Swipe down from the top to bring them back.</td></tr>
-<tr><td><b class="ui">Start Picture in Picture automatically</b></td><td>Keeps your Mac in a small window when you leave Headwire. <a href="extras.html">Picture in Picture</a> has more.</td></tr>
+<tr><td><b class="ui">Start Picture in Picture automatically</b></td><td>Keeps your Mac in a small window when you leave Headwire. <a href="extras.html#picture-in-picture">Picture in Picture</a> has more.</td></tr>
 <tr><td><b class="ui">Glance at your Mac</b></td><td>Shows your Mac in widgets, and on iPhone in the Dynamic Island, while its sound or Picture in Picture plays. <b class="ui">Only while charging</b> keeps it to when this iPad or iPhone charges.</td></tr>
 <tr><td><b class="ui">Advanced mode</b></td><td>Shows connection choices, keys, exact formats and capture card details across Settings.</td></tr>
 <tr><td><b class="ui">Show features of Headwire Connect from the Headwire website</b></td><td>Advanced mode: shows the settings for features that only Headwire Connect from the Headwire website has, such as extending the Mac’s display.</td></tr>
 <tr><td><b class="ui">Exact text</b></td><td>Advanced mode, under <b class="ui">Experimental</b>: typing and other small changes arrive exactly and sooner over Headwire Connect. It may use more battery beside video.</td></tr>
-<tr><td><b class="ui">Show Headwire Pro features</b></td><td>Advanced mode: shows or hides the features of Headwire Pro across the app.</td></tr>
 </tbody>
 </table>
 
@@ -244,13 +243,13 @@ your own keys and shortcuts.</p>
 <p>Shown in Advanced mode, or while one of its settings is changed: a switch for each way the
 picture and the controls can reach your Mac, and Instant switch.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<figure class="shot ipad"><img src="shots/settings-connections-ipad-dark.avif" alt="The Connections screen: Picture connections and Control connections, each with switches, and Instant switch." loading="lazy"><figcaption>Connections, in Advanced mode.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/settings-connections-ipad-dark.avif" alt="The Connections screen: Picture connections and Control connections, each with switches, and Instant switch." loading="lazy"><figcaption>A switch for each connection; one turned off is never used.</figcaption></figure>
 <table>
 <thead><tr><th>Row</th><th>What it does</th></tr></thead>
 <tbody>
 <tr><td><b class="ui">Picture connections</b></td><td>A switch for each way the picture can arrive: <b class="ui">USB cable</b>, <b class="ui">Capture card</b>, <b class="ui">Local network (Ethernet)</b>, <b class="ui">Local network (Wi-Fi)</b> and <b class="ui">Peer-to-peer Wi-Fi</b>. A connection turned off is never used.</td></tr>
 <tr><td><b class="ui">Control connections</b></td><td>A switch for each way keys and clicks can reach the Mac: <b class="ui">Bluetooth</b> and <b class="ui">Headwire Connect</b>.</td></tr>
-<tr><td><b class="ui">Instant switch</b></td><td>Keeps a backup stream so a switch to another connection shows its next frame at once: <b class="ui">Off</b>, <b class="ui">When charging</b>, <b class="ui">Smart</b> (while charging, and on battery while the connection in use looks at risk) or <b class="ui">Always</b>. The footer says what it costs in battery. Smart is off in Low Power Mode.</td></tr>
+<tr><td><b class="ui">Instant switch</b></td><td>Keeps a backup stream so a switch to another connection shows its next frame at once: <b class="ui">Off</b>, <b class="ui">When charging</b>, <b class="ui">Smart</b> (while charging, and on battery while the connection in use looks at risk) or <b class="ui">Always</b>, with its battery cost in the footer.</td></tr>
 <tr><td><b class="ui">Capture cards</b></td><td>On a device that takes a capture card: every capture card you have plugged in, each with its profile. <a href="profiles.html">Capture card profiles</a> covers them.</td></tr>
 </tbody>
 </table>
@@ -258,7 +257,7 @@ picture and the controls can reach your Mac, and Instant switch.</p>
 <h2 id="about">About</h2>
 <p>The app’s version, and the ways to reach the developer.</p>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
-<figure class="shot ipad"><img src="shots/settings-about-ipad-dark.avif" alt="The About screen: Version, Tip the developer, Send feedback, Share usage data, Headwire Connect for Mac, Privacy Policy and Acknowledgements." loading="lazy"><figcaption>About.</figcaption></figure>
+<figure class="shot ipad"><img src="shots/settings-about-ipad-dark.avif" alt="The About screen: Version, Tip the developer, Send feedback, Share usage data, Headwire Connect for Mac, Privacy Policy and Acknowledgements." loading="lazy"><figcaption><b class="ui">Send feedback</b> writes an email with the versions filled in.</figcaption></figure>
 <table>
 <thead><tr><th>Row</th><th>What it does</th></tr></thead>
 <tbody>
