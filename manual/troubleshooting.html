@@ -69,7 +69,7 @@
 <h3 id="black-bars">Black bars around the picture</h3>
 <p>Set <a href="stream.html#scaling">Scaling</a> to <b class="ui">Fill</b> or <b class="ui">Zoom to content</b>.</p>
 <h3 id="soft-text">Text looks soft</h3>
-<p>Set <a href="settings.html#picture">Optimize for</a> to <b class="ui">Sharpness</b>, or pick a larger capture card <a href="settings.html#capture-card-format">resolution</a>.</p>
+<p>Set <a href="settings.html#picture">Optimize for</a> to <b class="ui">Sharpness</b>, or pick a larger capture card <a href="settings.html#capture-card-format">resolution</a>. Soft for a few seconds after the network stutters is normal: it turns sharp again by itself.</p>
 <h3 id="choppy">Motion looks choppy, or the pointer lags</h3>
 <p>Use a USB cable, and set <a href="settings.html#picture">Optimize for</a> to <b class="ui">Responsiveness</b>.</p>
 <h3 id="grey-blacks">Blacks look grey, or colours look off</h3>
@@ -103,13 +103,13 @@
 <dt id="no-video"><b class="ui">No video</b></dt><dd>Plug in a capture card, or open Headwire Connect. <b class="ui">Connection options</b> shows each way.</dd>
 <dt id="reconnecting"><b class="ui">Reconnecting…</b></dt><dd>It comes back by itself. If not, wake your Mac.</dd>
 <dt id="mac-asleep-capture-card"><b class="ui">Your Mac is asleep or not sending a picture</b></dt><dd>Wake your Mac, or check the HDMI cable.</dd>
-<dt id="mac-display-asleep"><b class="ui">Your Mac’s display is asleep</b></dt><dd>Wake your Mac.</dd>
+<dt id="mac-display-asleep"><b class="ui">Your Mac’s display is asleep</b></dt><dd>Wake your Mac, and unlock it if it locked.</dd>
 <dt id="connecting"><b class="ui">Connecting to your Mac…</b></dt><dd>Wait; the picture follows.</dd>
 <dt id="starting-capture"><b class="ui">Starting capture…</b></dt><dd>The capture card is slow to start. If it stays, plug it in again. If it can’t draw, Headwire names why: <a href="#mac-asleep-capture-card">no picture</a>, <a href="#capture-paused">paused</a> or <a href="#capture-stopped">stopped</a>.</dd>
-<dt id="cant-reach"><b>Can’t reach <i>name</i></b></dt><dd>Wake that Mac, or <a href="macs.html#switch">switch Macs</a>.</dd>
+<dt id="cant-reach"><b>Can’t reach <i>name</i></b></dt><dd>Headwire keeps trying and shows the picture once it connects. Wake that Mac, or <a href="macs.html#switch">switch Macs</a>.</dd>
 <dt id="capture-paused"><b class="ui">Capture paused</b></dt><dd>Close other apps on screen or using the capture card. It resumes by itself.</dd>
 <dt id="capture-card-unplugged"><b class="ui">Capture card unplugged</b></dt><dd>Plug it back in.</dd>
-<dt id="capture-stopped"><b class="ui">Capture stopped</b>, <b class="ui">Capture card not ready</b></dt><dd>Tap <b class="ui">Try again</b>, or plug it in again.</dd>
+<dt id="capture-stopped"><b class="ui">Capture stopped</b>, <b class="ui">Capture card not ready</b></dt><dd>After a replug, Headwire tries up to three times by itself. Then tap <b class="ui">Try again</b>, or plug it in again.</dd>
 <dt id="capture-card-not-supported"><b class="ui">Capture card not supported</b></dt><dd>Try another capture card, or Headwire Connect.</dd>
 <dt id="not-streaming"><b class="ui">Headwire Connect isn’t streaming</b>, <b class="ui">Streaming is off</b></dt><dd>On your Mac, turn on <b class="ui">Streaming</b>.</dd>
 <dt id="turn-on-screen-recording"><b class="ui">Turn on Screen Recording</b></dt><dd>On your Mac, turn on Headwire Connect in Privacy &amp; Security › Screen &amp; System Audio Recording.</dd>
@@ -137,7 +137,7 @@
 <dt id="no-sound-capture-card"><b class="ui">No sound from this capture card</b></dt><dd>Use one that carries sound, or Headwire Connect.</dd>
 <dt id="several-inputs"><b class="ui">Several sound inputs</b></dt><dd>Unplug the ones you don’t need.</dd>
 <dt id="sound-couldnt-start"><b class="ui">Sound couldn’t start</b></dt><dd>Close other sound apps, then set Play Mac sound on to Mac and back.</dd>
-<dt id="sound-stopped"><b class="ui">Sound stopped</b></dt><dd>Plug the capture card in again.</dd>
+<dt id="sound-stopped"><b class="ui">Sound stopped</b></dt><dd>Plug the capture card in again. A call or Siri doesn’t stop it: the sound comes back when they end.</dd>
 <dt id="no-sound-from-mac"><b class="ui">No sound from your Mac</b></dt><dd>On your Mac, turn <b class="ui">Streaming</b> off and on, or <a href="#update-connect">update Headwire Connect</a>.</dd>
 </dl>
 
@@ -161,7 +161,8 @@
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
 <p>Under <b class="ui">Couldn't pair</b>, the line says what happened:</p>
 <ul>
-<li><b>The code didn’t match, or looks mistyped:</b> check it against your Mac.</li>
+<li><b>The code didn’t match:</b> the numbers clear; type them again from your Mac.</li>
+<li><b>The code looks mistyped:</b> check it against your Mac.</li>
 <li><b>Too many tries:</b> wait, then <b class="ui">Try again</b>.</li>
 <li><b>Pairing isn’t open, timed out or stopped:</b> on your Mac, choose <b class="ui">Pair a Device…</b>.</li>
 <li><b>Your Mac is locked:</b> unlock it.</li>
@@ -171,6 +172,7 @@
 
 <h2 id="bluetooth">Bluetooth</h2>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
+<p>When Bluetooth can’t be used, <b class="ui">Connect over Bluetooth…</b> shows why in place of <b class="ui">Pair</b>, and <b class="ui">Pair</b> comes back once it’s fixed.</p>
 <dl>
 <dt id="bluetooth-off"><b class="ui">Bluetooth is off</b></dt><dd>Turn it on in Control Center.</dd>
 <dt id="bluetooth-didnt-start"><b class="ui">Bluetooth keyboard didn’t start</b>, <b class="ui">Bluetooth isn’t taking input</b></dt><dd>Turn Bluetooth off and on, then <b class="ui">Try again</b>.</dd>
@@ -199,6 +201,7 @@
 <li><b class="ui">Your Mac is taking another file</b>: wait.</li>
 <li>Anything else: send the file again.</li>
 </ul>
+<p><b class="ui">Not enough space to record</b>: free up space in the Settings app › General. A recording that stops early keeps what it has, with a note saying why.</p>
 
 <h2 id="calibration">Calibration</h2>
 <aside class="video-slot" aria-label="Video">A short video of this is on its way.</aside>
