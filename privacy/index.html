@@ -29,7 +29,7 @@
 <main id="main" class="wrap doc">
 <header>
 <h1>Headwire Privacy Policy</h1>
-<p class="updated">Last updated 2026-11-19</p>
+<p class="updated">Last updated 2026-11-25</p>
 </header>
 
 <section class="summary" aria-label="Summary">
@@ -75,7 +75,9 @@ Settings or turning reverse scrolling on, and once a minute a count of frequent 
 touches and key presses. With each one, PostHog’s software adds the app’s version, the iOS or
 iPadOS version, the device model and type (such as iPad), its screen size, its language and region
 setting, its time zone, whether it’s on Wi-Fi or mobile data, whether it came from TestFlight, a
-random ID made on this install, and another made for each session of use.</li>
+random ID made on this install, another made for each session of use, the time it happened and an
+ID for that one event. Two settings go with each too, telling PostHog not to build a profile and
+not to work out a location.</li>
 <li><strong>Crash reports:</strong> when Headwire crashes, the next launch sends what kind of crash it
 was, the addresses in Headwire’s and the system’s code where it happened, the names of those code
 files and their build IDs, with the same app and device details. A crash’s message is taken out
@@ -116,7 +118,8 @@ App Store has no update check, since the App Store updates it.</p>
 
 <h2 id="stays">What stays on your devices</h2>
 <p>To work, the apps keep a few things on the device they run on. None of it leaves that
-device except inside your own device backups.</p>
+device except inside your own device backups, and where Apple shows Headwire’s widgets and Live
+Activity on your other devices (see <em>Your paired Macs’ names</em> below).</p>
 <ul>
 <li><strong>Settings:</strong> your choices in Settings, the connections you’ve turned on or off,
 and your input and sound preferences.</li>
@@ -124,7 +127,9 @@ and your input and sound preferences.</li>
 it, so the picture is right the next time you plug it in.</li>
 <li><strong>Pairing keys:</strong> each app makes its own key and keeps it, with the keys of the
 devices it’s paired with and their names, in the Keychain, readable only on that device.
-They aren’t synced through iCloud Keychain and don’t move to a new device.</li>
+They aren’t synced through iCloud Keychain and don’t move to a new device. Headwire Connect
+also keeps the key behind its Bonjour tag, and gives it to each device it pairs with (see
+<a href="#link">How the link to Headwire Connect is protected</a>).</li>
 <li><strong>Your Mac’s keyboard layout, shortcuts and three-finger drag setting,</strong> as
 Headwire Connect last reported them, so Bluetooth input types the right characters and drags as your
 Mac does when Headwire Connect isn’t running.</li>
@@ -132,15 +137,24 @@ Mac does when Headwire Connect isn’t running.</li>
 and for each app on the Mac.</li>
 <li><strong>Your Macs:</strong> which paired Mac you chose to show, which one the capture card is
 plugged into, and the connection each was last shown over.</li>
+<li><strong>Bluetooth:</strong> the Bluetooth identifier of each Mac that has used Headwire as its
+keyboard and mouse, so input goes back to the one you chose, kept for 90 days after it last
+connected, or, for a Mac running Headwire Connect, until you forget it; and the key fingerprint and Bluetooth
+identifier of each Bluetooth pairing you answered Don’t Allow to, so you aren’t asked again, until
+you next choose Pair with your Mac.</li>
 <li><strong>Your paired Macs’ names,</strong> and whether each is connected: shared with Headwire’s
-widgets and controls, Siri, Shortcuts and Spotlight on this device, so you can open a Mac from
-them. Pairing keys are never shared with them.</li>
+widgets and controls, its Live Activity, Siri, Shortcuts and Spotlight on this device, so you can
+open a Mac from them. The widgets, controls and Live Activity show the names on the Lock Screen too
+if you put them there. Apple may also show them, with any pictures in them, on your Apple Watch,
+on your Mac or in CarPlay. Pairing keys are never shared with them.</li>
 <li><strong>Battery readings:</strong> a reading of the device’s charge each minute while Headwire
 is open, to work out what Instant switch costs in battery. Each reading is deleted once Headwire
 takes one two days after it.</li>
 <li><strong>Pictures of your Macs,</strong> if you turn on Glance at your Mac: the newest small
-picture of each paired Mac, shared with Headwire’s widgets on this device, and its Live Activity on
-iPhone, so they can show it. Turning Glance at your Mac off deletes them all, and removing a Mac
+picture of each paired Mac and the one before it, and an older one while a widget or the Live
+Activity still shows it, from Headwire Connect or the capture card, shared with Headwire’s
+widgets on this device, and its Live Activity on iPhone, so they can show it. They never show on
+the Lock Screen. Turning Glance at your Mac off deletes them all, and removing a Mac
 deletes its picture. They’re kept out of iCloud and computer backups.</li>
 <li><strong>How many times you’ve opened Headwire,</strong> so it knows when to offer a tip.</li>
 <li><strong>Files you receive</strong> from your Mac, in Headwire’s folder in the Files app (On My
@@ -151,15 +165,41 @@ run on. They name what happened, not what you did: no keys you press, text you t
 codes or keys, and device and Mac names are replaced with a scrambled value. Logs stay on the device
 unless you collect and share them yourself.</li>
 </ul>
-<p>Deleting Headwire removes its settings and files from that device. On the Mac, removing a
-device from Headwire Connect’s menu forgets its key.</p>
 
-<h2>What travels between your devices</h2>
+<h3 id="forgetting">Forgetting a device, and deleting the apps</h3>
+<ul>
+<li><strong>Forget this Mac</strong> in Headwire deletes that Mac’s key, name and picture from the
+iPad or iPhone.</li>
+<li><strong>Forget</strong> in Headwire Connect’s menu deletes the device’s name and stops
+trusting its key. Headwire Connect keeps the key’s fingerprint, and the Bluetooth identifier the
+device paired from, on a list of forgotten devices, so the device can’t pair again over Bluetooth
+without you. The entry goes when you pair that device again.</li>
+<li><strong>Deleting Headwire</strong> removes its settings and files from the iPad or iPhone. The
+system keeps Keychain items when an app is deleted, so Headwire’s own key stays, and so do the
+keys and names of any paired Macs you didn’t forget first.</li>
+<li><strong>Deleting Headwire Connect</strong> (moving it to the Trash) leaves its key, the keys and
+names of its paired devices and its list of forgotten devices in the Mac’s keychain. It also leaves
+its settings and a note of what the Mac’s video encoder can do, which you can delete yourself: the
+folder ~/Library/Containers/com.nth.headwire.mac for the App Store version, or the file
+~/Library/Preferences/com.nth.headwire.mac.plist and the folder ~/Library/Application
+Support/com.nth.headwire.mac for the version from the Headwire website.</li>
+<li><strong>Copies kept aside:</strong> if a saved list doesn’t read in full, for example after
+going back to an older version, the app keeps a copy of it as it was, to help find out why, and
+never reads it again. The copy stays until the app is deleted; a copy of a list kept in the
+Keychain, such as the paired Macs or paired devices, stays after that too.</li>
+<li><strong>Headwire Connect before version 0.4</strong> kept its key and paired devices in your
+login keychain. Later versions copy them from there and leave the originals, which Keychain Access
+lists under com.nth.headwire.mac.</li>
+</ul>
+
+<h2 id="travels">What travels between your devices</h2>
 <p>Headwire connects your iPad or iPhone to a Mac in the same room. What it sends goes straight
 between those two devices:</p>
 <ul>
 <li><strong>From a capture card:</strong> the Mac’s picture and sound come into the iPad over the
-capture card’s USB cable and are shown and played there. They never leave the iPad.</li>
+capture card’s USB cable and are shown and played there. They never leave the iPad. With Glance
+at your Mac on, a small picture of the screen is kept for the widgets (see
+<a href="#stays">What stays on your devices</a>).</li>
 <li><strong>To the Mac over Bluetooth:</strong> the iPad acts as a Bluetooth keyboard and mouse
 and sends your touches, pointer movements and key presses to the Mac you paired it with.</li>
 <li><strong>Through Headwire Connect,</strong> over a USB cable, your local network (Ethernet or
@@ -175,6 +215,12 @@ Wi-Fi) or peer-to-peer Wi-Fi between the two devices:
   time you switch apps, so the device can show that app’s custom keys;</li>
   <li>whether the Mac’s screen is on, asleep or locked, whether it’s streaming and whether the
   capture card is on it;</li>
+  <li>what Accessibility reports under the Mac’s pointer: the kind of control, such as a button or
+  a text field, its size and position, and the height of a line of text there, so the device can
+  shape its pointer to fit;</li>
+  <li>while you write with Apple Pencil, in Headwire Connect from the Headwire website: where the
+  text fields are in the windows in front, and the text and selection of the field you write in,
+  never a password field;</li>
   <li>small pictures of the Mac’s screen: at most one a second while the Mac overview is open on
   a paired device, where they’re shown and not saved; and, if you turn on Glance at your Mac, one
   every 15 seconds from each other paired Mac while Headwire keeps playing in the background, kept
@@ -182,7 +228,7 @@ Wi-Fi) or peer-to-peer Wi-Fi between the two devices:
   </ul>
 </li>
 </ul>
-<h3>How the link to Headwire Connect is protected</h3>
+<h3 id="link">How the link to Headwire Connect is protected</h3>
 <ul>
 <li>Every connection between Headwire and Headwire Connect is encrypted with TLS 1.3, and each side
 checks the other’s key against the one it saved when you paired them. A device that hasn’t been
@@ -194,8 +240,9 @@ service, it relies on your router or firewall to keep the internet from reaching
 <li>Headwire never uses mobile data for the link.</li>
 <li>Headwire Connect captures the screen only while a paired device is connected.</li>
 <li>On your local network, Headwire Connect announces itself with Bonjour under your Mac’s name,
-as Mac file and screen sharing do, with a random tag that only your paired devices can
-recognise.</li>
+as Mac file and screen sharing do, with a random tag that only devices you’ve paired with can
+recognise. A device you forget on the Mac can still recognise the tag until you forget the Mac on
+that device too; it gets nothing else from Headwire Connect.</li>
 </ul>
 <h3 id="clipboard">Copy and paste</h3>
 <ul>
@@ -241,7 +288,9 @@ iPhone, and to take the small pictures for the Mac overview and Glance at your M
 one is connected. Headwire Connect takes the sound the Mac plays, never the Mac’s
 microphone.</td></tr>
 <tr><td>Accessibility</td><td>To turn your touches, pointer and key presses from the iPad or iPhone
-into mouse and keyboard input on the Mac.</td></tr>
+into mouse and keyboard input on the Mac, and to read what’s under the pointer and where text
+fields are, for the device’s pointer and Apple Pencil writing (see <a href="#travels">What travels
+between your devices</a>). Headwire Connect changes nothing through Accessibility.</td></tr>
 <tr><td>Local Network</td><td>To accept connections from your iPad or iPhone over Ethernet, Wi-Fi
 or peer-to-peer Wi-Fi. The USB cable works without it.</td></tr>
 <tr><td>Bluetooth</td><td>To read the picture size your iPad asks the Mac to send to the capture
